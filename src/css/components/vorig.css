@@ -1,10 +1,9 @@
-.c-vorig { margin-top: var(--r5); border-top: 1px solid var(--lijn); padding-top: var(--r3); }
-.c-vorig__titel { font: 700 1.3rem/1.2 var(--slab); margin-bottom: var(--r2); }
+.c-vorig { border-top: 2px solid var(--inkt); }
+.c-vorig__titel { font: 400 1.9rem/1.1 var(--titel); text-transform: uppercase; margin-bottom: var(--r3); }
 .c-vorig__rij { display: flex; flex-wrap: wrap; gap: var(--r3); align-items: flex-start; }
 .c-vorig__jaar { width: 13rem; display: flex; flex-direction: column; gap: var(--r1); }
 .c-vorig__jaar figcaption { font-weight: 600; }
-.c-vorig__knop { padding: 0; border: 0; background: none; border-radius: var(--straal-klein); overflow: hidden; cursor: zoom-in; transition: transform 0.2s; }
-.c-vorig__knop:hover { transform: translateY(-3px); }
+.c-vorig__knop { padding: 0; border: 0; background: none; border-radius: var(--straal-klein); overflow: hidden; cursor: zoom-in; }
 .c-vorig__bonnen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r0); }
 .c-vorig__bonnen img { border-radius: 0.2rem; }
 .c-vorig__tekst { flex: 1; min-width: 16rem; max-width: 34rem; color: var(--grijs); font-size: 0.9rem; display: flex; flex-direction: column; gap: var(--r1); align-items: flex-start; }
@@ -17,4 +16,4 @@
 .c-lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 60rem); max-height: 92vh; overflow: visible; }
 .c-lightbox::backdrop { background: rgb(15 12 22 / 0.86); }
 .c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; border-radius: var(--straal-klein); }
-.c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; border-radius: 99rem; background: #fff; color: var(--inkt); font-weight: 600; }
+.c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; border-radius: 0; background: #fff; color: var(--inkt); font-weight: 600; }

@@ -5,9 +5,10 @@
 @import './objects/layout.css';
 @import './components/kop.css';
 @import './components/combo.css';
+@import './components/show.css';
+@import './components/alle.css';
 @import './components/stalen.css';
 @import './components/bon.css';
-@import './components/teller.css';
 @import './components/knop.css';
 @import './components/vorig.css';
 @import './components/huisstijl.css';

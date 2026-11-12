@@ -4,3 +4,11 @@
 .o-gulden { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r4); }
 .o-gulden > * { min-width: 0; }
 @media (max-width: 50rem) { .o-gulden { grid-template-columns: 1fr; } }
+
+/* Pagina met marge: alles behalve de schermvullende carrousel. */
+.o-pagina, .c-alle, .c-vorig {
+  max-width: 90rem; margin-inline: auto;
+  padding-block: var(--r4) var(--r5);
+  padding-left: max(var(--r3), env(safe-area-inset-left, 0px));
+  padding-right: max(var(--r3), env(safe-area-inset-right, 0px));
+}

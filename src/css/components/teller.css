@@ -1,6 +1,0 @@
-.c-teller { display: inline-flex; align-items: center; gap: var(--r0); border: 1px solid var(--lijn); border-radius: 99rem; padding: 0.2rem; }
-.c-teller--voorop { border-color: var(--inkt); box-shadow: inset 0 0 0 1px var(--inkt); }
-.c-teller__knop { width: 2.75rem; height: 2.75rem; border-radius: 50%; border: 0; background: var(--papier); font-size: 1.4rem; line-height: 1; }
-.c-teller__knop:hover { background: var(--lijn); }
-.c-teller__aantal { font: 700 1.5rem/1 var(--slab); min-width: 2ch; text-align: center; font-variant-numeric: tabular-nums; }
-.c-teller__label { font-size: 0.75rem; color: var(--grijs); padding-right: var(--r1); }

@@ -1,0 +1,16 @@
+/* Alle affiches naast elkaar, maximaal drie op een rij. */
+.c-alle__kop { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r3); align-items: end; margin-bottom: var(--r4); }
+.c-alle__titel { font: 400 clamp(2.2rem, 5vw, 4.236rem)/0.95 var(--titel); text-transform: uppercase; }
+.c-alle__uitleg { color: var(--grijs); }
+.c-alle__raster { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4) var(--r3); }
+.c-alle__item { display: grid; grid-template-rows: auto auto; gap: var(--r1); }
+.c-alle__beeld { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.c-alle__beeld .c-kunst { outline: 2px solid var(--inkt); outline-offset: -2px; }
+.c-alle__naam { display: flex; align-items: baseline; gap: var(--r1); font: 700 1.1rem/1.2 var(--slab); }
+.c-alle__naam b { font: 400 1.618rem/1 var(--titel); }
+.c-alle__stemmen { display: none; margin-left: auto; font: 400 1.618rem/1 var(--titel); font-variant-numeric: tabular-nums; }
+.toon-uitslag .c-alle__stemmen { display: inline; }
+.c-alle__uitslag { display: flex; flex-wrap: wrap; gap: var(--r2); margin-top: var(--r4); }
+
+@media (max-width: 60rem) { .c-alle__raster { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-alle__kop { grid-template-columns: 1fr; } }
+@media (max-width: 30rem) { .c-alle__raster { grid-template-columns: 1fr; } }

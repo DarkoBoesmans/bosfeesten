@@ -5,8 +5,7 @@
 .c-combo__letter { font: 400 1.8rem/1 var(--titel); width: var(--r4); height: var(--r4); flex: none; display: grid; place-items: center; border-radius: 50%; }
 .c-combo__naam { font: 700 1.3rem/1.2 var(--slab); }
 .c-combo__zin { font-size: 0.85rem; color: var(--grijs); line-height: 1.4; }
-.c-combo__beeld { display: block; border-radius: var(--straal-klein); transition: transform 0.2s; }
-.c-combo__beeld:hover { transform: translateY(-3px); }
+.c-combo__beeld { display: block; border-radius: var(--straal-klein); }
 .c-combo__bonnen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r1); }
 .c-combo__bonnen > *, .c-held__bonnen > * { min-width: 0; }
 .c-combo__voet { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--r1); margin-top: auto; }

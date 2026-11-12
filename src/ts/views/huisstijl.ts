@@ -39,7 +39,7 @@ export function huisstijl(c: Combo, jaar: number) {
   const k = c.kleuren;
   const creme = KLEUREN.creme.druk;
   const merk = [k.P, k.S, k.A];
-  return `
+  return `<div class="o-pagina">
   <nav class="c-pad" aria-label="Combo's">
     <a class="c-pad__link c-pad__link--terug" href="#">Alle combo's</a>
     ${COMBOS.map((x) => `<a class="c-pad__link" href="#${x.id}"${x.id === c.id ? ' aria-current="page"' : ''}><i style="background:${x.kleuren.P.druk}"></i><i style="background:${x.kleuren.S.druk}"></i><i style="background:${x.kleuren.A.druk}"></i>${letter(x.id)} · ${x.naam}</a>`).join('')}
@@ -47,10 +47,11 @@ export function huisstijl(c: Combo, jaar: number) {
   <main>
     <header class="c-held" style="background:${k.P.druk};color:${tekstOp(k.P.druk)}">
       <div class="c-held__tekst">
-        <p class="c-kop__boven">Combo ${letter(c.id)} · Huisstijl Bosfeesten ${jaar}</p>
+        <p class="c-held__letter">${letter(c.id)}</p>
         <h1 class="c-held__titel">${c.naam}</h1>
         <p class="c-held__zin">${c.zin}</p>
         <p class="c-held__harmonie">${c.harmonie}</p>
+        <p class="c-held__jaar">Huisstijl Bosfeesten ${jaar}</p>
       </div>
       <div class="c-held__bonnen">
         ${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}
@@ -120,5 +121,5 @@ export function huisstijl(c: Combo, jaar: number) {
     <nav class="c-verder" aria-label="Andere combo's">
       ${COMBOS.filter((x) => x.id !== c.id).map((x) => `<a class="c-verder__link" href="#${x.id}" style="background:${x.kleuren.P.druk};color:${tekstOp(x.kleuren.P.druk)}"><span>Combo ${letter(x.id)}</span>${x.naam}</a>`).join('')}
     </nav>
-  </main>`;
+  </main></div>`;
 }

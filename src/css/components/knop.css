@@ -1,10 +1,10 @@
-.c-knop { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--r2); background: var(--inkt); color: #fff; border: 0; border-radius: 99rem; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
-.c-knop:hover { background: #3B3450; }
-.c-knop--rand { background: transparent; color: var(--inkt); border: 1px solid var(--inkt); }
-.c-knop--rand:hover { background: var(--lijn); }
+.c-knop { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 var(--r3); background: var(--inkt); color: var(--papier); border: 2px solid var(--inkt); border-radius: 0; text-decoration: none; font: 400 1rem/1 var(--titel); text-transform: uppercase; }
+.c-knop:hover { background: var(--papier); color: var(--inkt); }
+.c-knop--rand { background: transparent; color: var(--inkt); }
+.c-knop--rand:hover { background: var(--inkt); color: var(--papier); }
 
 .c-kopie { background: none; border: 0; padding: 0.4rem 0; font-weight: 600; text-decoration: underline dotted; text-underline-offset: 3px; }
 .c-kopie:hover { text-decoration-style: solid; }
 
-.c-toast { position: fixed; left: 50%; bottom: calc(var(--r3) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--inkt); color: #fff; padding: var(--r1) var(--r3); border-radius: 99rem; z-index: 9; }
+.c-toast { position: fixed; left: 50%; bottom: calc(var(--r3) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--inkt); color: var(--papier); padding: var(--r1) var(--r3); border-radius: 0; z-index: 9; }
 .c-toast:empty { display: none; }

@@ -9,6 +9,8 @@ import { overzicht } from './views/overzicht';
 import { huisstijl } from './views/huisstijl';
 import { toast } from './components/toast';
 import { lightboxMarkup, openLightbox, sluitLightbox } from './components/lightbox';
+import { huidige, naar, volgScroll } from './components/show';
+import { aantal } from './lib/stemmen';
 
 const inhoud = $('#inhoud')!;
 const jaar = editie();
@@ -22,6 +24,22 @@ function teken() {
     const c = COMBOS.find((x) => x.id === cv.dataset.combo)!;
     herkleur(cv, WERKEN.get(cv.dataset.werk!)!, c.kleuren).catch((e: Error) => toast(e.message));
   }
+  volgScroll();
+}
+
+function stemKnop(knop: HTMLElement) {
+  const id = knop.dataset.stem!;
+  const delta = Number(knop.dataset.delta);
+  stem(id, delta);
+  $$(`[data-telling="${id}"]`).forEach((el) => (el.textContent = String(aantal(id))));
+  const dia = knop.closest('.c-dia');
+  const hoofd = $<HTMLButtonElement>('.c-dia__stem', dia ?? document);
+  const terug = $<HTMLButtonElement>('.c-dia__terug', dia ?? document);
+  if (!hoofd || !terug) return;
+  hoofd.textContent = delta > 0 ? 'Gestemd. Geef de laptop door.' : `Stem op ${id.toUpperCase()}`;
+  hoofd.disabled = delta > 0;
+  terug.hidden = delta < 0;
+  if (delta > 0) setTimeout(() => { hoofd.textContent = `Stem op ${id.toUpperCase()}`; hoofd.disabled = false; terug.hidden = true; }, 4000);
 }
 
 async function kopieer(tekst: string) {
@@ -34,14 +52,19 @@ addEventListener('hashchange', () => { teken(); scrollTo(0, 0); inhoud.focus({ p
 document.addEventListener('click', (e) => {
   const doel = e.target as Element;
   const knop = doel.closest<HTMLElement>('[data-stem]');
-  if (knop) {
-    stem(knop.dataset.stem!, Number(knop.dataset.delta));
-    const y = scrollY;
-    teken(); scrollTo(0, y);
-    $(`[data-stem="${knop.dataset.stem}"][data-delta="${knop.dataset.delta}"]`)?.focus();
+  if (knop) { stemKnop(knop); return; }
+  const sprong = doel.closest<HTMLElement>('[data-naar]');
+  if (sprong) { naar(Number(sprong.dataset.naar)); return; }
+  const stap = doel.closest<HTMLElement>('[data-stap]');
+  if (stap) { naar(huidige() + Number(stap.dataset.stap)); return; }
+  if (doel.closest('[data-alles]')) { $('#alle')?.scrollIntoView({ behavior: 'smooth' }); return; }
+  const uitslag = doel.closest<HTMLElement>('[data-uitslag]');
+  if (uitslag) {
+    const aan = document.body.classList.toggle('toon-uitslag');
+    uitslag.textContent = aan ? 'Verberg de stemmen' : 'Toon de stemmen';
     return;
   }
-  if (doel.closest('[data-wis]')) { wis(); teken(); toast('Stemmen staan op nul.'); return; }
+  if (doel.closest('[data-wis]')) { wis(); $$('[data-telling]').forEach((el) => (el.textContent = '0')); toast('Stemmen staan op nul.'); return; }
   const groot = doel.closest<HTMLElement>('[data-groot]');
   if (groot) { openLightbox(groot.dataset.groot!, groot.dataset.alt ?? ''); return; }
   const vergroot = doel.closest<HTMLElement>('[data-vergroot]');
@@ -56,3 +79,9 @@ document.addEventListener('click', (e) => {
 });
 
 teken();
+
+document.addEventListener('keydown', (e) => {
+  if (location.hash.length > 1 || (e.target as Element).closest('input, textarea') || $<HTMLDialogElement>('#lightbox')?.open) return;
+  if (e.key === 'ArrowRight') naar(huidige() + 1);
+  if (e.key === 'ArrowLeft') naar(huidige() - 1);
+});

@@ -1,4 +1,4 @@
 /* Drankbon (SVG, 1618 x 1000: de gulden snede, bijna gelijk aan de echte bon). */
-.c-bon { display: block; width: 100%; height: auto; border-radius: var(--straal-klein); box-shadow: 0 2px 10px rgb(0 0 0 / 0.12); }
+.c-bon { display: block; width: 100%; height: auto; border-radius: var(--straal-klein); }
 .c-bon__label { font: 700 74px var(--slab); text-transform: uppercase; letter-spacing: 3px; stroke-width: 10px; paint-order: stroke fill; stroke-linejoin: round; }
 .c-bon__titel { font: 400 300px var(--titel); text-transform: uppercase; stroke-width: 18px; paint-order: stroke fill; stroke-linejoin: round; }

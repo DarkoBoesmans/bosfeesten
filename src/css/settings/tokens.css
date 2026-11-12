@@ -4,10 +4,10 @@
 :root {
   color-scheme: light;
   --r0: 0.382rem; --r1: 0.618rem; --r2: 1rem; --r3: 1.618rem; --r4: 2.618rem; --r5: 4.236rem;
-  --papier: #F3F0F7; --kaart: #FFFFFF; --inkt: #1B1726; --grijs: #5E586B; --lijn: #DDD8E6;
+  --papier: #FAF6DE; --kaart: #FAF6DE; --inkt: #17131F; --grijs: #4D4757; --lijn: #17131F;
   --titel: Hipstelvetica, 'Arial Black', Impact, sans-serif;
   --slab: 'Roboto Slab', Georgia, serif;
   --tekst: Poppins, system-ui, sans-serif;
-  --straal: 0.618rem;
-  --straal-klein: 0.382rem;
+  --straal: 0;
+  --straal-klein: 0;
 }

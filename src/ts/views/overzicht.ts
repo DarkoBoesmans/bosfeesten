@@ -1,47 +1,66 @@
+// Overzicht: één combo per scherm om de laptop mee rond te geven, daaronder alle affiches naast elkaar.
+import type { Combo } from '../types';
 import { COMBOS } from '../data/combos';
 import { AFFICHE, VORIGE } from '../data/werken';
+import { tekstOp } from '../lib/kleur';
+import { aantal } from '../lib/stemmen';
 import { kunst } from '../components/kunst';
-import { stalen } from '../components/stalen';
-import { teller } from '../components/teller';
 import { bon } from '../components/bon';
 
-const letter = (id: string) => id.toUpperCase();
+const L = (c: Combo) => c.id.toUpperCase();
+
+function dia(c: Combo, i: number, jaar: number) {
+  const k = c.kleuren;
+  return `<section class="c-dia" id="dia-${c.id}" aria-label="Combo ${L(c)}: ${c.naam}" style="--dia-p:${k.P.druk};--dia-tekst:${tekstOp(k.P.druk)};--dia-s:${k.S.druk}">
+    <div class="c-dia__affiche">${kunst(AFFICHE, c)}</div>
+    <div class="c-dia__info">
+      <p class="c-dia__teller">${i + 1} / ${COMBOS.length}</p>
+      <h2 class="c-dia__titel"><span class="c-dia__letter">${L(c)}</span>${c.naam}</h2>
+      <ul class="c-dia__kleuren">
+        ${[k.P, k.S, k.A].map((kl) => `<li><i style="background:${kl.druk}"></i>${kl.naam}</li>`).join('')}
+      </ul>
+      <div class="c-dia__bonnen">${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}${bon('zwaar', c.bon.zwaar, c.bon.licht, jaar)}</div>
+      <div class="c-dia__acties">
+        <button type="button" class="c-dia__stem" data-stem="${c.id}" data-delta="1">Stem op ${L(c)}</button>
+        <button type="button" class="c-dia__terug" data-stem="${c.id}" data-delta="-1" hidden>Stem ongedaan maken</button>
+        <a class="c-dia__meer" href="#${c.id}">Huisstijl en drukwerk →</a>
+      </div>
+    </div>
+  </section>`;
+}
 
 export function overzicht(jaar: number) {
   return `
-  <header class="c-kop">
-    <p class="c-kop__boven">Chiro Popov · Bosfeesten ${jaar}</p>
-    <h1 class="c-kop__titel">Welke kleuren worden het?</h1>
-    <p class="c-kop__tekst">Vijf voorstellen op de echte affiche en de drankbonnen. Klik op een combo voor de huisstijl en het drukwerk.</p>
-    <div class="c-regel">
-      <span class="c-regel__tekst">Niet opnieuw:</span>
-      ${VORIGE.map((v) => `<span class="c-regel__jaar">${v.jaar} ${v.kleuren.map((k) => `<i style="background:${k}"></i>`).join('')}</span>`).join('')}
-    </div>
-  </header>
-  <main class="o-drie">
-    ${COMBOS.map((c) => `
-    <article class="c-combo" aria-labelledby="titel-${c.id}">
-      <header class="c-combo__kop">
-        <span class="c-combo__letter" style="background:${c.bon.zwaar.druk};color:${c.kleuren.L.druk}">${letter(c.id)}</span>
-        <div>
-          <h2 class="c-combo__naam" id="titel-${c.id}">${c.naam}</h2>
-          <p class="c-combo__zin">${c.zin}</p>
-        </div>
-      </header>
-      <a class="c-combo__beeld" href="#${c.id}" aria-label="Huisstijl en drukwerk van combo ${letter(c.id)}">${kunst(AFFICHE, c)}</a>
-      <div class="c-combo__bonnen">
-        ${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}
-        ${bon('zwaar', c.bon.zwaar, c.bon.licht, jaar)}
-      </div>
-      ${stalen(c)}
-      <div class="c-combo__voet">
-        ${teller(c)}
-        <a class="c-knop" href="#${c.id}">Huisstijl en drukwerk</a>
-      </div>
-    </article>`).join('')}
+  <main class="c-show" aria-label="Kleurvoorstellen Bosfeesten ${jaar}">
+    <div class="c-show__spoor" tabindex="0">${COMBOS.map((c, i) => dia(c, i, jaar)).join('')}</div>
+    <nav class="c-show__nav" aria-label="Combo kiezen">
+      <button type="button" class="c-show__pijl" data-stap="-1" aria-label="Vorige combo">←</button>
+      ${COMBOS.map((c, i) => `<button type="button" class="c-show__letter" data-naar="${i}"${i === 0 ? ' aria-current="true"' : ''} style="--kleur:${c.kleuren.P.druk}">${L(c)}</button>`).join('')}
+      <button type="button" class="c-show__pijl" data-stap="1" aria-label="Volgende combo">→</button>
+      <button type="button" class="c-show__alles" data-alles>Alles naast elkaar ↓</button>
+    </nav>
   </main>
+
+  <section class="c-alle" id="alle" aria-labelledby="alle-titel">
+    <header class="c-alle__kop">
+      <h2 class="c-alle__titel" id="alle-titel">Bosfeesten ${jaar}: welke kleuren?</h2>
+      <p class="c-alle__uitleg">Klik een affiche om ze groot te zien en te stemmen. Geen rood, roze, hemelsblauw of mint: die waren van 2025 en 2026.</p>
+    </header>
+    <div class="c-alle__raster">
+      ${COMBOS.map((c, i) => `
+      <figure class="c-alle__item">
+        <button type="button" class="c-alle__beeld" data-naar="${i}" aria-label="Combo ${L(c)} groot bekijken">${kunst(AFFICHE, c)}</button>
+        <figcaption class="c-alle__naam"><b>${L(c)}</b> ${c.naam}<span class="c-alle__stemmen" data-telling="${c.id}">${aantal(c.id)}</span></figcaption>
+      </figure>`).join('')}
+    </div>
+    <div class="c-alle__uitslag">
+      <button type="button" class="c-knop" data-uitslag>Toon de stemmen</button>
+      <button type="button" class="c-knop c-knop--rand" data-wis>Stemmen op nul</button>
+    </div>
+  </section>
+
   <section class="c-vorig" aria-labelledby="vorig-titel">
-    <h2 class="c-vorig__titel" id="vorig-titel">De vorige twee jaren</h2>
+    <h2 class="c-vorig__titel" id="vorig-titel">Zo zag het er de vorige jaren uit</h2>
     <div class="c-vorig__rij">
       ${VORIGE.map((v) => `
       <figure class="c-vorig__jaar">
@@ -54,11 +73,7 @@ export function overzicht(jaar: number) {
         </div>
         <figcaption>${v.jaar}</figcaption>
       </figure>`).join('')}
-      <div class="c-vorig__tekst">
-        <p>2025 had een blauwe lichte bon en een rode zware. In 2026 werd rood-roze net de lichte bon. Daarom gebruikt geen enkel voorstel nog rood, roze, hemelsblauw of mint, en is de lichte bon altijd de lichtste kleur.</p>
-        <p>Alle kleuren zijn eerst in CMYK gekozen. Stemmen worden alleen in deze browser geteld.</p>
-        <button type="button" class="c-knop c-knop--rand" data-wis>Stemmen op nul</button>
-      </div>
+      <p class="c-vorig__tekst">In 2025 was blauw de lichte bon en rood de zware. In 2026 werd rood-roze net de lichte. Daarom is de lichte bon nu altijd een lichte kleur en de zware altijd de donkerste.</p>
     </div>
   </section>`;
 }
