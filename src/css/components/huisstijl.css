@@ -50,3 +50,5 @@
 .c-kleur__waarden div { border-bottom-color: rgb(23 19 31 / 0.2); }
 .c-lijst li, .c-contrast div { border-bottom-color: rgb(23 19 31 / 0.2); }
 .c-lijst li::before { border-radius: 0; }
+.c-held__bonnen .c-bon { outline: 3px solid currentColor; }
+.c-oudebonnen .c-bon { outline: 2px solid var(--inkt); outline-offset: -2px; }

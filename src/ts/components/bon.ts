@@ -9,7 +9,7 @@ export function bon(soort: 'licht' | 'zwaar', vlak: Kleur, letter: Kleur, jaar: 
   const label = soort === 'licht' ? 'Lichte drank' : 'Zware drank';
   const papier = KLEUREN.creme.druk;
   return `<svg class="c-bon" viewBox="0 0 1618 1000" role="img" aria-label="Drankbon ${label.toLowerCase()} ${jaar}: ${vlak.naam} met letters in ${letter.naam}">
-    <rect width="1618" height="1000" rx="28" fill="${vlak.druk}"/>
+    <rect width="1618" height="1000" fill="${vlak.druk}"/>
     <g class="c-bon__label" fill="${papier}" stroke="${letter.druk}">
       <text x="110" y="170">${label}</text>
       <text x="1508" y="900" text-anchor="end">${label}</text>

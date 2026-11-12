@@ -14,16 +14,20 @@ function dia(c: Combo, i: number, jaar: number) {
   return `<section class="c-dia" id="dia-${c.id}" aria-label="Combo ${L(c)}: ${c.naam}" style="--dia-p:${k.P.druk};--dia-tekst:${tekstOp(k.P.druk)};--dia-s:${k.S.druk}">
     <div class="c-dia__affiche">${kunst(AFFICHE, c)}</div>
     <div class="c-dia__info">
-      <p class="c-dia__teller">${i + 1} / ${COMBOS.length}</p>
+      <p class="c-dia__teller">${i + 1} / ${COMBOS.length} · pijltjes of A tot ${L(COMBOS[COMBOS.length - 1]!)}</p>
       <h2 class="c-dia__titel"><span class="c-dia__letter">${L(c)}</span>${c.naam}</h2>
       <ul class="c-dia__kleuren">
         ${[k.P, k.S, k.A].map((kl) => `<li><i style="background:${kl.druk}"></i>${kl.naam}</li>`).join('')}
       </ul>
       <div class="c-dia__bonnen">${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}${bon('zwaar', c.bon.zwaar, c.bon.licht, jaar)}</div>
       <div class="c-dia__acties">
-        <button type="button" class="c-dia__stem" data-stem="${c.id}" data-delta="1">Stem op ${L(c)}</button>
-        <button type="button" class="c-dia__terug" data-stem="${c.id}" data-delta="-1" hidden>Stem ongedaan maken</button>
-        <a class="c-dia__meer" href="#${c.id}">Huisstijl en drukwerk →</a>
+        <button type="button" class="c-dia__knop c-dia__knop--vol" data-stem="${c.id}">Stem op ${L(c)}</button>
+        <a class="c-dia__knop" href="#${c.id}">Bekijk huisstijl en drukwerk <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="c-dia__klaar" hidden>
+        <p class="c-dia__bevestig" role="status">Gestemd op <b data-gekozen></b>. Geef de laptop door.</p>
+        <button type="button" class="c-dia__knop c-dia__knop--vol" data-volgende>Volgende persoon</button>
+        <button type="button" class="c-dia__terug" data-ongedaan>Stem ongedaan maken</button>
       </div>
     </div>
   </section>`;

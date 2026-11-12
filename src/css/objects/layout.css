@@ -8,7 +8,7 @@
 /* Pagina met marge: alles behalve de schermvullende carrousel. */
 .o-pagina, .c-alle, .c-vorig {
   max-width: 90rem; margin-inline: auto;
-  padding-block: var(--r4) var(--r5);
+  padding-block: var(--r3) var(--r5);
   padding-left: max(var(--r3), env(safe-area-inset-left, 0px));
   padding-right: max(var(--r3), env(safe-area-inset-right, 0px));
 }

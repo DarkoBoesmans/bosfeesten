@@ -83,8 +83,8 @@ export function huisstijl(c: Combo, jaar: number) {
         </ul>
       </div>
       <div>
-        <h3 class="c-sectie-titel c-sectie-titel--klein">Vorige jaren</h3>
         <div class="c-oudebonnen">
+          <figure>${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}${bon('zwaar', c.bon.zwaar, c.bon.licht, jaar)}<figcaption><b>${jaar}, combo ${letter(c.id)}</b>: licht links, zwaar rechts</figcaption></figure>
           ${VORIGE.map((v) => `<figure><img src="assets/vorig/bon-${v.jaar}-licht.webp" alt="Lichte drankbon ${v.jaar}" width="500" height="301" loading="lazy"><img src="assets/vorig/bon-${v.jaar}-zwaar.webp" alt="Zware drankbon ${v.jaar}" width="500" height="301" loading="lazy"><figcaption>${v.jaar}: licht links, zwaar rechts</figcaption></figure>`).join('')}
         </div>
       </div>

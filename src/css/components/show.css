@@ -14,11 +14,12 @@
 .c-dia {
   flex: 0 0 100%; scroll-snap-align: start; min-height: 0;
   display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--r4); align-items: center;
-  padding: var(--r3) max(var(--r4), env(safe-area-inset-right, 0px)) var(--r3) max(var(--r4), env(safe-area-inset-left, 0px));
+  --rand: var(--r4);
+  padding: var(--rand) max(var(--rand), env(safe-area-inset-right, 0px)) var(--rand) max(var(--rand), env(safe-area-inset-left, 0px));
   background: var(--dia-p); color: var(--dia-tekst);
 }
 .c-dia__affiche { height: 100%; min-height: 0; display: flex; align-items: center; }
-.c-dia__affiche .c-kunst { height: 100%; width: auto; max-height: calc(100svh - 3.5rem - 2 * var(--r3)); outline: 0.618rem solid var(--dia-s); }
+.c-dia__affiche .c-kunst { height: 100%; width: auto; max-height: calc(100svh - 3.5rem - 2 * var(--rand)); }
 .c-dia__info { display: flex; flex-direction: column; gap: var(--r3); max-width: 40rem; }
 .c-dia__teller { font: 700 1rem/1 var(--slab); font-variant-numeric: tabular-nums; }
 .c-dia__titel { font: 400 clamp(2.2rem, 4.5vw, 4.5rem)/0.95 var(--titel); text-transform: uppercase; }
@@ -28,19 +29,27 @@
 .c-dia__kleuren i { width: 1.618rem; height: 1.618rem; outline: 2px solid currentColor; }
 .c-dia__bonnen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r2); max-width: 32rem; }
 .c-dia__bonnen > * { min-width: 0; }
-.c-dia__acties { display: flex; flex-wrap: wrap; align-items: center; gap: var(--r2) var(--r3); }
-.c-dia__stem { min-height: 4.236rem; padding: 0 var(--r4); border: 3px solid currentColor; background: var(--dia-tekst); color: var(--dia-p); font: 400 1.618rem/1 var(--titel); text-transform: uppercase; }
-.c-dia__stem:hover:not(:disabled) { background: transparent; color: var(--dia-tekst); }
-.c-dia__stem:disabled { cursor: default; background: transparent; color: var(--dia-tekst); font-size: 1.1rem; }
-.c-dia__terug { border: 0; background: none; text-decoration: underline; padding: var(--r1) 0; }
-.c-dia__meer { font-weight: 600; text-underline-offset: 4px; }
+
+.c-dia__acties, .c-dia__klaar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--r2); }
+.c-dia__acties[hidden], .c-dia__klaar[hidden] { display: none; }
+.c-dia__knop {
+  display: inline-flex; align-items: center; gap: var(--r1); min-height: 3.5rem; padding: 0 var(--r3);
+  border: 3px solid currentColor; background: transparent; color: inherit; text-decoration: none;
+  font: 400 1.2rem/1 var(--titel); text-transform: uppercase;
+}
+.c-dia__knop:hover { background: var(--dia-tekst); color: var(--dia-p); }
+.c-dia__knop--vol { background: var(--dia-tekst); color: var(--dia-p); border-color: var(--dia-tekst); }
+.c-dia__knop--vol:hover { background: transparent; color: var(--dia-tekst); }
+.c-dia__bevestig { flex-basis: 100%; font: 700 1.3rem/1.3 var(--slab); }
+.c-dia__bevestig b { font: 400 1.618em/1 var(--titel); }
+.c-dia__terug { border: 0; background: none; color: inherit; text-decoration: underline; text-underline-offset: 4px; min-height: 3.5rem; padding: 0 var(--r1); }
+.c-dia :focus-visible, .c-show__nav :focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
 
 @media (max-width: 50rem), (orientation: portrait) {
   .c-show { height: auto; }
-  .c-dia { grid-template-columns: 1fr; align-items: start; padding: var(--r3) max(16px, env(safe-area-inset-right, 0px)) var(--r4) max(16px, env(safe-area-inset-left, 0px)); }
+  .c-dia { --rand: 16px; grid-template-columns: 1fr; align-items: start; }
   .c-dia__affiche .c-kunst { width: 100%; height: auto; max-height: none; }
   .c-show__nav { position: sticky; bottom: 0; }
   .c-show__pijl, .c-show__letter { padding: 0 var(--r2); }
 }
 .c-dia__bonnen .c-bon { outline: 3px solid var(--dia-tekst); }
-.c-dia__stem:disabled { font: 700 1.2rem/1.2 var(--slab); text-transform: none; }
