@@ -26,6 +26,9 @@ Live: https://darkoboesmans.github.io/bosfeesten/
 bun install
 bun run build   # bouwt dist/
 bun run check   # typecontrole
+bun run deploy  # bouwt en zet de site online (branch gh-pages)
 ```
+
+Pages staat op **Deploy from a branch: `gh-pages` / (root)**. Er is geen GitHub Actions nodig.
 
 Kleur aanpassen: wijzig de CMYK in `src/ts/data/kleuren.ts` en reken de hex opnieuw uit met `tools/kleur.py`.
