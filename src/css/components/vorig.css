@@ -16,5 +16,5 @@
 
 .c-lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 60rem); max-height: 92vh; overflow: visible; }
 .c-lightbox::backdrop { background: rgb(15 12 22 / 0.86); }
-.c-lightbox__beeld { max-height: 86vh; width: auto; border-radius: var(--straal-klein); }
+.c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; border-radius: var(--straal-klein); }
 .c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; border-radius: 99rem; background: #fff; color: var(--inkt); font-weight: 600; }

@@ -12,7 +12,7 @@ export function overzicht(jaar: number) {
   <header class="c-kop">
     <p class="c-kop__boven">Chiro Popov · Bosfeesten ${jaar}</p>
     <h1 class="c-kop__titel">Welke kleuren worden het?</h1>
-    <p class="c-kop__tekst">Drie voorstellen op de echte affiche en de drankbonnen. Klik op een combo voor de huisstijl en het drukwerk.</p>
+    <p class="c-kop__tekst">Vijf voorstellen op de echte affiche en de drankbonnen. Klik op een combo voor de huisstijl en het drukwerk.</p>
     <div class="c-regel">
       <span class="c-regel__tekst">Niet opnieuw:</span>
       ${VORIGE.map((v) => `<span class="c-regel__jaar">${v.jaar} ${v.kleuren.map((k) => `<i style="background:${k}"></i>`).join('')}</span>`).join('')}

@@ -41,3 +41,5 @@
 .c-verder__link { padding: var(--r3); border-radius: var(--straal); text-decoration: none; font: 700 1.4rem/1.2 var(--slab); }
 .c-verder__link span { display: block; font: 600 0.75rem/1.6 var(--tekst); letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.8; }
 .c-verder__link:hover { filter: brightness(1.1); }
+.c-voorbeeld__knop { display: block; width: 100%; padding: 0; border: 0; background: none; border-radius: var(--straal-klein); cursor: zoom-in; transition: transform 0.2s; }
+.c-voorbeeld__knop:hover { transform: translateY(-3px); }

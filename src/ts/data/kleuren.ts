@@ -9,5 +9,7 @@ export const KLEUREN = {
   ultra: { naam: 'Ultramarijn', cmyk: [90, 80, 0, 0], druk: '#364FA2', scherm: '#2D49CD', dichtst: 'blauw 2025', graden: 36 },
   druif: { naam: 'Druif', cmyk: [70, 90, 0, 0], druk: '#6D3F99', scherm: '#7D29BE', dichtst: 'roze 2026', graden: 66 },
   lila: { naam: 'Lila', cmyk: [35, 50, 0, 0], druk: '#A888BF', scherm: '#B785D9', dichtst: 'roze 2026', graden: 60 },
+  indigo: { naam: 'Indigo', cmyk: [85, 95, 0, 0], druk: '#4F3795', scherm: '#5828B8', dichtst: 'blauw 2025', graden: 58 },
+  groen: { naam: 'Groen', cmyk: [65, 0, 100, 0], druk: '#60BC46', scherm: '#37CB00', dichtst: 'mint 2026', graden: 28 },
   creme: { naam: 'Crème', cmyk: [2, 2, 14, 0], druk: '#FAF6DE', scherm: '#FFF8DC', dichtst: 'geel 2025', graden: 4 },
 } satisfies Record<string, Kleur>;

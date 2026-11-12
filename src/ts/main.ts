@@ -44,6 +44,12 @@ document.addEventListener('click', (e) => {
   if (doel.closest('[data-wis]')) { wis(); teken(); toast('Stemmen staan op nul.'); return; }
   const groot = doel.closest<HTMLElement>('[data-groot]');
   if (groot) { openLightbox(groot.dataset.groot!, groot.dataset.alt ?? ''); return; }
+  const vergroot = doel.closest<HTMLElement>('[data-vergroot]');
+  if (vergroot) {
+    const cv = $<HTMLCanvasElement>('canvas', vergroot);
+    if (cv) openLightbox(cv.toDataURL('image/jpeg', 0.92), cv.getAttribute('aria-label') ?? '');
+    return;
+  }
   const kopie = doel.closest<HTMLElement>('[data-kopie]');
   if (kopie) { kopieer(kopie.dataset.kopie!); return; }
   sluitLightbox(e);

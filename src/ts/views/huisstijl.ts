@@ -5,7 +5,6 @@ import { KLEUREN } from '../data/kleuren';
 import { contrast, cmykTekst, inkt, tekstOp } from '../lib/kleur';
 import { kunst } from '../components/kunst';
 import { bon } from '../components/bon';
-import { website } from '../components/website';
 
 const letter = (id: string) => id.toUpperCase();
 const oordeel = (v: number) => (v >= 4.5 ? 'goed voor alle tekst' : v >= 3 ? 'goed voor grote tekst' : 'alleen voor grote titels');
@@ -59,9 +58,17 @@ export function huisstijl(c: Combo, jaar: number) {
       </div>
     </header>
 
+    <section class="o-sectie" aria-labelledby="vb-titel">
+      <h2 class="c-sectie-titel" id="vb-titel">Drukwerk in deze kleuren</h2>
+      <p class="c-sectie-tekst">Rechtstreeks uit drukwerk.af, automatisch herkleurd. Opmaak en teksten zijn die van nu. Klik om groot te bekijken.</p>
+      <div class="c-voorbeelden">
+        ${VOORBEELDEN.map((w) => `<figure class="c-voorbeeld"><button type="button" class="c-voorbeeld__knop" data-vergroot aria-label="${w.titel} groot bekijken">${kunst(w, c)}</button><figcaption>${w.titel}</figcaption></figure>`).join('')}
+      </div>
+    </section>
+
     <section class="o-sectie" aria-labelledby="kleuren-titel">
       <h2 class="c-sectie-titel" id="kleuren-titel">Kleuren</h2>
-      <p class="c-sectie-tekst">Typ in drukwerk.af de CMYK-waarden in de hoofdstalen. "Hex scherm" is de fellere versie voor website, Instagram en Facebook. Klik op een waarde om ze te kopiëren.</p>
+      <p class="c-sectie-tekst">Typ in drukwerk.af de CMYK-waarden in de hoofdstalen. "Hex scherm" is de fellere versie voor de website, Instagram en Facebook. Klik op een waarde om ze te kopiëren.</p>
       <div class="c-kleuren">${ROLLEN.map(({ r, rol, gebruik }) => kleurkaart(c, r, rol, gebruik)).join('')}</div>
     </section>
 
@@ -107,20 +114,6 @@ export function huisstijl(c: Combo, jaar: number) {
         <dl class="c-contrast">
           ${merk.map((kl) => { const v = contrast(creme, kl.druk); return `<div><dt><i style="background:${kl.druk}"></i>op ${kl.naam}</dt><dd>${v.toFixed(1)}:1, ${oordeel(v)}</dd></div>`; }).join('')}
         </dl>
-      </div>
-    </section>
-
-    <section class="o-sectie" aria-labelledby="web-titel">
-      <h2 class="c-sectie-titel" id="web-titel">Op de website</h2>
-      <p class="c-sectie-tekst">Dezelfde kleuren in hun schermversie, zoals op bosfeesten.be.</p>
-      ${website(c, jaar)}
-    </section>
-
-    <section class="o-sectie" aria-labelledby="vb-titel">
-      <h2 class="c-sectie-titel" id="vb-titel">Drukwerk in deze kleuren</h2>
-      <p class="c-sectie-tekst">Rechtstreeks uit drukwerk.af, automatisch herkleurd. Opmaak en teksten zijn die van nu.</p>
-      <div class="c-voorbeelden">
-        ${VOORBEELDEN.map((w) => `<figure class="c-voorbeeld">${kunst(w, c)}<figcaption>${w.titel}</figcaption></figure>`).join('')}
       </div>
     </section>
 
