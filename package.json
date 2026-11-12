@@ -5,8 +5,7 @@
   "scripts": {
     "build": "bun run build.ts",
     "dev": "bun run build.ts && bunx serve dist",
-    "check": "tsc --noEmit",
-    "deploy": "bun run deploy.ts"
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "typescript": "5.8.3"

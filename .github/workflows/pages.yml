@@ -1,16 +1,18 @@
-# Bij elke push naar main: bouwen en de branch gh-pages bijwerken (Pages: Deploy from a branch, gh-pages).
+# Bij elke push naar main: bouwen en publiceren op GitHub Pages (Settings → Pages → Source: GitHub Actions).
 name: Online zetten
 on:
   push:
     branches: [main]
   workflow_dispatch:
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 concurrency:
   group: pages
   cancel-in-progress: true
 jobs:
-  online:
+  bouw:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,11 +22,15 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bunx tsc --noEmit
       - run: bun run build
-      - name: gh-pages bijwerken
-        working-directory: dist
-        run: |
-          touch .nojekyll
-          git init -q -b gh-pages
-          git add -A
-          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -q -m "Site gebouwd uit ${GITHUB_SHA::7}"
-          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" gh-pages
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+  publiceer:
+    needs: bouw
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
