@@ -1,45 +1,40 @@
-// Overzicht: één combo per scherm om de laptop mee rond te geven, daaronder alle affiches naast elkaar.
+// Overzicht na de keuze: de gekozen combo eerst, schermvullend, daarna de andere voorstellen.
 import type { Combo } from '../types';
-import { COMBOS } from '../data/combos';
+import { KEUZE, OP_VOLGORDE, gekozen } from '../data/combos';
 import { AFFICHE, VORIGE } from '../data/werken';
 import { tekstOp } from '../lib/kleur';
-import { aantal } from '../lib/stemmen';
 import { kunst } from '../components/kunst';
 import { bon } from '../components/bon';
 
 const L = (c: Combo) => c.id.toUpperCase();
+const isKeuze = (c: Combo) => c.id === KEUZE.id;
 
-function dia(c: Combo, i: number, jaar: number) {
+function dia(c: Combo, jaar: number) {
   const k = c.kleuren;
   return `<section class="c-dia" id="dia-${c.id}" aria-label="Combo ${L(c)}: ${c.naam}" style="--dia-p:${k.P.druk};--dia-tekst:${tekstOp(k.P.druk)};--dia-s:${k.S.druk}">
     <div class="c-dia__affiche">${kunst(AFFICHE, c)}</div>
     <div class="c-dia__info">
-      <p class="c-dia__teller">${i + 1} / ${COMBOS.length} · pijltjes of A tot ${L(COMBOS[COMBOS.length - 1]!)}</p>
+      <p class="c-dia__teller">${isKeuze(c) ? `Gekozen op ${KEUZE.datum}` : `Voorstel ${L(c)}, niet gekozen`}</p>
       <h2 class="c-dia__titel"><span class="c-dia__letter">${L(c)}</span>${c.naam}</h2>
       <ul class="c-dia__kleuren">
         ${[k.P, k.S, k.A].map((kl) => `<li><i style="background:${kl.druk}"></i>${kl.naam}</li>`).join('')}
       </ul>
       <div class="c-dia__bonnen">${bon('licht', c.bon.licht, c.bon.zwaar, jaar)}${bon('zwaar', c.bon.zwaar, c.bon.licht, jaar)}</div>
       <div class="c-dia__acties">
-        <button type="button" class="c-dia__knop c-dia__knop--vol" data-stem="${c.id}">Stem op ${L(c)}</button>
-        <a class="c-dia__knop" href="#${c.id}">Bekijk huisstijl en drukwerk <span aria-hidden="true">→</span></a>
-      </div>
-      <div class="c-dia__klaar" hidden>
-        <p class="c-dia__bevestig" role="status">Gestemd op <b data-gekozen></b>. Geef de laptop door.</p>
-        <button type="button" class="c-dia__knop c-dia__knop--vol" data-volgende>Volgende persoon</button>
-        <button type="button" class="c-dia__terug" data-ongedaan>Stem ongedaan maken</button>
+        <a class="c-dia__knop${isKeuze(c) ? ' c-dia__knop--vol' : ''}" href="#${c.id}">${isKeuze(c) ? 'Open de huisstijl' : 'Bekijk dit voorstel'} <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>`;
 }
 
 export function overzicht(jaar: number) {
+  const winnaar = gekozen();
   return `
-  <main class="c-show" aria-label="Kleurvoorstellen Bosfeesten ${jaar}">
-    <div class="c-show__spoor" tabindex="0">${COMBOS.map((c, i) => dia(c, i, jaar)).join('')}</div>
+  <main class="c-show" aria-label="Kleuren Bosfeesten ${jaar}">
+    <div class="c-show__spoor" tabindex="0">${OP_VOLGORDE.map((c) => dia(c, jaar)).join('')}</div>
     <nav class="c-show__nav" aria-label="Combo kiezen">
       <button type="button" class="c-show__pijl" data-stap="-1" aria-label="Vorige combo">←</button>
-      ${COMBOS.map((c, i) => `<button type="button" class="c-show__letter" data-naar="${i}"${i === 0 ? ' aria-current="true"' : ''} style="--kleur:${c.kleuren.P.druk}">${L(c)}</button>`).join('')}
+      ${OP_VOLGORDE.map((c, i) => `<button type="button" class="c-show__letter" data-naar="${i}"${i === 0 ? ' aria-current="true"' : ''} style="--kleur:${c.kleuren.P.druk}" aria-label="Combo ${L(c)}${isKeuze(c) ? ', gekozen' : ''}">${L(c)}</button>`).join('')}
       <button type="button" class="c-show__pijl" data-stap="1" aria-label="Volgende combo">→</button>
       <button type="button" class="c-show__alles" data-alles>Alles naast elkaar ↓</button>
     </nav>
@@ -47,19 +42,15 @@ export function overzicht(jaar: number) {
 
   <section class="c-alle" id="alle" aria-labelledby="alle-titel">
     <header class="c-alle__kop">
-      <h2 class="c-alle__titel" id="alle-titel">Bosfeesten ${jaar}: welke kleuren?</h2>
-      <p class="c-alle__uitleg">Klik een affiche om ze groot te zien en te stemmen. Geen rood, roze, hemelsblauw of mint: die waren van 2025 en 2026.</p>
+      <h2 class="c-alle__titel" id="alle-titel">Bosfeesten ${jaar} wordt ${winnaar.naam}</h2>
+      <p class="c-alle__uitleg">Gekozen op ${KEUZE.datum} uit vijf voorstellen. Klik een affiche om ze groot te zien.</p>
     </header>
     <div class="c-alle__raster">
-      ${COMBOS.map((c, i) => `
-      <figure class="c-alle__item">
+      ${OP_VOLGORDE.map((c, i) => `
+      <figure class="c-alle__item${isKeuze(c) ? ' c-alle__item--keuze' : ''}">
         <button type="button" class="c-alle__beeld" data-naar="${i}" aria-label="Combo ${L(c)} groot bekijken">${kunst(AFFICHE, c)}</button>
-        <figcaption class="c-alle__naam"><b>${L(c)}</b> ${c.naam}<span class="c-alle__stemmen" data-telling="${c.id}">${aantal(c.id)}</span></figcaption>
+        <figcaption class="c-alle__naam"><b>${L(c)}</b> ${c.naam}${isKeuze(c) ? '<span class="c-alle__tag">Gekozen</span>' : ''}</figcaption>
       </figure>`).join('')}
-    </div>
-    <div class="c-alle__uitslag">
-      <button type="button" class="c-knop" data-uitslag>Toon de stemmen</button>
-      <button type="button" class="c-knop c-knop--rand" data-wis>Stemmen op nul</button>
     </div>
   </section>
 

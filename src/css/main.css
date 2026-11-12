@@ -13,4 +13,6 @@
 @import './components/vorig.css';
 @import './components/huisstijl.css';
 @import './components/kleur.css';
+@import './components/gids.css';
 @import './utilities/utils.css';
+@import './utilities/print.css';

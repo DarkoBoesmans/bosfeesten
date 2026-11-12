@@ -1,0 +1,22 @@
+/* Afdrukversie: A4, kleuren zoals op scherm, zonder navigatie en knoppen. */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { background: #fff; font-size: 10pt; }
+  .c-pad, .c-verder, .c-held__print, .c-toast, .c-lightbox, .c-skip, .c-show, .c-melding { display: none !important; }
+  .o-pagina { max-width: none; padding: 0; }
+  .c-held { margin: 0; padding: 8mm; break-after: page; }
+  .o-sectie { margin-top: 0; padding-top: 8mm; }
+  .c-sectie { break-before: page; }
+  .c-sectie:first-of-type { break-before: auto; }
+  .c-sectie-titel, .c-welniet__kop { break-after: avoid; }
+  .c-kleur, .c-logotegel, .c-voorbeeld, .c-letters__rij, .c-oudebonnen figure, .c-lijst li { break-inside: avoid; }
+  .c-kopie { text-decoration: none; padding: 0; }
+  .c-voorbeelden { grid-template-columns: repeat(4, 1fr); }
+  .c-kleuren { grid-template-columns: repeat(4, 1fr); }
+  a { text-decoration: none; }
+  .c-sectie .o-gulden { grid-template-columns: 1fr; gap: 6mm; }
+  .c-oudebonnen { grid-template-columns: 1fr 1fr; gap: 8mm; }
+  .c-oudebonnen figure:first-child { grid-column: 1 / -1; }
+  .c-patroon { max-width: 70%; }
+}

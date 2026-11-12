@@ -15,9 +15,9 @@ function markeer(i: number) {
   $$('.c-show__letter').forEach((b, j) => b.toggleAttribute('aria-current', j === i));
 }
 
-/** Eerste bruikbare knop van een dia (stemknop, of "Volgende persoon" na een stem). */
+/** Eerste bruikbare knop van een dia (de link naar de huisstijl). */
 export function hoofdknop(i: number) {
-  return $$<HTMLButtonElement>('.c-dia')[i]?.querySelector<HTMLElement>('.c-dia__acties:not([hidden]) .c-dia__knop, .c-dia__klaar:not([hidden]) .c-dia__knop') ?? null;
+  return $$('.c-dia')[i]?.querySelector<HTMLElement>('.c-dia__knop') ?? null;
 }
 
 export function naar(i: number, focus = false) {

@@ -46,3 +46,9 @@ export const COMBOS: Combo[] = [
     bon: { licht: K.mandarijn, zwaar: K.indigo },
   },
 ];
+
+/** Gekozen op de vergadering door stemming op de laptop. */
+export const KEUZE = { id: 'd', datum: '12 november 2026' };
+export const gekozen = () => COMBOS.find((c) => c.id === KEUZE.id)!;
+/** Gekozen combo eerst, daarna de andere voorstellen in hun volgorde. */
+export const OP_VOLGORDE = [...COMBOS].sort((a, b) => Number(b.id === KEUZE.id) - Number(a.id === KEUZE.id));

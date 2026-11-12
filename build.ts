@@ -4,7 +4,7 @@ import { cp, rm } from 'node:fs/promises';
 await rm('dist', { recursive: true, force: true });
 
 for (const [entry, map] of [['src/ts/main.ts', 'dist/js'], ['src/css/main.css', 'dist/css']] as const) {
-  const uit = await Bun.build({ entrypoints: [entry], outdir: map, minify: true, target: 'browser', external: ['*.woff2'] });
+  const uit = await Bun.build({ entrypoints: [entry], outdir: map, minify: true, target: 'browser', external: ['*.woff2', '*.svg'] });
   if (!uit.success) { console.error(uit.logs); process.exit(1); }
 }
 

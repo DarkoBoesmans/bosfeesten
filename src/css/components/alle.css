@@ -7,9 +7,7 @@
 .c-alle__beeld { display: block; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .c-alle__naam { display: flex; align-items: baseline; gap: var(--r1); font: 700 1.1rem/1.2 var(--slab); }
 .c-alle__naam b { font: 400 1.618rem/1 var(--titel); }
-.c-alle__stemmen { display: none; margin-left: auto; font: 400 1.618rem/1 var(--titel); font-variant-numeric: tabular-nums; }
-.toon-uitslag .c-alle__stemmen { display: inline; }
-.c-alle__uitslag { display: flex; flex-wrap: wrap; gap: var(--r2); margin-top: var(--r4); }
+.c-alle__tag { margin-left: auto; padding: var(--r0) var(--r1); background: var(--inkt); color: var(--papier); font: 400 0.9rem/1 var(--titel); text-transform: uppercase; }
 
 @media (max-width: 60rem) { .c-alle__raster { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-alle__kop { grid-template-columns: 1fr; } }
 @media (max-width: 30rem) { .c-alle__raster { grid-template-columns: 1fr; } }

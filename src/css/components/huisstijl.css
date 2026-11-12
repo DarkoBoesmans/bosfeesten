@@ -21,7 +21,7 @@
 .c-lijst li { padding: var(--r1) 0 var(--r1) var(--r3); border-bottom: 1px solid var(--lijn); position: relative; }
 .c-lijst li::before { content: ''; position: absolute; left: 0.3rem; top: 1.2rem; width: 0.5rem; height: 0.5rem; background: var(--inkt); border-radius: 50%; }
 
-.c-verhouding { display: flex; height: var(--r5); border-radius: var(--straal); overflow: hidden; margin: var(--r2) 0; }
+.c-verhouding { display: flex; height: var(--r5); overflow: hidden; margin-top: var(--r3); }
 .c-verhouding span { display: flex; align-items: flex-end; padding: var(--r0) var(--r1); font: 700 1.1rem/1 var(--slab); }
 
 .c-letter { font-size: 1.1rem; }

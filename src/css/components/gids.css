@@ -1,0 +1,40 @@
+/* Onderdelen van de huisstijlgids: logo, letters, patroon, wel en niet. */
+.c-melding { margin-bottom: var(--r2); padding: var(--r2) var(--r3); border: 2px solid var(--inkt); font-weight: 500; }
+
+.c-held__print { margin-top: var(--r3); min-height: 3rem; padding: 0 var(--r3); border: 2px solid currentColor; background: transparent; color: inherit; font: 400 1rem/1 var(--titel); text-transform: uppercase; }
+.c-held__print:hover { background: currentColor; }
+.c-held__print:hover { color: inherit; background: rgb(255 255 255 / 0.15); }
+
+.c-verhouding span { white-space: nowrap; overflow: hidden; }
+
+.c-logo { display: block; width: 100%; aspect-ratio: 1; max-width: 100%; background: var(--logo-kleur); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; }
+.c-logo--uitgerekt { transform: scaleX(1.45) scaleY(0.8); }
+.c-logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r3) var(--r2); margin-bottom: var(--r3); }
+.c-logotegel__vlak { aspect-ratio: 1.618; display: grid; place-items: center; padding: var(--r3); overflow: hidden; }
+.c-logotegel__vlak .c-logo { width: auto; height: 100%; }
+.c-logotegel figcaption { margin-top: var(--r1); font-size: 0.9rem; line-height: 1.4; }
+.c-logotegel figcaption b { font: 400 1rem/1 var(--titel); text-transform: uppercase; margin-right: var(--r0); }
+.c-logotegel--niet .c-logotegel__vlak { position: relative; }
+.c-logotegel--niet .c-logotegel__vlak::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 3px), var(--inkt) calc(50% - 3px), var(--inkt) calc(50% + 3px), transparent calc(50% + 3px)); }
+.c-downloads { margin-top: var(--r2); font-weight: 500; }
+@media (max-width: 40rem) { .c-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.c-letters__rij { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r3); align-items: baseline; padding: var(--r3) 0; border-bottom: 2px solid var(--inkt); }
+.c-letters__rij:first-child { border-top: 2px solid var(--inkt); }
+.c-letters__rij > * { min-width: 0; }
+.c-letters__voorbeeld--titel { font: 400 clamp(2.4rem, 6vw, 5rem)/0.95 var(--titel); text-transform: uppercase; }
+.c-letters__voorbeeld--slab { font: 700 clamp(1.4rem, 3vw, 2.2rem)/1.2 var(--slab); }
+.c-letters__voorbeeld--tekst { font: 400 1.2rem/1.6 var(--tekst); max-width: 36rem; }
+.c-letters__uitleg { color: var(--grijs); font-size: 0.95rem; }
+.c-letters__uitleg b { color: var(--inkt); }
+@media (max-width: 50rem) { .c-letters__rij { grid-template-columns: 1fr; gap: var(--r1); } }
+
+/* Uitsnede van de affiche: de linkerbovenhoek met patroon en titel. */
+.c-patroon { aspect-ratio: 1.618; max-width: 100%; overflow: hidden; position: relative; }
+.c-patroon .c-kunst { position: absolute; width: 260%; max-width: none; left: -2%; top: -36%; }
+
+.c-welniet { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r4); margin-bottom: var(--r3); }
+.c-welniet > * { min-width: 0; }
+.c-welniet__kop { font: 400 1.4rem/1 var(--titel); text-transform: uppercase; margin-bottom: var(--r1); }
+.c-lijst--niet li::before { width: 0.7rem; height: 2px; top: 1.35rem; }
+@media (max-width: 50rem) { .c-welniet { grid-template-columns: 1fr; } }

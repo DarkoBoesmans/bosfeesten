@@ -30,8 +30,7 @@
 .c-dia__bonnen { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r2); max-width: 32rem; }
 .c-dia__bonnen > * { min-width: 0; }
 
-.c-dia__acties, .c-dia__klaar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--r2); }
-.c-dia__acties[hidden], .c-dia__klaar[hidden] { display: none; }
+.c-dia__acties { display: flex; flex-wrap: wrap; align-items: center; gap: var(--r2); }
 .c-dia__knop {
   display: inline-flex; align-items: center; gap: var(--r1); min-height: 3.5rem; padding: 0 var(--r3);
   border: 3px solid currentColor; background: transparent; color: inherit; text-decoration: none;
@@ -40,9 +39,6 @@
 .c-dia__knop:hover { background: var(--dia-tekst); color: var(--dia-p); }
 .c-dia__knop--vol { background: var(--dia-tekst); color: var(--dia-p); border-color: var(--dia-tekst); }
 .c-dia__knop--vol:hover { background: transparent; color: var(--dia-tekst); }
-.c-dia__bevestig { flex-basis: 100%; font: 700 1.3rem/1.3 var(--slab); }
-.c-dia__bevestig b { font: 400 1.618em/1 var(--titel); }
-.c-dia__terug { border: 0; background: none; color: inherit; text-decoration: underline; text-underline-offset: 4px; min-height: 3.5rem; padding: 0 var(--r1); }
 .c-dia :focus-visible, .c-show__nav :focus-visible { outline: 3px solid currentColor; outline-offset: 4px; }
 
 @media (max-width: 50rem), (orientation: portrait) {
