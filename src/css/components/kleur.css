@@ -1,0 +1,13 @@
+.c-kleuren { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--r2); }
+.c-kleur { background: var(--kaart); border: 1px solid var(--lijn); border-radius: var(--straal); overflow: hidden; font-size: 0.85rem; }
+.c-kleur__vlak { display: grid; grid-template-columns: 1.618fr 1fr; aspect-ratio: 1.618; max-width: 100%; }
+.c-kleur__druk { padding: var(--r2); display: flex; flex-direction: column; justify-content: space-between; }
+.c-kleur__scherm { padding: var(--r2) var(--r1); display: flex; align-items: flex-end; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+.c-kleur__rol { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+.c-kleur__naam { font: 700 1.4rem/1.1 var(--slab); }
+.c-kleur__waarden { padding: var(--r1) var(--r2) 0; }
+.c-kleur__waarden div { display: flex; justify-content: space-between; align-items: center; gap: var(--r1); border-bottom: 1px solid var(--lijn); min-height: 2.4rem; }
+.c-kleur__waarden dt { color: var(--grijs); }
+.c-kleur__waarden dd { font-weight: 600; font-variant-numeric: tabular-nums; }
+.c-kleur__gebruik { padding: var(--r1) var(--r2); line-height: 1.45; }
+.c-kleur__afstand { padding: 0 var(--r2) var(--r2); color: var(--grijs); font-size: 0.78rem; line-height: 1.4; }

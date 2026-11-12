@@ -1,0 +1,16 @@
+/* ITCSS-volgorde: van algemeen naar specifiek. Namen volgen BEM (blok__element--modifier). */
+@import './settings/tokens.css';
+@import './generic/reset.css';
+@import './elements/base.css';
+@import './objects/layout.css';
+@import './components/kop.css';
+@import './components/combo.css';
+@import './components/stalen.css';
+@import './components/bon.css';
+@import './components/teller.css';
+@import './components/knop.css';
+@import './components/vorig.css';
+@import './components/huisstijl.css';
+@import './components/kleur.css';
+@import './components/web.css';
+@import './utilities/utils.css';

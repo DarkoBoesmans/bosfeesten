@@ -1,0 +1,2 @@
+.c-stalen { display: flex; height: var(--r4); border-radius: var(--straal-klein); overflow: hidden; border: 1px solid var(--lijn); }
+.c-stalen__staal { display: flex; align-items: flex-end; padding: 0.25rem 0.4rem; font-size: 0.66rem; font-weight: 600; line-height: 1.1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }

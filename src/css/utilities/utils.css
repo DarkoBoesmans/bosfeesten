@@ -1,0 +1,2 @@
+/* Utilities: overschrijvingen die altijd winnen */
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

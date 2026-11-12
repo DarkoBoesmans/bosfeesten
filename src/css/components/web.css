@@ -1,0 +1,16 @@
+/* Mini-website in schermkleuren. Alle kleuren komen binnen als --web-* variabelen. */
+.c-web { border-radius: var(--straal); overflow: hidden; border: 1px solid var(--lijn); background: var(--web-l); color: var(--web-donker); max-width: 60rem; }
+.c-web__balk { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: var(--r1); padding: var(--r1) var(--r3); background: var(--web-donker); color: var(--web-l); }
+.c-web__logo { font: 400 1.3rem/1 var(--titel); text-transform: uppercase; }
+.c-web__menu { font-size: 0.85rem; }
+.c-web__held { background: var(--web-p); padding: var(--r4) var(--r3); }
+.c-web__titel { font: 400 clamp(2.4rem, 7vw, 4.8rem)/0.92 var(--titel); text-transform: uppercase; color: var(--web-l); -webkit-text-stroke: 0.35rem var(--web-s); paint-order: stroke fill; }
+.c-web__datum { display: inline-block; margin: var(--r2) 0; padding: var(--r0) var(--r1); background: var(--web-l); color: var(--web-donker); font: 700 1rem/1.4 var(--slab); }
+.c-web__knop { display: table; padding: var(--r1) var(--r3); border-radius: 99rem; background: var(--web-a); color: var(--web-op-a); font-weight: 700; }
+.c-web__programma { padding: var(--r2) var(--r3) var(--r3); }
+.c-web__rij { display: flex; align-items: center; gap: var(--r2); padding: var(--r1) 0; border-bottom: 2px solid var(--web-p); }
+.c-web__uur { font: 700 1rem/1 var(--slab); font-variant-numeric: tabular-nums; }
+.c-web__wat { flex: 1; min-width: 0; font-weight: 500; }
+.c-web__tag { font: 400 0.8rem/1 var(--titel); text-transform: uppercase; padding: 0.3rem 0.5rem; border-radius: 0.2rem; }
+.c-web__tag--plein { background: var(--web-a); color: var(--web-op-a); }
+.c-web__tag--meis { background: var(--web-b); color: var(--web-op-b); }
