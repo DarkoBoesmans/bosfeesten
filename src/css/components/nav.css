@@ -12,11 +12,20 @@
 .c-nav__merk:hover .c-nav__logo { rotate: -12deg; }
 .c-nav__links { display: flex; overflow-x: auto; scrollbar-width: none; min-width: 0; flex: 1; }
 .c-nav__links::-webkit-scrollbar { display: none; }
-@media (max-width: 60rem) { .c-nav__links { -webkit-mask: linear-gradient(to right, #000 80%, transparent); mask: linear-gradient(to right, #000 80%, transparent); } }
+
 .c-nav__link { display: flex; align-items: center; padding: 0 var(--r1); font-size: 0.85rem; font-weight: 500; text-decoration: none; white-space: nowrap; position: relative; }
 .c-nav__link::after { content: ''; position: absolute; left: var(--r1); right: var(--r1); bottom: 0.9rem; height: 2px; background: var(--groen); scale: 0 1; transform-origin: left; transition: scale 0.25s cubic-bezier(.2,.8,.2,1); }
 .c-nav__link:hover::after, .c-nav__link[aria-current]::after { scale: 1 1; }
 .c-nav__zip { flex: none; display: flex; align-items: center; gap: var(--r1); margin-block: var(--r0); padding: 0 var(--r2); background: var(--mandarijn); color: var(--inkt); font: 400 0.95rem/1 var(--titel); text-transform: uppercase; text-decoration: none; transition: background 0.2s, translate 0.2s; }
 .c-nav__zip span { font: 600 0.7rem/1 var(--tekst); opacity: 0.8; }
-.c-nav__zip:hover { background: var(--creme); }
-@media (max-width: 60rem) { .c-nav__zip span { display: none; } .c-nav__merk { font-size: 0; gap: 0; } }
+.c-nav__zip:hover { background: var(--creme); translate: 0 -2px; }
+@media (max-width: 60rem) {
+  /* Telefoon: merk en ZIP op de eerste rij, alle onderdelen schuifbaar op een eigen rij eronder. */
+  .c-nav { height: auto; flex-wrap: wrap; row-gap: 0; padding-right: max(var(--r1), env(safe-area-inset-right, 0px)); }
+  .c-nav__merk { height: 3.25rem; font-size: 0; gap: 0; }
+  .c-nav__zip { order: 2; margin-left: auto; min-height: 2.75rem; align-self: center; }
+  .c-nav__zip span { display: none; }
+  .c-nav__links { order: 3; flex-basis: 100%; height: 2.75rem; margin-left: calc(-1 * var(--r1)); -webkit-mask: linear-gradient(to right, #000 85%, transparent); mask: linear-gradient(to right, #000 85%, transparent); }
+  .c-nav__link { padding-inline: var(--r1); }
+  .c-nav__link::after { bottom: 0.45rem; }
+}

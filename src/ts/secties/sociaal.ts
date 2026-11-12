@@ -10,6 +10,10 @@ export const sociaal = () => `
         const [b, h] = maat.split(' × ').map(Number) as [number, number];
         return `<figure class="c-sociaal__item c-sociaal__item--${b > h ? 'breed' : b === h ? 'vierkant' : 'hoog'}">${voorbeeld(pad, label, b, h)}<figcaption><span class="c-sociaal__maat">${maat}</span>${bestand(pad, label)}</figcaption></figure>`;
       }).join('')}
+      <div class="c-sociaal__item c-sociaal__item--uitleg">
+        <p class="c-sociaal__maat">Lege versies</p>
+        <p>Zet je eigen tekst in het Indigo vlak: Hipstelvetica voor de kop, Poppins voor de rest, in Crème. Line-up, oproep voor helpers, nieuws: alles krijgt dezelfde rand.</p>
+      </div>
     </div>
     <ul class="c-lijst c-lijst--kolommen">
       <li>Houd in een story de bovenste en onderste 250 px vrij: daar staan profielnaam en antwoordbalk.</li>

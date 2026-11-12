@@ -5,5 +5,5 @@
 .c-letters__uitleg { display: grid; gap: var(--r1); }
 .c-letters__bron { font-size: 0.85rem; color: var(--grijs); }
 @media (max-width: 48rem) { .c-letters__rij { grid-template-columns: 1fr; } }
-.c-letters__bron a { text-decoration-thickness: 1px; }
+.c-letters__bron a { display: inline-block; padding-block: 0.2rem; text-decoration-thickness: 1px; }
 .c-letters__bron a:hover { color: var(--indigo); text-decoration-thickness: 3px; }

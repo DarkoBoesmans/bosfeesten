@@ -21,8 +21,10 @@ figcaption .c-bestand { display: flex; margin-top: var(--r1); }
 .c-sociaal__item--hoog { grid-column: span 2; }
 .c-sociaal__item--vierkant { grid-column: span 2; }
 .c-sociaal__item--breed { grid-column: span 4; }
+.c-sociaal__item--uitleg { grid-column: span 2; gap: var(--r1); padding: var(--r3); background: var(--indigo); color: var(--creme); align-self: stretch; justify-content: flex-end; }
+.c-sociaal__item--uitleg .c-sociaal__maat { font-family: var(--titel); font-weight: 400; font-size: 1.3rem; text-transform: uppercase; }
 .c-sociaal__maat { display: block; font: 700 0.85rem/1 var(--slab); font-variant-numeric: tabular-nums; }
-@media (max-width: 56rem) { .c-sociaal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-sociaal__item--hoog, .c-sociaal__item--vierkant { grid-column: span 1; } .c-sociaal__item--breed { grid-column: 1 / -1; } }
+@media (max-width: 56rem) { .c-sociaal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-sociaal__item--hoog, .c-sociaal__item--vierkant { grid-column: span 1; } .c-sociaal__item--breed, .c-sociaal__item--uitleg { grid-column: 1 / -1; } }
 
 .c-lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 70rem); max-height: 92vh; overflow: visible; }
 .c-lightbox::backdrop { background: rgb(30 21 56 / 0.9); }

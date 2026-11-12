@@ -23,7 +23,7 @@ export function pagina(vandaag = new Date()) {
     nummer,
     html: [
       nav(jaar),
-      `<main id="inhoud">${held(jaar, nummer)}${kleuren()}${logo()}${letters(jaar)}${patroon()}${drukwerk()}${bonnen(jaar)}${sociaal()}${regels()}${wettelijk(jaar)}${downloads()}</main>`,
+      `<main id="inhoud" tabindex="-1">${held(jaar, nummer)}${kleuren()}${logo()}${letters(jaar)}${patroon()}${drukwerk()}${bonnen(jaar)}${sociaal()}${regels()}${wettelijk(jaar)}${downloads()}</main>`,
       voet(jaar, nummer),
       lightbox(),
     ].join(''),

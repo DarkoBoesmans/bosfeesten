@@ -8,8 +8,9 @@
 .c-knop:hover { translate: -3px -3px; box-shadow: 6px 6px 0 var(--groen); }
 .c-knop:active { translate: 0 0; box-shadow: none; }
 .c-knop--vol { background: var(--mandarijn); border-color: var(--mandarijn); color: var(--inkt); }
+.c-knop--vol:hover { background: var(--creme); border-color: var(--creme); box-shadow: 6px 6px 0 var(--mandarijn); }
 .c-knop--groot { min-height: 4.2rem; font-size: 1.4rem; margin-bottom: var(--r4); }
-.c-knop__meta { font: 600 0.75rem/1 var(--tekst); text-transform: none; opacity: 0.8; }
+.c-knop__meta { font: 600 0.75rem/1 var(--tekst); text-transform: none; opacity: 0.8; white-space: nowrap; }
 
 .c-bestanden { display: flex; flex-wrap: wrap; gap: var(--r1); margin-top: var(--r3); }
 .c-bestand {

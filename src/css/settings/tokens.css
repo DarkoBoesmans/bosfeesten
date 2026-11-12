@@ -20,3 +20,4 @@
   --nav: 3.5rem;
   --patroon: url('../assets/kit/patroon/bosfeesten-patroon-transparant.svg');
 }
+@media (max-width: 60rem) { :root { --nav: 6rem; } }

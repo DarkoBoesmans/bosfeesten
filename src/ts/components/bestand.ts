@@ -13,5 +13,5 @@ export const bestand = (pad: string, label: string) =>
 /** Voorbeeldbeeld dat groot opent bij een klik. */
 export const voorbeeld = (pad: string, alt: string, b: number, h: number) =>
   `<button type="button" class="c-voorbeeld" data-groot="${url(pad)}" data-alt="${alt}" aria-label="${alt} groot bekijken">
-    <img src="${klein(pad)}" alt="${alt}" width="${b}" height="${h}" loading="lazy" decoding="async">
+    <img src="${klein(pad)}" alt="${alt}" width="${b}" height="${h}" style="aspect-ratio:${b} / ${h}" decoding="async">
   </button>`;
