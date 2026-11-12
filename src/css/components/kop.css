@@ -1,12 +1,4 @@
-.c-skip { position: absolute; left: -999rem; }
-.c-skip:focus { left: var(--r2); top: var(--r2); background: var(--inkt); color: #fff; padding: var(--r1) var(--r2); z-index: 9; }
-
-.c-kop { margin-bottom: var(--r4); max-width: 60rem; }
-.c-kop__boven { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; opacity: 0.75; }
-.c-kop__titel { font: 400 clamp(2.2rem, 6vw, 4.236rem)/1 var(--titel); text-transform: uppercase; margin: var(--r1) 0 var(--r2); }
-.c-kop__tekst { font-size: 1.1rem; color: var(--grijs); max-width: 44rem; }
-
-.c-regel { display: flex; flex-wrap: wrap; align-items: center; gap: var(--r1) var(--r2); margin-top: var(--r2); font-size: 0.9rem; }
-.c-regel__tekst { font-weight: 600; }
-.c-regel__jaar { display: inline-flex; align-items: center; gap: 0.25rem; background: var(--kaart); border: 1px solid var(--lijn); border-radius: 99rem; padding: 0.2rem 0.7rem; text-decoration: line-through; text-decoration-thickness: 2px; }
-.c-regel__jaar i { width: 0.9rem; height: 0.9rem; border-radius: 50%; }
+.c-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--r2) var(--r4); align-items: end; margin-bottom: var(--r4); padding-bottom: var(--r2); border-bottom: 3px solid currentColor; }
+.c-kop__titel { font: 400 clamp(2.6rem, 6vw, 5rem)/0.9 var(--titel); text-transform: uppercase; letter-spacing: -0.01em; margin-left: -0.03em; }
+.c-kop__tekst { max-width: 40rem; font-size: 1.05rem; }
+@media (max-width: 48rem) { .c-kop { grid-template-columns: 1fr; } }

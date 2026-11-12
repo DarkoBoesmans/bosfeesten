@@ -1,0 +1,9 @@
+.c-logos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r3) var(--r2); }
+@media (max-width: 40rem) { .c-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.c-logotegel__vlak { position: relative; aspect-ratio: 1.618; max-width: 100%; display: grid; place-items: center; padding: var(--r3); overflow: hidden; }
+.c-logo { display: block; height: 100%; aspect-ratio: 1; background: var(--logo-kleur); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; }
+.c-logo--uitgerekt { scale: 1.5 0.78; }
+.c-logotegel figcaption { margin-top: var(--r1); font-size: 0.9rem; line-height: 1.4; }
+.c-logotegel figcaption b { font: 400 1rem/1 var(--titel); text-transform: uppercase; margin-right: var(--r0); }
+.c-logotegel--niet .c-logotegel__vlak::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 3px), var(--inkt) calc(50% - 3px), var(--inkt) calc(50% + 3px), transparent calc(50% + 3px)); }
+.c-logotegel--niet figcaption b { color: #B23A00; }

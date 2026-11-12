@@ -6,9 +6,9 @@ from kleur import cmyk_naar_hex, rgb
 
 
 def kleur_in(naam, palet):
-    m1 = np.asarray(Image.open(f'assets/kunst/{naam}.m1.webp').convert('RGB'), np.float32) / 255
-    m2 = np.asarray(Image.open(f'assets/kunst/{naam}.m2.webp').convert('RGB'), np.float32) / 255
-    v = np.asarray(Image.open(f'assets/kunst/{naam}.v.jpg').convert('RGB'), np.float32)
+    m1 = np.asarray(Image.open(f'tools/kunst/{naam}.m1.webp').convert('RGB'), np.float32) / 255
+    m2 = np.asarray(Image.open(f'tools/kunst/{naam}.m2.webp').convert('RGB'), np.float32) / 255
+    v = np.asarray(Image.open(f'tools/kunst/{naam}.v.jpg').convert('RGB'), np.float32)
     uit = m2[:, :, 2:3] * v
     for i, r in enumerate('PSL'):
         uit += m1[:, :, i:i + 1] * np.array(rgb(palet[r]), np.float32)

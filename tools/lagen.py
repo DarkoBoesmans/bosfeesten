@@ -1,6 +1,6 @@
 """Splitst drukwerk in herkleurbare lagen.
 
-Per kunstwerk komen er drie bestanden in assets/kunst/:
+Per kunstwerk komen er drie bestanden in tools/kunst/:
   <naam>.m1.webp  RGB = dekking van de rollen P (primary), S (secondary), L (licht)
   <naam>.m2.webp  RGB = dekking van A (accent), B (tweede accent), V (vast: logo's, zwart)
   <naam>.v.jpg    de originele pixels voor het vaste deel
@@ -14,7 +14,7 @@ import pikepdf
 from PIL import Image
 
 Image.MAX_IMAGE_PIXELS = None
-BRON, UIT = 'bron', 'assets/kunst'
+BRON, UIT = 'bron', 'tools/kunst'
 ROLLEN = 'PSLABV'
 
 # Merkkleuren die alleen in de bewerkte pdf voorkomen.

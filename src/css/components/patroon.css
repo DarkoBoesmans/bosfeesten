@@ -1,0 +1,7 @@
+#patroon { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--r4); align-items: stretch; }
+.c-patroon { min-height: 24rem; background: var(--indigo) var(--patroon) 0 0 / 14rem; outline: 3px solid var(--creme); outline-offset: -3px; animation: c-held-wind 120s linear infinite reverse; }
+.c-patroon__inhoud .c-kop { border-color: var(--creme); }
+.c-patroon__inhoud .c-lijst li { border-color: rgb(250 246 222 / 0.25); }
+.c-patroon__inhoud .c-lijst li::before { background: var(--groen); }
+@media (max-width: 56rem) { #patroon { grid-template-columns: 1fr; } .c-patroon { min-height: 14rem; } }
+.c-patroon__inhoud .c-kop { grid-template-columns: 1fr; }

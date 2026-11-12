@@ -1,33 +1,33 @@
-# Bosfeesten kleurkeuze
+# Bosfeesten media kit
 
-Drie kleurvoorstellen voor de huisstijl van Bosfeesten (Chiro Popov), getoond op de echte affiche, drankbonnen en website.
+Huisstijl en media kit van de Bosfeesten (vzw Chiro Popov, Gijzegem): kleuren, logo, letters, patroon,
+drukwerk, drankbonnen, sjablonen voor sociale media, wettelijke vermeldingen en alle downloads.
 Live: https://darkoboesmans.github.io/bosfeesten/
 
 ## Stack
 
-- TypeScript in `src/ts`, gebouwd met bun
-- CSS in ITCSS-lagen (`src/css/settings` tot `utilities`), klassen in BEM
-- Geen framework: elke view is een functie die HTML-tekst teruggeeft
+- TypeScript in `src/ts`, gebouwd met bun. De pagina wordt bij het bouwen als vaste HTML gemaakt (`src/ts/pagina.ts`), zodat ze ook zonder JavaScript werkt.
+- CSS in ITCSS-lagen (`src/css/settings` tot `utilities`), klassen in BEM.
+- Geen framework: elke sectie in `src/ts/secties` is een functie die HTML-tekst teruggeeft.
 
 ## Mappen
 
 | Map | Wat |
 | --- | --- |
-| `src/ts/data` | kleuren (CMYK eerst), combo's, drukwerk |
-| `src/ts/views` | overzicht en huisstijl per combo (`#a`, `#b`, `#c`) |
-| `src/ts/components` | drankbon, websitevoorbeeld, lightbox, teller, ... |
-| `src/ts/render` | herkleuren van het drukwerk op een canvas |
-| `assets/kunst` | kleurlagen uit drukwerk.af, gemaakt met `tools/lagen.py` |
-| `tools` | Python-scripts om lagen en kleuren te maken |
+| `src/ts/data` | kleuren (CMYK eerst), feestgegevens en editie, lijst van downloads |
+| `src/ts/secties` | één bestand per sectie van de pagina |
+| `src/ts/components` | navigatie, downloadknop, lightbox, melding |
+| `assets/kit` | alle downloads, gemaakt met `tools/kit.py` |
+| `tools` | Python-scripts: kleurlagen uit drukwerk.af (`lagen.py`) en de media kit (`kit.py`) |
 
 ## Werken
 
 ```sh
 bun install
-bun run build   # bouwt dist/
-bun run check   # typecontrole
+bun run build          # bouwt dist/
+bun run check          # typecontrole
+python3 tools/kit.py   # maakt assets/kit opnieuw (na een kleur- of datumwijziging)
 ```
 
-Elke push naar `main` bouwt en publiceert de site via GitHub Actions (Settings → Pages → Source: **GitHub Actions**).
-
-Kleur aanpassen: wijzig de CMYK in `src/ts/data/kleuren.ts` en reken de hex opnieuw uit met `tools/kleur.py`.
+Elke push naar `main` bouwt en publiceert de site via GitHub Actions (Settings, Pages, Source: GitHub Actions).
+Het jaartal en de editie (2023 was de 60ste) rekenen zichzelf uit; na het tweede weekend van augustus schuift alles een jaar op.

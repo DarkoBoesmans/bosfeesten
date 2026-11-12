@@ -1,0 +1,30 @@
+/* Drukwerk, bonnen en sociale media: voorbeeld boven, downloadlink eronder, alles op één lijn. */
+.c-voorbeeld { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
+.c-voorbeeld img { width: 100%; transition: translate 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s cubic-bezier(.2,.8,.2,1); }
+.c-voorbeeld:hover img { translate: -4px -4px; box-shadow: 8px 8px 0 var(--indigo); }
+figcaption .c-bestand { display: flex; margin-top: var(--r1); }
+
+.c-raster { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--r3); align-items: end; }
+@media (max-width: 56rem) { .c-raster { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.c-bonnen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r3); }
+.c-bonnen__oud { display: grid; grid-template-columns: minmax(0, 1fr) repeat(2, minmax(0, 0.618fr)); gap: var(--r3); align-items: center; margin-top: var(--r4); padding-top: var(--r3); border-top: 1px solid var(--lijn); color: var(--grijs); }
+.c-oudebon { display: grid; grid-template-columns: 1fr 1fr; gap: var(--r0); }
+.c-oudebon img { border-radius: 0.2rem; filter: grayscale(0.15); }
+.c-oudebon figcaption { grid-column: 1 / -1; font: 700 0.9rem/1 var(--slab); }
+@media (max-width: 48rem) { .c-bonnen, .c-bonnen__oud { grid-template-columns: 1fr; } }
+
+.c-sociaal { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--r4) var(--r3); align-items: start; }
+.c-sociaal__item { display: flex; flex-direction: column; }
+.c-sociaal__item figcaption { order: -1; margin-bottom: var(--r1); }
+.c-sociaal__item figcaption .c-bestand { margin-top: var(--r0); }
+.c-sociaal__item--hoog { grid-column: span 2; }
+.c-sociaal__item--vierkant { grid-column: span 2; }
+.c-sociaal__item--breed { grid-column: span 4; }
+.c-sociaal__maat { display: block; font: 700 0.85rem/1 var(--slab); font-variant-numeric: tabular-nums; }
+@media (max-width: 56rem) { .c-sociaal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-sociaal__item--hoog, .c-sociaal__item--vierkant { grid-column: span 1; } .c-sociaal__item--breed { grid-column: 1 / -1; } }
+
+.c-lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 70rem); max-height: 92vh; overflow: visible; }
+.c-lightbox::backdrop { background: rgb(30 21 56 / 0.9); }
+.c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; }
+.c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; background: var(--creme); color: var(--inkt); font: 400 1rem/1 var(--titel); text-transform: uppercase; }

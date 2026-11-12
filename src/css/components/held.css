@@ -1,0 +1,24 @@
+/* Openingsbeeld: zoals de Facebook-banner. Boompjesrand rondom, vlak in Indigo, affiche ernaast. */
+.c-held {
+  display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); gap: var(--r4); align-items: center;
+  padding: var(--r4) var(--rand);
+  background: var(--indigo) var(--patroon) 0 0 / 22rem;
+  animation: c-held-wind 90s linear infinite;
+}
+@keyframes c-held-wind { to { background-position: 22rem 11rem; } }
+.c-held__vlak { background: var(--indigo); color: var(--creme); padding: var(--r5) var(--r4); display: flex; flex-direction: column; align-items: flex-start; gap: var(--r2); }
+.c-held__boven, .c-held__adres { font: 600 0.8rem/1.3 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; }
+.c-held__titel { font: 400 clamp(3.4rem, 9vw, 8.5rem)/0.9 var(--titel); text-transform: uppercase; letter-spacing: -0.01em; margin-left: -0.04em; color: var(--creme); -webkit-text-stroke: 0.07em var(--groen); paint-order: stroke fill; }
+.c-held__jaar { color: var(--mandarijn); -webkit-text-stroke-color: var(--creme); }
+.c-held__editie { font: 400 1.1rem/1 var(--titel); text-transform: uppercase; background: var(--mandarijn); color: var(--inkt); padding: var(--r0) var(--r1); }
+.c-held__datum { font: 700 clamp(1.4rem, 2.6vw, 2.2rem)/1.15 var(--slab); }
+.c-held__uitleg { max-width: 34rem; margin-top: var(--r2); color: rgb(250 246 222 / 0.88); }
+.c-held__acties { display: flex; flex-wrap: wrap; gap: var(--r2); margin-top: var(--r1); }
+.c-held__affiche { padding: 0; border: 0; background: none; cursor: zoom-in; justify-self: center; max-width: 30rem; width: 100%; }
+.c-held__affiche img { width: 100%; transition: translate 0.4s cubic-bezier(.2,.8,.2,1), rotate 0.4s cubic-bezier(.2,.8,.2,1); }
+.c-held__affiche:hover img { translate: 0 -0.5rem; rotate: -1deg; }
+@media (max-width: 56rem) {
+  .c-held { grid-template-columns: 1fr; padding: var(--r3) var(--rand); }
+  .c-held__vlak { padding: var(--r4) var(--r3); }
+  .c-held__affiche { max-width: 22rem; }
+}

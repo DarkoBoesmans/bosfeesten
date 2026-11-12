@@ -1,6 +1,8 @@
-// Bouwt dist/: TypeScript naar js/main.js, ITCSS naar css/main.css, en kopieert html en assets.
-import { cp, rm } from 'node:fs/promises';
+// Bouwt dist/: de pagina als vaste HTML, TypeScript naar js/main.js, ITCSS naar css/main.css, plus assets.
+import { cp, rm, writeFile, readFile } from 'node:fs/promises';
+import { pagina } from './src/ts/pagina';
 
+const SITE = 'https://darkoboesmans.github.io/bosfeesten/';
 await rm('dist', { recursive: true, force: true });
 
 for (const [entry, map] of [['src/ts/main.ts', 'dist/js'], ['src/css/main.css', 'dist/css']] as const) {
@@ -8,6 +10,14 @@ for (const [entry, map] of [['src/ts/main.ts', 'dist/js'], ['src/css/main.css', 
   if (!uit.success) { console.error(uit.logs); process.exit(1); }
 }
 
-await cp('index.html', 'dist/index.html');
-await cp('assets', 'dist/assets', { recursive: true, filter: (p) => !p.endsWith('maten.json') });
-console.log('dist/ klaar');
+const { jaar, nummer, html } = pagina();
+const sjabloon = (await readFile('index.html', 'utf8')).replaceAll('{{jaar}}', String(jaar)).replaceAll('{{nummer}}', String(nummer));
+await writeFile('dist/index.html', sjabloon.replace('<!--pagina-->', html));
+await writeFile('dist/404.html', sjabloon.replace('<!--pagina-->', `<main id="inhoud" class="c-niet-gevonden">
+  <h1 class="c-niet-gevonden__titel">Verdwaald in het bos</h1>
+  <p>Deze pagina bestaat niet. Alles van de Bosfeesten staat op één plek.</p>
+  <a class="c-knop c-knop--vol" href="${SITE}">Naar de media kit</a></main>`).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<base href="/bosfeesten/">'));
+await writeFile('dist/robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE}sitemap.xml\n`);
+await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${SITE}</loc></url></urlset>\n`);
+await cp('assets', 'dist/assets', { recursive: true });
+console.log(`dist/ klaar: Bosfeesten ${jaar}, ${nummer}ste editie`);

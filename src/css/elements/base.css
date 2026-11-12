@@ -1,11 +1,9 @@
-/* Elements: kale HTML-elementen */
-html { -webkit-text-size-adjust: 100%; }
-body {
-  background: var(--papier); color: var(--inkt); font: 400 1rem/1.618 var(--tekst);
-}
-img, canvas { display: block; max-width: 100%; height: auto; }
-a { color: inherit; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--nav) + var(--r2)); }
+body { background: var(--creme); color: var(--inkt); font: 400 1.0625rem/1.55 var(--tekst); }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-underline-offset: 3px; }
 button { font: inherit; color: inherit; cursor: pointer; }
-:focus-visible { outline: 3px solid var(--inkt); outline-offset: 3px; }
-h1, h2, h3 { text-wrap: balance; line-height: 1.1; }
-#inhoud { outline: 0; }
+:focus-visible { outline: 3px solid var(--mandarijn); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; line-height: 1; }
+b { font-weight: 600; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

@@ -1,22 +1,15 @@
-/* Afdrukversie: A4, kleuren zoals op scherm, zonder navigatie en knoppen. */
+/* Afdrukversie: A4, kleuren zoals op scherm, zonder navigatie, knoppen en downloads. */
 @media print {
   @page { size: A4; margin: 12mm; }
-  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  body { background: #fff; font-size: 10pt; }
-  .c-pad, .c-verder, .c-held__print, .c-toast, .c-lightbox, .c-skip, .c-show, .c-melding { display: none !important; }
-  .o-pagina { max-width: none; padding: 0; }
-  .c-held { margin: 0; padding: 8mm; break-after: page; }
-  .o-sectie { margin-top: 0; padding-top: 8mm; }
-  .c-sectie { break-before: page; }
-  .c-sectie:first-of-type { break-before: auto; }
-  .c-sectie-titel, .c-welniet__kop { break-after: avoid; }
-  .c-kleur, .c-logotegel, .c-voorbeeld, .c-letters__rij, .c-oudebonnen figure, .c-lijst li { break-inside: avoid; }
-  .c-kopie { text-decoration: none; padding: 0; }
-  .c-voorbeelden { grid-template-columns: repeat(4, 1fr); }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; }
+  body { font-size: 10pt; }
+  .c-nav, .c-held__acties, .c-bestanden, figcaption .c-bestand, #downloads, .c-toast, .c-lightbox, .c-skip { display: none !important; }
+  .c-held { break-after: page; grid-template-columns: 1.618fr 1fr; }
+  .o-sectie { padding-top: 0; break-before: page; }
+  .o-sectie--donker { margin-top: 0; }
+  .c-kleur, .c-logotegel, .c-raster__item, .c-letters__rij, .c-sociaal__item, .c-lijst li, .c-wet__blok { break-inside: avoid; }
   .c-kleuren { grid-template-columns: repeat(4, 1fr); }
+  .c-sociaal { grid-template-columns: repeat(6, 1fr); }
+  .c-kop__titel { font-size: 2.6rem; }
   a { text-decoration: none; }
-  .c-sectie .o-gulden { grid-template-columns: 1fr; gap: 6mm; }
-  .c-oudebonnen { grid-template-columns: 1fr 1fr; gap: 8mm; }
-  .c-oudebonnen figure:first-child { grid-column: 1 / -1; }
-  .c-patroon { max-width: 70%; }
 }

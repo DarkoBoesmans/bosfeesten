@@ -1,18 +1,17 @@
-/* ITCSS-volgorde: van algemeen naar specifiek. Namen volgen BEM (blok__element--modifier). */
+/* ITCSS: van algemeen naar specifiek. Klassen volgen BEM (blok__element--modifier). */
 @import './settings/tokens.css';
 @import './generic/reset.css';
 @import './elements/base.css';
 @import './objects/layout.css';
+@import './components/nav.css';
+@import './components/held.css';
 @import './components/kop.css';
-@import './components/combo.css';
-@import './components/show.css';
-@import './components/alle.css';
-@import './components/stalen.css';
-@import './components/bon.css';
 @import './components/knop.css';
-@import './components/vorig.css';
-@import './components/huisstijl.css';
 @import './components/kleur.css';
-@import './components/gids.css';
+@import './components/logo.css';
+@import './components/letters.css';
+@import './components/patroon.css';
+@import './components/beelden.css';
+@import './components/lijst.css';
 @import './utilities/utils.css';
 @import './utilities/print.css';

@@ -2,3 +2,5 @@ bron/
 __pycache__/
 node_modules/
 dist/
+.kit-tmp.html
+.shots/

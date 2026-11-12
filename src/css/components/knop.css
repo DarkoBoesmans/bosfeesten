@@ -1,10 +1,31 @@
-.c-knop { display: inline-flex; align-items: center; min-height: 3rem; padding: 0 var(--r3); background: var(--inkt); color: var(--papier); border: 2px solid var(--inkt); border-radius: 0; text-decoration: none; font: 400 1rem/1 var(--titel); text-transform: uppercase; }
-.c-knop:hover { background: var(--papier); color: var(--inkt); }
-.c-knop--rand { background: transparent; color: var(--inkt); }
-.c-knop--rand:hover { background: var(--inkt); color: var(--papier); }
+/* Knoppen en downloads: vlak, harde rand, bewegen bij hover zoals een bon die je meeneemt. */
+.c-knop {
+  display: inline-flex; align-items: center; gap: var(--r1); min-height: 3.25rem; padding: 0 var(--r3);
+  border: 3px solid currentColor; background: transparent; text-decoration: none;
+  font: 400 1.05rem/1 var(--titel); text-transform: uppercase;
+  transition: translate 0.2s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s cubic-bezier(.2,.8,.2,1);
+}
+.c-knop:hover { translate: -3px -3px; box-shadow: 6px 6px 0 var(--groen); }
+.c-knop:active { translate: 0 0; box-shadow: none; }
+.c-knop--vol { background: var(--mandarijn); border-color: var(--mandarijn); color: var(--inkt); }
+.c-knop--groot { min-height: 4.2rem; font-size: 1.4rem; margin-bottom: var(--r4); }
+.c-knop__meta { font: 600 0.75rem/1 var(--tekst); text-transform: none; opacity: 0.8; }
 
-.c-kopie { background: none; border: 0; padding: 0.4rem 0; font-weight: 600; text-decoration: underline dotted; text-underline-offset: 3px; }
+.c-bestanden { display: flex; flex-wrap: wrap; gap: var(--r1); margin-top: var(--r3); }
+.c-bestand {
+  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--r2); min-height: 2.75rem; padding: var(--r0) var(--r2);
+  border: 2px solid currentColor; text-decoration: none; font-weight: 500; font-size: 0.92rem;
+  transition: background 0.2s, color 0.2s, translate 0.2s cubic-bezier(.2,.8,.2,1);
+}
+.c-bestand { flex-wrap: wrap; row-gap: 0; }
+.c-bestand__meta { font-size: 0.75rem; font-weight: 600; opacity: 0.75; white-space: nowrap; }
+.c-bestand__meta::after { content: ' ↓'; display: inline-block; transition: translate 0.2s cubic-bezier(.2,.8,.2,1); }
+.c-bestand:hover { background: var(--inkt); color: var(--creme); }
+.o-sectie--donker .c-bestand:hover { background: var(--creme); color: var(--indigo); }
+.c-bestand:hover .c-bestand__meta::after { translate: 0 3px; }
+
+.c-kopie { background: none; border: 0; padding: var(--r0) 0; font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: underline dotted; text-underline-offset: 3px; }
 .c-kopie:hover { text-decoration-style: solid; }
 
-.c-toast { position: fixed; left: 50%; bottom: calc(var(--r3) + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--inkt); color: var(--papier); padding: var(--r1) var(--r3); border-radius: 0; z-index: 9; }
+.c-toast { position: fixed; left: 50%; bottom: calc(var(--r3) + env(safe-area-inset-bottom, 0px)); translate: -50% 0; background: var(--inkt); color: var(--creme); padding: var(--r1) var(--r3); z-index: 30; }
 .c-toast:empty { display: none; }

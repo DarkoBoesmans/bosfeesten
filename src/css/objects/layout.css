@@ -1,14 +1,13 @@
-/* Objects: lay-outpatronen zonder uiterlijk */
-.o-drie { display: grid; grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr)); gap: var(--r3); }
-.o-sectie { margin-top: var(--r5); }
-.o-gulden { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r4); }
-.o-gulden > * { min-width: 0; }
-@media (max-width: 50rem) { .o-gulden { grid-template-columns: 1fr; } }
-
-/* Pagina met marge: alles behalve de schermvullende carrousel. */
-.o-pagina, .c-alle, .c-vorig {
-  max-width: 90rem; margin-inline: auto;
-  padding-block: var(--r3) var(--r5);
-  padding-left: max(var(--r3), env(safe-area-inset-left, 0px));
-  padding-right: max(var(--r3), env(safe-area-inset-right, 0px));
+/* Objects: secties met een vaste rand en breedte. */
+.o-sectie {
+  max-width: var(--breed); margin-inline: auto;
+  padding-block: var(--r6) 0;
+  padding-left: var(--rand); padding-right: max(var(--r3), env(safe-area-inset-right, 0px));
 }
+.o-sectie--donker {
+  max-width: none; margin-top: var(--r6); padding-block: var(--r6);
+  background: var(--indigo); color: var(--creme);
+  padding-left: max(var(--rand), calc((100% - var(--breed)) / 2 + var(--r3)));
+  padding-right: max(var(--r3), calc((100% - var(--breed)) / 2 + var(--r3)));
+}
+.o-sectie--donker + .o-sectie { padding-top: var(--r6); }
