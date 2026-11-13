@@ -58,28 +58,54 @@ FONTS = ''.join(
 
 
 def sjabloon(b, h, leeg=False):
-    """Zelfde opbouw als de Facebook-banner van 2026: patroonrand, vlak in het midden, titel."""
+    """Patroonrand, Indigo vlak, het woordmerk zo breed als het vlak en de drie dagen als blokken.
+    De lege versies houden kop en voet, het midden is vrij voor een artiest."""
     k = min(b, h)
+    rand = round(k * .075)
     tegel = round(k / 3)
-    titel = f'''
-      <p class="boven">vzw Chiro Popov presenteert</p>
-      <p class="titel"><span>Bos</span> <span class="jaar">{JAAR}</span><br><span>Feesten</span></p>
-      <p class="editie">{EDITIE}ste editie</p>
-      <p class="datum">{DATUM}</p>
-      <p class="adres">{ADRES}</p>'''
-    logo = f'<img class="logo" src="{data_uri(logo_svg(C))}" alt="">'
-    return f'''<!doctype html><html><head><meta charset="utf-8"><style>{FONTS}
+    breed = b > h * 1.3
+    story = h > b * 1.5
+    vlak_b = b - 2 * rand
+    # Hipstelvetica met rand: "BOS 2027" is ongeveer 4,4 em breed.
+    merk = vlak_b * (.46 if breed else .5 if leeg else .8) / 4.4
+    if b == h:  # vierkant: minder hoogte, dus alles een tikje kleiner
+        merk *= .82
+        k *= .85
+    veilig = round(h * .12) if story else round(k * .05)  # story: boven en onder vrij voor profielnaam en antwoordbalk
+    dag = lambda d, n: f'<div class="dag"><b>{n}</b><span>{d}</span></div>'
+    dagen = f'<div class="dagen">{dag("vrijdag", 13)}{dag("zaterdag", 14)}{dag("zondag", 15)}</div>'
+    woordmerk = f'<p class="titel"><span>Bos</span> <span class="jaar">{JAAR}</span><br><span>Feesten</span></p>'
+    editie = f'<p class="editie">{EDITIE}ste editie</p>'
+    boven = '<p class="boven">vzw Chiro Popov presenteert</p>'
+    if leeg:
+        inhoud = (f'<header class="kop">{woordmerk}{editie}</header><div class="vrij"></div>'
+                  f'<footer class="kop"><p class="regel">{DATUM} {JAAR}</p><p class="adres">{ADRES}</p></footer>')
+    elif breed:
+        inhoud = (f'<div class="kolom">{boven}{woordmerk}{editie}</div>'
+                  f'<div class="kolom">{dagen}<p class="maand">augustus {JAAR}</p><p class="adres">{ADRES}</p></div>')
+    else:
+        inhoud = f'{boven}{woordmerk}{editie}{dagen}<p class="maand">augustus {JAAR}</p><p class="adres">{ADRES}</p>'
+    klasse = 'vlak' + (' leeg' if leeg else '') + (' breed' if breed and not leeg else '')
+    css = f"""{FONTS}
       *{{margin:0;box-sizing:border-box}}
-      body{{width:{b}px;height:{h}px;background:{I} url("{data_uri(patroon_svg(G))}") 0 0/{tegel}px;display:grid;place-items:center;overflow:hidden}}
-      .vlak{{width:calc(100% - {k * .16}px);height:calc(100% - {k * .16}px);background:{I};border-radius:{k * .04}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:{k * .022}px;text-align:center;color:{C};padding:{k * .05}px}}
-      .boven,.adres{{font:600 {k * .026}px/1.2 Poppins;text-transform:uppercase;letter-spacing:.14em}}
-      .titel{{font:400 {k * .15}px/.92 Hipstelvetica;text-transform:uppercase;color:{C};-webkit-text-stroke:{k * .012}px {G};paint-order:stroke fill;margin:{k * .01}px 0}}
+      body{{width:{b}px;height:{h}px;background:{I} url("{data_uri(patroon_svg(G))}") 0 0/{tegel}px;padding:{rand}px;overflow:hidden}}
+      .vlak{{height:100%;background:{I};border-radius:{k * .035}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:{k * .032}px;text-align:center;color:{C};padding:{veilig}px {k * .05}px}}
+      .vlak.breed{{flex-direction:row;justify-content:space-evenly}}
+      .vlak.leeg{{justify-content:space-between}}
+      .kolom,.kop{{display:flex;flex-direction:column;align-items:center;gap:{k * .03}px}}
+      .vrij{{flex:1}}
+      .boven,.adres{{font:600 {k * .027}px/1.3 Poppins;text-transform:uppercase;letter-spacing:.14em}}
+      .regel{{font:800 {k * .05}px/1.1 'Roboto Slab'}}
+      .titel{{font:400 {merk:.1f}px/.9 Hipstelvetica;text-transform:uppercase;color:{C};-webkit-text-stroke:{merk * .075:.1f}px {G};paint-order:stroke fill;white-space:nowrap}}
       .jaar{{color:{M};-webkit-text-stroke-color:{C}}}
-      .editie{{font:800 {k * .03}px/1 'Roboto Slab';text-transform:uppercase;letter-spacing:.04em;background:{M};color:{I};padding:{k * .012}px {k * .022}px}}
-      .datum{{font:700 {k * .052}px/1.1 'Roboto Slab'}}
-      .logo{{width:{k * .2}px;height:auto}}
-      .vlak.leeg{{justify-content:flex-end}}
-    </style></head><body><div class="vlak{' leeg' if leeg else ''}">{logo if leeg else titel}</div></body></html>'''
+      .editie{{font:800 {k * .034}px/1 'Roboto Slab';background:{M};color:{I};padding:{k * .014}px {k * .026}px;transform:rotate(-2deg)}}
+      .dagen{{display:flex;gap:{k * .022}px}}
+      .dag{{display:grid;justify-items:center;gap:{k * .008}px;width:{k * .2}px;padding:{k * .022}px 0 {k * .026}px;background:{C};color:{I};border-radius:{k * .012}px}}
+      .dag b{{font:800 {k * .12}px/1 'Roboto Slab'}}
+      .dag span{{font:600 {k * .024}px/1 Poppins;text-transform:uppercase;letter-spacing:.08em}}
+      .dag:nth-child(2){{background:{M}}}
+      .maand{{font:800 {k * .058}px/1 'Roboto Slab'}}"""
+    return f'<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head><body><div class="{klasse}">{inhoud}</div></body></html>'
 
 
 def profiel(z):
@@ -94,9 +120,9 @@ def bon_svg(soort):
       .l{{font:700 74px 'Roboto Slab';text-transform:uppercase;letter-spacing:3px;stroke-width:10px;paint-order:stroke fill;stroke-linejoin:round}}
       .t{{font:400 300px Hipstelvetica;text-transform:uppercase;stroke-width:18px;paint-order:stroke fill;stroke-linejoin:round}}</style></head><body>
       <svg width="1618" height="1000" viewBox="0 0 1618 1000"><rect width="1618" height="1000" fill="{vlak}"/>
-      <g class="l" fill="{C}" stroke="{letter}"><text x="110" y="170">{label}</text><text x="1508" y="900" text-anchor="end">{label}</text></g>
-      <g class="t"><text x="110" y="560" textLength="1398" lengthAdjust="spacingAndGlyphs"><tspan fill="{letter}" stroke="{C}">Bos</tspan><tspan fill="{C}" stroke="{letter}"> {JAAR}</tspan></text>
-      <text x="110" y="790" textLength="1398" lengthAdjust="spacingAndGlyphs" fill="{letter}" stroke="{C}">Feesten</text></g></svg></body></html>'''
+      <g class="l" fill="{C}" stroke="{letter}"><text x="110" y="170">{label}</text><text x="1508" y="882" text-anchor="end">{label}</text></g>
+      <g class="t"><text x="110" y="490" textLength="1398" lengthAdjust="spacingAndGlyphs"><tspan fill="{letter}" stroke="{C}">Bos</tspan><tspan fill="{C}" stroke="{letter}"> {JAAR}</tspan></text>
+      <text x="110" y="720" textLength="1398" lengthAdjust="spacingAndGlyphs" fill="{letter}" stroke="{C}">Feesten</text></g></svg></body></html>'''
 
 
 def main():

@@ -5,11 +5,17 @@
 .c-tafel { display: flex; gap: var(--r5); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--zijde); margin-right: var(--rail); padding: var(--r3) var(--zijde-r) var(--r5) var(--zijde); cursor: grab; scrollbar-width: thin; scrollbar-color: var(--inkt) transparent; }
 .c-tafel.is-slepen { cursor: grabbing; scroll-snap-type: none; }
 .c-tafel.is-slepen img { pointer-events: none; }
-.c-tafel__item { flex: 0 0 min(72vw, 22rem); scroll-snap-align: start; display: grid; gap: var(--r1); align-content: start; }
+.c-tafel__item { flex: 0 0 min(72vw, max(22rem, 19vw)); scroll-snap-align: start; display: grid; gap: var(--r1); align-content: start; }
 .c-tafel__item img { rotate: var(--draai); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
 .c-tafel__item:hover img { rotate: 0deg; translate: 0 -0.6rem; box-shadow: 1rem 1.2rem 0 var(--mandarijn); }
 .c-tafel__naam { margin-top: var(--r2); font: 800 1.3rem/1 var(--slab); }
-.c-tafel__item--later { flex-basis: min(60vw, 16rem); display: grid; place-items: center; aspect-ratio: 849 / 1200; border: 3px dashed var(--inkt); font: 800 1.6rem/1.1 var(--slab); text-align: center; color: var(--indigo); }
+.c-later { position: relative; display: grid; align-content: center; justify-items: center; gap: var(--r2); aspect-ratio: 849 / 1200; padding: var(--r4) var(--r3); text-align: center; background: var(--indigo) var(--patroon) 0 0 / 8rem; color: var(--creme); rotate: var(--draai); box-shadow: 0.6rem 0.6rem 0 var(--inkt); transition: rotate var(--traag) var(--ease), translate var(--traag) var(--ease); }
+.c-later::before { content: ''; position: absolute; inset: var(--r2); z-index: 0; background: var(--indigo); }
+.c-later > * { position: relative; }
+.c-later__stempel { padding: 0.35rem 0.9rem; border: 3px solid var(--mandarijn); color: var(--mandarijn); font: 800 1.3rem/1 var(--slab); text-transform: uppercase; letter-spacing: 0.08em; rotate: -8deg; }
+.c-later__titel { font: 800 clamp(1.5rem, 2.2vw, 2rem)/1.05 var(--slab); }
+.c-later__tekst { max-width: 15rem; font-size: 0.95rem; line-height: 1.5; }
+.c-tafel__item--later:hover .c-later { rotate: 0deg; translate: 0 -0.6rem; }
 
 .c-bonnen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r5); }
 .c-bon img { rotate: -2deg; box-shadow: 0.8rem 0.8rem 0 var(--inkt); }
@@ -25,23 +31,28 @@
 .c-oud figcaption { margin-top: var(--r1); font: 800 1rem/1 var(--slab); }
 @media (max-width: 52rem) { .c-bonnen, .c-bonnen__oud { grid-template-columns: 1fr; } }
 
-.c-sociaal { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--r5) var(--r3); align-items: start; }
-.c-sociaal__item { display: flex; flex-direction: column; grid-column: span 4; }
-.c-sociaal__item--breed { grid-column: span 8; }
-.c-sociaal__item figcaption { order: -1; margin-bottom: var(--r1); }
-.c-sociaal__item figcaption .c-bestand { margin-top: var(--r0); }
-.c-sociaal__maat { display: block; font: 800 1.05rem/1.2 var(--slab); font-variant-numeric: tabular-nums; }
-.c-sociaal__item .c-voorbeeld img { box-shadow: 0.5rem 0.5rem 0 var(--inkt); }
-.c-sociaal__item .c-voorbeeld:hover img { translate: -0.3rem -0.3rem; box-shadow: 0.9rem 0.9rem 0 var(--mandarijn); }
-.c-stappen { align-self: stretch; gap: var(--r3); padding: var(--r4) var(--r3); background: var(--inkt); color: var(--creme); }
-.c-stappen__titel { font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+/* Sociale media: de beelden staan op één lijn onderaan, zodat naam en download altijd netjes onder elkaar komen. */
+.c-sociaal { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: var(--r4); align-items: end; }
+.c-sociaal--rij { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.c-sociaal__tussen { margin: var(--r6) 0 var(--r3); padding-top: var(--r2); border-top: 3px solid var(--inkt); font-size: clamp(1.6rem, 2.6vw, 2.4rem); }
+.c-post { display: grid; gap: var(--r2); }
+.c-post .c-voorbeeld { overflow: hidden; border-radius: 0.6rem; }
+.c-post .c-voorbeeld img { transition: scale var(--traag) var(--ease); }
+.c-post .c-voorbeeld:hover img { scale: 1.04; }
+.c-post__onder { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: var(--r2); align-items: baseline; }
+.c-post__naam { font: 800 1.2rem/1.2 var(--slab); }
+.c-post__maat { font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.c-post__onder .c-bestand { grid-column: 1 / -1; margin-top: var(--r0); }
+.c-sociaal__noot { grid-column: span 2; align-self: center; max-width: 24rem; font: 700 1.3rem/1.4 var(--slab); }
+.c-stappen { display: grid; gap: var(--r3); padding: var(--r4) var(--r3); background: var(--inkt); color: var(--creme); border-radius: 0.6rem; }
+.c-stappen__titel { font-size: clamp(1.6rem, 2.4vw, 2.2rem); }
 .c-stappen__lijst { counter-reset: stap; display: grid; gap: var(--r2); }
 .c-stappen__lijst li { counter-increment: stap; display: grid; grid-template-columns: 2.2rem minmax(0, 1fr); column-gap: var(--r1); font-size: 0.98rem; line-height: 1.5; }
 .c-stappen__lijst li::before { content: counter(stap); grid-row: span 2; display: grid; place-items: center; width: 2.2rem; height: 2.2rem; background: var(--mandarijn); color: var(--inkt); font: 800 1rem/1 var(--slab); }
 .c-stappen__lijst b { font: 800 1.1rem/1.3 var(--slab); color: var(--creme); }
-.c-stappen .c-knop { align-self: flex-start; }
-@media (max-width: 30rem) { .c-sociaal { grid-template-columns: minmax(0, 1fr) !important; } }
-@media (max-width: 60rem) { .c-sociaal { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-sociaal__item { grid-column: span 1; } .c-sociaal__item--breed, .c-stappen { grid-column: 1 / -1; } }
+.c-stappen .c-knop { justify-self: start; }
+@media (max-width: 64rem) { .c-sociaal { grid-template-columns: minmax(0, 1fr); } .c-sociaal--rij { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-sociaal__noot { grid-column: 1 / -1; } }
+@media (max-width: 40rem) { .c-sociaal--rij { gap: var(--r3) var(--r2); } .c-post__onder { grid-template-columns: minmax(0, 1fr); } .c-post__naam { font-size: 1.02rem; } }
 
 .c-lightbox { border: 0; padding: 0; background: transparent; max-width: min(92vw, 70rem); max-height: 92vh; overflow: visible; }
 .c-lightbox[open] { animation: c-pop 0.4s var(--ease); }

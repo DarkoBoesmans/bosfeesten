@@ -1,17 +1,22 @@
 import { FEEST } from '../data/feest';
-import { woordmerk } from '../components/woordmerk';
+import { ZIP, omvang, url } from '../data/kit';
 
+const KAART = 'https://www.google.com/maps/search/?api=1&query=Eerste+Bochtweg+1+9308+Gijzegem';
+
+/** Voet: een echte wegwijzerpaal met drie bordjes, en de feiten op een rij. */
 export const voet = (jaar: number, nummer: number) => `
   <footer class="c-voet">
-    <div class="c-voet__bos" aria-hidden="true"></div>
-    <div class="c-voet__inhoud">
-      <a class="c-voet__merk" href="#top">${woordmerk(jaar, 'c-woordmerk--voet')}</a>
-      <dl class="c-voet__feiten">
-        <div><dt>Wanneer</dt><dd>${FEEST.dagen} ${jaar}</dd></div>
-        <div><dt>Waar</dt><dd>${FEEST.adres}<br>${FEEST.gemeente}</dd></div>
-        <div><dt>Wie</dt><dd>${FEEST.organisator}<br>${nummer}ste editie</dd></div>
-      </dl>
-      <p class="c-voet__colofon">Huisstijl gekozen op 12 november 2026 door de ploeg. Logo, patroon en ontwerpen: ${FEEST.organisator}. Hipstelvetica via Graphic Pear.</p>
-      <a class="c-voet__boven" href="#top">Terug naar boven ↑</a>
+    <div class="c-voet__binnen">
+      <div class="c-voet__feest">
+        <span class="c-voet__logo" aria-hidden="true"></span>
+        <p class="c-voet__datum">${FEEST.dagen} ${jaar}</p>
+        <p class="c-voet__plaats">${FEEST.adres}, ${FEEST.gemeente}<br>${nummer}ste editie van ${FEEST.organisator}</p>
+      </div>
+      <nav class="c-paal" aria-label="Verder">
+        <a class="c-paal__bord c-paal__bord--links" href="#top" style="--bord:var(--creme)">Terug naar boven</a>
+        <a class="c-paal__bord c-paal__bord--rechts" href="${url(ZIP)}" download style="--bord:var(--mandarijn)">Media kit downloaden <small>${omvang(ZIP)}</small></a>
+        <a class="c-paal__bord c-paal__bord--links" href="${KAART}" target="_blank" rel="noopener" style="--bord:var(--groen)">Route naar de wei</a>
+      </nav>
     </div>
+    <p class="c-voet__colofon">Huisstijl gekozen op 12 november 2026 door de ploeg van ${FEEST.organisator}. Logo, patroon en ontwerpen: ${FEEST.organisator}. Letters: Hipstelvetica (Graphic Pear), Roboto Slab en Poppins (Google Fonts).</p>
   </footer>`;

@@ -2,3 +2,4 @@
 body, h1, h2, h3, p, ul, ol, dl, dd, figure, fieldset { margin: 0; padding: 0; }
 ul, ol { list-style: none; }
 fieldset { border: 0; min-width: 0; }
+[hidden] { display: none !important; }

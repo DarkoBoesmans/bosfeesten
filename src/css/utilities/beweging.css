@@ -1,8 +1,12 @@
 /* Binnenschuiven: elementen staan er altijd, ze schuiven alleen zacht op hun plaats als ze in beeld komen. */
 .js-toon [data-toon] { transition: translate 0.9s var(--ease), rotate 0.9s var(--ease); }
 .js-toon [data-toon]:not(.is-getoond) { translate: 0 3rem; }
-.js-toon .c-kop[data-toon]:not(.is-getoond) .c-kop__titel { clip-path: inset(0 0 100% 0); }
-.c-kop__titel { transition: clip-path 0.9s var(--ease); clip-path: inset(0 0 -10% 0); }
+/* De titel komt van onder het bordje omhoog. De ruime marge rond de clip laat staarten van g en j heel. */
+.c-kop__titel { clip-path: inset(-0.3em -0.2em -0.35em -0.2em); transition: clip-path 0.9s 0.1s var(--ease); }
+.js-toon .c-kop[data-toon]:not(.is-getoond) .c-kop__titel { clip-path: inset(-0.3em -0.2em 100% -0.2em); }
+
+/* Het bos waait: altijd precies twee tegels opzij en één omlaag, zo sluit de lus naadloos. */
+@keyframes c-wind { to { background-position: calc(var(--tegel) * 2) var(--tegel); } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

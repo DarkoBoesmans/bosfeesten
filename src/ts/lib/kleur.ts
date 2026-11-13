@@ -16,3 +16,4 @@ export function contrast(a: string, b: string) {
 export const tekstOp = (hex: string) => (contrast(hex, '#1E1538') > contrast(hex, '#FFFFFF') ? '#1E1538' : '#FFFFFF');
 export const cmykTekst = ([c, m, y, k]: Cmyk) => `C${c} M${m} Y${y} K${k}`;
 export const inkt = (cmyk: Cmyk) => cmyk.reduce((s, v) => s + v, 0);
+export const rgbTekst = (hex: string) => rgb(hex).join(' ');

@@ -1,11 +1,15 @@
-/* Hoofdstukkop: een groot nummer, de titel, en een inleiding die naast de titel staat. */
-.c-kop { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--r3); row-gap: var(--r2); align-items: end; margin-bottom: var(--r5); }
-.c-kop__nr { grid-row: span 2; align-self: start; font: 800 clamp(1rem, 1.6vw, 1.3rem)/1 var(--slab); color: var(--mandarijn); background: var(--inkt); padding: var(--r0) var(--r1); font-variant-numeric: tabular-nums; }
-.c-kop__titel { font-size: clamp(3rem, 9vw, 8.5rem); letter-spacing: -0.035em; line-height: 0.88; margin-left: -0.04em; }
-.c-kop__tekst { max-width: 38rem; font-size: 1.2rem; line-height: 1.55; }
-.c-kop__titel { hyphens: manual; overflow-wrap: break-word; }
-@media (max-width: 40rem) {
-  .c-kop { grid-template-columns: minmax(0, 1fr); margin-bottom: var(--r4); }
-  .c-kop__nr { grid-row: auto; justify-self: start; }
-  .c-kop__titel { font-size: clamp(2.4rem, 12.5vw, 4rem); }
+/* Hoofdstukkop: een bordje met het nummer, de titel groot, de inleiding rechts op de basislijn. */
+.c-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 27rem); grid-template-areas: 'nr nr' 'titel tekst'; gap: var(--r2) var(--r5); align-items: end; margin-bottom: var(--r5); }
+.c-kop__nr {
+  --tip: 0.9rem; grid-area: nr; justify-self: start;
+  padding: 0.5rem calc(var(--tip) + 0.7rem) 0.5rem 0.8rem; background: var(--bord); color: var(--bord-letter, var(--inkt));
+  font: 800 1rem/1 var(--slab); font-variant-numeric: tabular-nums;
+  clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%);
+}
+.c-kop__titel { grid-area: titel; font-size: clamp(3rem, 7vw, 9.5rem); letter-spacing: -0.035em; line-height: 0.92; padding-bottom: 0.06em; margin-left: -0.04em; }
+.c-kop__tekst { grid-area: tekst; font-size: 1.15rem; line-height: 1.55; padding-bottom: 0.4em; }
+@media (max-width: 56rem) {
+  .c-kop { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'nr' 'titel' 'tekst'; margin-bottom: var(--r4); }
+  .c-kop__titel { font-size: clamp(2.6rem, 12.5vw, 5rem); }
+  .c-kop__tekst { max-width: 34rem; }
 }

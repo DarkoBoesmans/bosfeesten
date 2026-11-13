@@ -3,7 +3,7 @@ import { ZIP, omvang, url } from '../data/kit';
 import { woordmerk } from '../components/woordmerk';
 
 const loop = (jaar: number, nummer: number) =>
-  Array.from({ length: 4 }, () => `<span>${FEEST.dagen} ${jaar}</span><span aria-hidden="true">✳</span><span>${nummer}ste editie</span><span aria-hidden="true">✳</span><span>Gijzegem</span><span aria-hidden="true">✳</span>`).join('');
+  Array.from({ length: 8 }, () => `<span>${FEEST.dagen} ${jaar}</span><span aria-hidden="true">✳</span><span>${nummer}ste editie</span><span aria-hidden="true">✳</span><span>Gijzegem</span><span aria-hidden="true">✳</span>`).join('');
 
 export const held = (jaar: number, nummer: number) => `
   <section class="c-held" id="top" aria-labelledby="held-titel" data-held>

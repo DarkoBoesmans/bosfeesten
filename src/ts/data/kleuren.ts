@@ -14,3 +14,12 @@ export const ROLLEN = [
   { kleur: MANDARIJN, staal: 'Accent', deel: 10, gebruik: 'Het jaartal, datumblokken, de Plein-badge. En de lichte drankbon.' },
   { kleur: CREME, staal: 'Wit', deel: 0, gebruik: 'Het papier, de titel en alle tekst op een gekleurd vlak.' },
 ];
+
+/** De vijf globale stalen zoals ze in Affinity heten, voor de staalkaart onder de banden. */
+export const STAALKAART = [
+  { kleur: INDIGO, staal: 'Primary' },
+  { kleur: GROEN, staal: 'Secondary' },
+  { kleur: MANDARIJN, staal: 'Accent' },
+  { kleur: CREME, staal: 'Wit' },
+  { kleur: ZWART, staal: 'Black' },
+];

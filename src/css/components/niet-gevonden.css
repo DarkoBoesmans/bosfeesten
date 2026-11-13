@@ -1,0 +1,7 @@
+/* 404: het bos waait, in het midden een kaartje met een bordje terug naar de wei. */
+.c-niet-gevonden { --tegel: 16rem; min-height: 100svh; display: grid; place-items: center; padding: var(--r5) var(--zijde-r) var(--r5) var(--zijde); background: var(--indigo) var(--patroon) 0 0 / var(--tegel); animation: c-wind 40s linear infinite; }
+.c-niet-gevonden__kaart { display: grid; justify-items: start; gap: var(--r3); max-width: 34rem; padding: var(--r5) var(--r4); background: var(--creme); box-shadow: 1rem 1rem 0 var(--inkt); rotate: -1.5deg; }
+.c-niet-gevonden__code { font: 800 1rem/1 var(--slab); padding: 0.4rem 0.8rem; background: var(--mandarijn); }
+.c-niet-gevonden__titel { font-size: clamp(2.6rem, 8vw, 4.5rem); letter-spacing: -0.03em; }
+.c-niet-gevonden__bord { --tip: 1.4rem; display: inline-flex; align-items: center; min-height: 3.6rem; padding: 0 var(--r3) 0 calc(var(--tip) + var(--r2)); background: var(--groen); color: var(--inkt); text-decoration: none; font: 800 1.2rem/1 var(--slab); clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%); transition: translate var(--snel) var(--ease), background var(--snel); }
+.c-niet-gevonden__bord:hover, .c-niet-gevonden__bord:focus-visible { translate: -0.6rem 0; background: var(--mandarijn); }

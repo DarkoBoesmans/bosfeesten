@@ -1,6 +1,6 @@
 /* Logo-proef: een groot vlak dat van kleur wisselt, met een stempel als het niet mag. */
 .c-logo { display: block; width: 100%; aspect-ratio: 1; background: var(--proef-voor, var(--creme)); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; transition: background var(--traag) var(--ease); }
-.c-proef { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--r4); align-items: start; }
+.c-proef { display: grid; grid-template-columns: minmax(0, 38rem) minmax(0, 1fr); gap: var(--r4); align-items: start; }
 .c-proef__vlak { position: relative; display: grid; place-items: center; aspect-ratio: 1; max-width: 100%; padding: 14%; background: var(--proef-achter); transition: background var(--traag) var(--ease); overflow: hidden; }
 .c-proef__vlak.is-wissel .c-logo { animation: c-wip 0.5s var(--ease); }
 @keyframes c-wip { 40% { scale: 0.92; rotate: -4deg; } }

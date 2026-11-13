@@ -1,25 +1,35 @@
-/* Postmaker: formulier links, het beeld rechts, op een Indigo grond met boompjes. */
-.c-maker { position: relative; isolation: isolate; margin-top: var(--r7); padding-bottom: var(--r7); background: var(--indigo); color: var(--creme); }
+/* Postmaker: formulier in drie stappen links, het beeld rechts, op een Indigo grond met boompjes. */
+.c-maker { position: relative; isolation: isolate; margin-top: var(--r6); padding-bottom: var(--r7); background: var(--indigo); color: var(--creme); }
 .c-maker::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--patroon) 0 0 / 12rem; opacity: 0.18; }
-.c-maker .c-kop__nr { background: var(--mandarijn); color: var(--inkt); }
-.c-maker__werk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--r5); align-items: start; }
-.c-maker__form { display: grid; gap: var(--r3); background: var(--creme); color: var(--inkt); padding: var(--r4); box-shadow: 1rem 1rem 0 var(--inkt); }
+.c-maker__werk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--r5); align-items: start; }
+.c-maker__form { display: grid; gap: var(--r3); align-content: start; min-width: 0; background: var(--creme); color: var(--inkt); padding: var(--r4); border-radius: 0.6rem; }
+.c-maker__groep { display: grid; gap: var(--r2); padding-bottom: var(--r3); border-bottom: 1px solid var(--lijn); }
+.c-maker__groep legend { margin-bottom: var(--r2); font: 800 1.35rem/1 var(--slab); color: var(--indigo); }
 .c-veld { display: grid; gap: var(--r0); }
-.c-veld > span, .c-veld legend { font: 800 1rem/1 var(--slab); margin-bottom: var(--r0); }
-.c-veld input[type='text'], .c-veld select { width: 100%; min-height: 3.25rem; padding: 0 var(--r2); border: 2px solid var(--inkt); background: #fff; font-size: 1.1rem; border-radius: 0; transition: box-shadow var(--snel) var(--ease); }
-.c-veld input[type='text']:focus, .c-veld select:focus { outline: 0; box-shadow: 5px 5px 0 var(--mandarijn); }
+.c-veld > span { font: 700 0.95rem/1.2 var(--slab); }
+.c-veld i { font: 400 0.85rem var(--tekst); }
+.c-veld input[type='text'], .c-veld select { width: 100%; min-height: 3.1rem; padding: 0 var(--r2); border: 2px solid var(--inkt); border-radius: 0.35rem; background: #fff; font-size: 1.05rem; transition: box-shadow var(--snel) var(--ease), border-color var(--snel); }
+.c-veld input[type='text']:hover, .c-veld select:hover { border-color: var(--indigo); }
+.c-veld input[type='text']:focus, .c-veld select:focus { outline: 0; border-color: var(--indigo); box-shadow: 0 0 0 4px rgb(245 130 31 / 0.55); }
 .c-veld__rij { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r2); }
 .c-veld--keuze { display: flex; flex-wrap: wrap; gap: var(--r0); }
-.c-veld--keuze legend { width: 100%; }
+.c-veld--keuze > span { width: 100%; }
 .c-veld--keuze label { position: relative; }
 .c-veld--keuze input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-.c-veld--keuze span { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--r2); border: 2px solid var(--inkt); font-weight: 600; font-size: 0.95rem; transition: background var(--snel), color var(--snel); }
+.c-veld--keuze label span { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--r2); border: 2px solid var(--inkt); border-radius: 0.35rem; font-weight: 600; font-size: 0.95rem; transition: background var(--snel), color var(--snel), translate var(--snel) var(--ease); }
+.c-veld--keuze label:hover span { translate: 0 -2px; }
 .c-veld--keuze input:checked + span { background: var(--inkt); color: var(--creme); }
 .c-veld--keuze input:focus-visible + span { outline: 3px solid var(--mandarijn); outline-offset: 2px; }
 .c-veld--foto input { font-size: 0.95rem; max-width: 100%; }
-.c-maker__voorbeeld, .c-maker__form { min-width: 0; }
-.c-veld--foto input::file-selector-button { min-height: 2.75rem; margin-right: var(--r1); padding: 0 var(--r2); border: 2px solid var(--inkt); background: var(--groen); color: var(--inkt); font: 800 0.95rem/1 var(--slab); cursor: pointer; }
-.c-maker__noot { font-size: 0.88rem; }
-.c-maker__voorbeeld { position: sticky; top: var(--r3); display: grid; justify-items: center; }
-.c-maker__canvas { width: auto; max-width: 100%; max-height: 82svh; height: auto; box-shadow: 1rem 1rem 0 var(--inkt); }
-@media (max-width: 60rem) { .c-maker__werk { grid-template-columns: minmax(0, 1fr); } .c-maker__voorbeeld { position: static; order: -1; } .c-maker__canvas { max-height: 70svh; } }
+.c-veld--foto input::file-selector-button { min-height: 2.75rem; margin-right: var(--r1); padding: 0 var(--r2); border: 2px solid var(--inkt); border-radius: 0.35rem; background: var(--groen); color: var(--inkt); font: 800 0.95rem/1 var(--slab); cursor: pointer; transition: background var(--snel); }
+.c-veld--foto input::file-selector-button:hover { background: var(--mandarijn); }
+.c-veld--schuif input { width: 100%; accent-color: var(--indigo); }
+.c-maker__foto { display: grid; gap: var(--r2); }
+.c-vink { display: flex; gap: var(--r1); align-items: center; font-size: 0.95rem; cursor: pointer; }
+.c-vink input { width: 1.3rem; height: 1.3rem; accent-color: var(--indigo); }
+.c-maker__tip, .c-maker__maat { font-size: 0.88rem; }
+.c-maker__voorbeeld { position: sticky; top: var(--r3); display: grid; justify-items: center; gap: var(--r1); min-width: 0; }
+.c-maker__canvas { width: auto; max-width: 100%; max-height: 84svh; height: auto; border-radius: 0.6rem; box-shadow: 0 1.5rem 3rem rgb(30 21 56 / 0.45); }
+.c-maker__canvas.heeft-foto { cursor: grab; touch-action: none; }
+.c-maker__canvas.is-slepen { cursor: grabbing; }
+@media (max-width: 60rem) { .c-maker__werk { grid-template-columns: minmax(0, 1fr); } .c-maker__voorbeeld { position: static; order: -1; } .c-maker__canvas { max-height: 66svh; } .c-maker__form { padding: var(--r3) var(--r2); } }

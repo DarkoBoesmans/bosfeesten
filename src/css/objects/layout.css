@@ -1,4 +1,8 @@
-/* Objects. o-wrap houdt de inhoud links van de wegwijzer en op een leesbare breedte. */
-.o-wrap { max-width: calc(80rem + var(--rail)); margin-inline: auto; padding-left: var(--zijde); padding-right: calc(var(--zijde-r) + var(--rail)); }
+/* Objects. o-wrap vult de ruimte links van de wegwijzer en blijft op heel brede schermen gecentreerd in die ruimte. */
+.o-wrap {
+  width: min(100% - var(--rail), 112rem);
+  margin-left: max(0px, (100% - var(--rail) - 112rem) / 2);
+  padding-left: var(--zijde); padding-right: var(--zijde-r);
+}
 main > section { padding-top: var(--r6); }
 @media (max-width: 40rem) { main > section { padding-top: var(--r5); } }

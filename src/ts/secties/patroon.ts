@@ -5,7 +5,7 @@ export const patroon = () => `
   <section class="c-hoofdstuk c-patroon" id="patroon" aria-labelledby="patroon-titel" data-patroon>
     <div class="c-patroon__bos" aria-hidden="true"></div>
     <div class="c-patroon__kaart" data-toon>
-      ${kop('patroon', 4, 'Patroon', 'De boompjes zijn het herkenningsteken. Beweeg over het bos.')}
+      ${kop('patroon', 4, 'Patroon', 'De boompjes zijn het herkenningsteken van de Bosfeesten. Het bos hier waait altijd door, net als de tegel: die sluit naadloos op zichzelf aan.')}
       <ul class="c-lijst">
         <li>Altijd Groen op Indigo, als rand of als achtergrond.</li>
         <li>Nooit op Crème: daar komen tekst, programma en sponsors.</li>

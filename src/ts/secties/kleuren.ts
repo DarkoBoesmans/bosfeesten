@@ -1,5 +1,5 @@
-import { ROLLEN } from '../data/kleuren';
-import { cmykTekst, inkt, tekstOp } from '../lib/kleur';
+import { ROLLEN, STAALKAART } from '../data/kleuren';
+import { cmykTekst, inkt, rgbTekst, tekstOp } from '../lib/kleur';
 import { bestand } from '../components/bestand';
 import { kop } from './kop';
 
@@ -11,19 +11,27 @@ export const kleuren = () => `
     <div class="c-banden">
       ${ROLLEN.map(({ kleur: k, staal, deel, gebruik }, i) => `
       <article class="c-band" style="--band:${k.hex};--band-tekst:${tekstOp(k.hex)};--i:${i}" aria-label="${k.naam}">
-        <div class="c-band__kop">
-          <p class="c-band__staal">Staal “${staal}”${deel ? ` · ${deel}%` : ''}</p>
-          <h3 class="c-band__naam">${k.naam}</h3>
-        </div>
+        <h3 class="c-band__naam">${k.naam}</h3>
         <p class="c-band__gebruik">${gebruik}</p>
         <div class="c-band__waarden">
           ${kopie(cmykTekst(k.cmyk), 'CMYK')}
           ${kopie(k.hex, 'Hex')}
           <p class="c-band__inkt"><span class="c-band__label">Inkt</span>${inkt(k.cmyk)}%</p>
+          <p class="c-band__inkt"><span class="c-band__label">In Affinity</span>${staal}${deel ? ` · ${deel}%` : ''}</p>
         </div>
       </article>`).join('')}
     </div>
     <div class="o-wrap">
+      <h3 class="c-staalkaart__titel" data-toon>Alle kleuren op een rij</h3>
+      <ul class="c-staalkaart" data-toon>
+        ${STAALKAART.map(({ kleur: k, staal }) => `
+        <li class="c-staal" style="--staal:${k.hex};--staal-tekst:${tekstOp(k.hex)}">
+          <div class="c-staal__vlak"><span class="c-staal__naam">${k.naam}</span><span class="c-staal__rol">${staal}</span></div>
+          <button type="button" class="c-staal__waarde" data-kopie="${k.hex}"><span>Hex</span>${k.hex}</button>
+          <button type="button" class="c-staal__waarde" data-kopie="${cmykTekst(k.cmyk)}"><span>CMYK</span>${cmykTekst(k.cmyk)}</button>
+          <button type="button" class="c-staal__waarde" data-kopie="${rgbTekst(k.hex)}"><span>RGB</span>${rgbTekst(k.hex)}</button>
+        </li>`).join('')}
+      </ul>
       <div class="c-verhouding" role="img" aria-label="Verhouding 60 procent Indigo, 30 procent Groen, 10 procent Mandarijn" data-toon>
         ${ROLLEN.filter((r) => r.deel).map(({ kleur: k, deel }) => `<span style="--deel:${deel};background:${k.hex};color:${tekstOp(k.hex)}">${deel}%<span class="c-verhouding__naam">&nbsp;${k.naam}</span></span>`).join('')}
       </div>

@@ -1,25 +1,49 @@
-/* Kleuren als banden die over elkaar schuiven bij het scrollen. */
+/* Kleuren als banden die over elkaar schuiven bij het scrollen, daarna de staalkaart om te kopiëren. */
 .c-banden { position: relative; }
 .c-band {
-  position: sticky; top: 0; min-height: 100svh;
-  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; align-content: start; gap: var(--r4) var(--r5);
+  position: sticky; top: 0; min-height: 86svh;
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: var(--r4) var(--r5);
   padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r5) var(--zijde);
   background: var(--band); color: var(--band-tekst);
   box-shadow: 0 -1.5rem 3rem rgb(30 21 56 / 0.18);
 }
-.c-band__kop { grid-column: 1 / -1; }
-.c-band__staal { font: 600 0.9rem/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: var(--r2); }
-.c-band__naam { font-size: clamp(4rem, 14vw, 13rem); letter-spacing: -0.045em; line-height: 0.82; margin-left: -0.05em; }
-.c-band__gebruik { font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
-.c-band__waarden { display: flex; flex-wrap: wrap; align-content: start; gap: var(--r3) var(--r4); border-top: 3px solid currentColor; padding-top: var(--r3); }
-.c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.25rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.4rem, 2.6vw, 2.2rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
-.c-band__label { font: 600 0.75rem/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.8; }
-.c-band__kopie { position: absolute; left: 0; bottom: -1.4rem; font: 600 0.75rem/1 var(--tekst); opacity: 0; translate: 0 -0.3rem; transition: opacity var(--snel), translate var(--snel) var(--ease); }
+.c-band__naam { grid-column: 1 / -1; align-self: start; font-size: clamp(4rem, 15vw, 16rem); letter-spacing: -0.045em; line-height: 0.86; padding-bottom: 0.08em; margin-left: -0.05em; }
+.c-band__gebruik { align-self: end; font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
+.c-band__waarden { align-self: end; display: grid; grid-template-columns: repeat(2, max-content); gap: var(--r3) var(--r5); border-top: 3px solid currentColor; padding-top: var(--r3); }
+.c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.35rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.3rem, 2.2vw, 2rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
+.c-band__label { font: 600 0.8rem/1 var(--tekst); opacity: 0.85; }
+.c-band__kopie { position: absolute; left: 0; bottom: -1.3rem; font: 600 0.75rem/1 var(--tekst); opacity: 0; translate: 0 -0.3rem; transition: opacity var(--snel), translate var(--snel) var(--ease); }
 .c-band__waarde:hover .c-band__kopie, .c-band__waarde:focus-visible .c-band__kopie { opacity: 1; translate: 0 0; }
 .c-band__waarde { cursor: copy; }
 .c-band__waarde:hover { text-decoration: underline 3px; text-underline-offset: 0.15em; }
-@media (max-width: 52rem) { .c-band { grid-template-columns: 1fr; padding-top: var(--r5); min-height: 80svh; } .c-band:last-child { min-height: 60svh; } .c-verhouding__naam { display: none; } }
+@media (max-width: 52rem) {
+  .c-band { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; align-content: space-between; min-height: 78svh; }
+  .c-band__waarden { gap: var(--r3); }
+  .c-verhouding__naam { display: none; }
+}
 
-.c-verhouding { display: flex; height: var(--r6); margin-top: var(--r6); overflow: hidden; }
+/* Staalkaart: vijf stalen naast elkaar, elke waarde is een knop die kopieert. */
+.c-staalkaart__titel { margin-top: var(--r6); margin-bottom: var(--r3); font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.02em; }
+.c-staalkaart { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--r3); }
+.c-staal { display: grid; align-content: start; border: 3px solid var(--inkt); background: var(--creme); }
+.c-staal__vlak { display: grid; align-content: space-between; aspect-ratio: 1 / 0.8; padding: var(--r2); background: var(--staal); color: var(--staal-tekst); border-bottom: 3px solid var(--inkt); transform-origin: top; transition: padding var(--traag) var(--ease); }
+.c-staal__naam { font: 800 clamp(1.4rem, 2.2vw, 2.1rem)/1 var(--slab); letter-spacing: -0.02em; }
+.c-staal__rol { font: 600 0.85rem/1 var(--tekst); }
+.c-staal__waarde {
+  position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: var(--r1);
+  min-height: 2.9rem; padding: 0 var(--r2); border: 0; border-top: 1px solid var(--lijn); background: none; cursor: copy;
+  font: 800 1rem/1 var(--slab); font-variant-numeric: tabular-nums; text-align: right; isolation: isolate;
+}
+.c-staal__waarde:first-of-type { border-top: 0; }
+.c-staal__waarde span { font: 600 0.78rem/1 var(--tekst); }
+.c-staal__waarde::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--staal); scale: 0 1; transform-origin: left; transition: scale var(--snel) var(--ease); }
+.c-staal__waarde:hover, .c-staal__waarde:focus-visible { color: var(--staal-tekst); }
+.c-staal__waarde:hover::before, .c-staal__waarde:focus-visible::before { scale: 1 1; }
+.c-staal__waarde:active { translate: 0 2px; }
+.c-staal:hover .c-staal__vlak { padding-top: var(--r4); }
+@media (max-width: 72rem) { .c-staalkaart { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 40rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r2); } .c-staal__waarde { padding: 0 var(--r1); font-size: 0.8rem; white-space: nowrap; letter-spacing: -0.02em; } }
+
+.c-verhouding { display: flex; height: var(--r6); margin-top: var(--r5); overflow: hidden; }
 .c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }
 .js-toon .c-verhouding:not(.is-getoond) span { flex-grow: 1; }

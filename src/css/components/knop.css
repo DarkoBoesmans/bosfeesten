@@ -33,5 +33,5 @@
 .c-toast:empty { display: none; }
 
 .c-lijst li { position: relative; padding: var(--r1) 0 var(--r1) var(--r3); border-bottom: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 20%, transparent); }
-.c-lijst li::before { content: ''; position: absolute; left: 0.2rem; top: 1.05rem; width: 0.7rem; height: 0.7rem; background: var(--mandarijn); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.c-lijst li::before { content: ''; position: absolute; left: 0; top: 0.95rem; width: 1.05rem; height: 1.05rem; background: var(--indigo); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; }
 .c-lijst--klein li { font-size: 0.98rem; }

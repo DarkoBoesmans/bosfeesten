@@ -1,7 +1,7 @@
 @media print {
   @page { size: A4; margin: 12mm; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; }
-  .c-merkje, .c-wijzer, .c-maker, .c-bestanden, .c-bestand, .c-zip, #downloads, .c-toast, .c-lightbox, .c-held__acties, .c-held__band { display: none !important; }
+  .c-merkje, .c-wijzer, .c-paal, .c-maker, .c-bestanden, .c-bestand, .c-zip, #downloads, .c-toast, .c-lightbox, .c-held__acties, .c-held__band { display: none !important; }
   :root { --rail: 0rem; }
   .c-band { position: static; min-height: 0; break-inside: avoid; }
   main > section { padding-top: 0; break-before: page; }
