@@ -1,5 +1,5 @@
 /* Voet: links het feest in één zin, rechts een wegwijzerpaal. De bordjes zwaaien een beetje als je ze aanwijst. */
-.c-voet { margin-top: var(--r6); background: var(--inkt); color: var(--creme); padding: var(--r6) calc(var(--zijde-r) + var(--rail)) calc(var(--r4) + env(safe-area-inset-bottom, 0px)) var(--zijde); }
+.c-voet { overflow-x: clip; margin-top: var(--r6); background: var(--inkt); color: var(--creme); padding: var(--r6) calc(var(--zijde-r) + var(--rail)) calc(var(--r4) + env(safe-area-inset-bottom, 0px)) var(--zijde); }
 .c-voet__binnen { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--r5); align-items: center; max-width: 112rem; }
 .c-voet__feest { display: grid; gap: var(--r3); justify-items: start; }
 .c-voet__logo { width: clamp(5rem, 9vw, 8rem); aspect-ratio: 1; background: var(--groen); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; animation: c-wieg 6s var(--ease) infinite alternate; }
