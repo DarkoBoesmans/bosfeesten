@@ -13,7 +13,7 @@ for (const [entry, map] of [['src/ts/main.ts', 'dist/js'], ['src/css/main.css', 
 const { jaar, nummer, html } = pagina();
 const sjabloon = (await readFile('index.html', 'utf8')).replaceAll('{{jaar}}', String(jaar)).replaceAll('{{nummer}}', String(nummer));
 await writeFile('dist/index.html', sjabloon.replace('<!--pagina-->', html));
-await writeFile('dist/404.html', sjabloon.replace('<!--pagina-->', `<main id="inhoud" class="c-niet-gevonden">
+await writeFile('dist/404.html', sjabloon.replace('<!--pagina-->', `<main id="main" class="c-niet-gevonden">
   <h1 class="c-niet-gevonden__titel">Verdwaald in het bos</h1>
   <p>Deze pagina bestaat niet. Alles van de Bosfeesten staat op één plek.</p>
   <a class="c-knop c-knop--vol" href="${SITE}">Naar de media kit</a></main>`).replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<base href="/bosfeesten/">'));

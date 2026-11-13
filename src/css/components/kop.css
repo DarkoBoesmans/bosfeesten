@@ -3,3 +3,9 @@
 .c-kop__nr { grid-row: span 2; align-self: start; font: 800 clamp(1rem, 1.6vw, 1.3rem)/1 var(--slab); color: var(--mandarijn); background: var(--inkt); padding: var(--r0) var(--r1); font-variant-numeric: tabular-nums; }
 .c-kop__titel { font-size: clamp(3rem, 9vw, 8.5rem); letter-spacing: -0.035em; line-height: 0.88; margin-left: -0.04em; }
 .c-kop__tekst { max-width: 38rem; font-size: 1.2rem; line-height: 1.55; }
+.c-kop__titel { hyphens: manual; overflow-wrap: break-word; }
+@media (max-width: 40rem) {
+  .c-kop { grid-template-columns: minmax(0, 1fr); margin-bottom: var(--r4); }
+  .c-kop__nr { grid-row: auto; justify-self: start; }
+  .c-kop__titel { font-size: clamp(2.4rem, 12.5vw, 4rem); }
+}

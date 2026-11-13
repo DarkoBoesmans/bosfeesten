@@ -22,6 +22,6 @@ export function pagina(vandaag = new Date()) {
   return {
     jaar,
     nummer,
-    html: `${nav(jaar)}<main id="inhoud" tabindex="-1">${inhoud.join('')}</main>${voet(jaar, nummer)}${lightbox()}`,
+    html: `${nav(jaar)}<main id="main" tabindex="-1">${inhoud.join('')}</main>${voet(jaar, nummer)}${lightbox()}`,
   };
 }

@@ -47,5 +47,5 @@
 .c-lightbox[open] { animation: c-pop 0.4s var(--ease); }
 @keyframes c-pop { from { scale: 0.92; opacity: 0; } }
 .c-lightbox::backdrop { background: rgb(30 21 56 / 0.92); }
-.c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; }
+.c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; height: auto; }
 .c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; background: var(--creme); color: var(--inkt); font: 800 1rem/1 var(--slab); }

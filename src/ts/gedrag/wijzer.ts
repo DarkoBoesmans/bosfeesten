@@ -12,6 +12,15 @@ export function wijzer() {
   nav.addEventListener('click', (e) => { if ((e.target as Element).closest('a')) zet(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { zet(false); knop.focus(); } });
 
+  // Op gsm schuift de Inhoud-knop weg tijdens het lezen (naar beneden scrollen) en komt terug bij omhoog scrollen.
+  let vorige = scrollY;
+  addEventListener('scroll', () => {
+    const y = scrollY;
+    if (Math.abs(y - vorige) < 8) return;
+    nav.classList.toggle('is-weg', y > vorige && y > 200);
+    vorige = y;
+  }, { passive: true });
+
   const pijlen = new Map(HOOFDSTUKKEN.map(([id]) => [id, nav.querySelector<HTMLElement>(`[data-hoofdstuk="${id}"]`)]));
   const io = new IntersectionObserver((items) => {
     for (const it of items) {

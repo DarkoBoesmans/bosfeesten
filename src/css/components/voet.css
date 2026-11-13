@@ -1,5 +1,5 @@
 /* Voet: een rand van bos, dan het woordmerk zo breed als het scherm, en de feiten. */
-.c-voet { margin-top: var(--r7); background: var(--inkt); color: var(--creme); }
+.c-voet { margin-top: var(--r6); background: var(--inkt); color: var(--creme); }
 .c-voet__bos { height: var(--r6); background: var(--indigo) var(--patroon) 0 0 / 9rem; animation: c-wind 50s linear infinite; }
 .c-voet__inhoud { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4); padding: var(--r5) calc(var(--zijde-r) + var(--rail)) calc(var(--r6) + env(safe-area-inset-bottom, 0px)) var(--zijde); }
 .c-voet__merk { grid-column: 1 / -1; justify-self: start; text-decoration: none; line-height: 1; transition: translate var(--traag) var(--ease); }

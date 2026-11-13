@@ -1,3 +1,4 @@
 /* Objects. o-wrap houdt de inhoud links van de wegwijzer en op een leesbare breedte. */
 .o-wrap { max-width: calc(80rem + var(--rail)); margin-inline: auto; padding-left: var(--zijde); padding-right: calc(var(--zijde-r) + var(--rail)); }
-main > section { padding-top: var(--r7); }
+main > section { padding-top: var(--r6); }
+@media (max-width: 40rem) { main > section { padding-top: var(--r5); } }
