@@ -2,14 +2,14 @@
 .c-banden { position: relative; }
 .c-band {
   position: sticky; top: 0; min-height: 86svh;
-  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: 1fr auto; gap: var(--r4) var(--r5);
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: auto auto; align-content: start; gap: var(--r4) var(--r5);
   padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r5) var(--zijde);
   background: var(--band); color: var(--band-tekst);
-  box-shadow: 0 -1.5rem 3rem rgb(30 21 56 / 0.18);
+  box-shadow: 0 -0.35rem 0 var(--inkt);
 }
 .c-band__naam { grid-column: 1 / -1; align-self: start; font-size: clamp(4rem, 15vw, 16rem); letter-spacing: -0.045em; line-height: 0.86; padding-bottom: 0.08em; margin-left: -0.05em; }
-.c-band__gebruik { align-self: end; font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
-.c-band__waarden { align-self: end; display: grid; grid-template-columns: repeat(2, max-content); gap: var(--r3) var(--r5); border-top: 3px solid currentColor; padding-top: var(--r3); }
+.c-band__gebruik { align-self: start; font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
+.c-band__waarden { align-self: start; display: grid; grid-template-columns: repeat(2, max-content); gap: var(--r3) var(--r5); border-top: 3px solid currentColor; padding-top: var(--r3); }
 .c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.35rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.3rem, 2.2vw, 2rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
 .c-band__label { font: 600 0.8rem/1 var(--tekst); opacity: 0.85; }
 .c-band__kopie { position: absolute; left: 0; bottom: -1.3rem; font: 600 0.75rem/1 var(--tekst); opacity: 0; translate: 0 -0.3rem; transition: opacity var(--snel), translate var(--snel) var(--ease); }
@@ -17,7 +17,7 @@
 .c-band__waarde { cursor: copy; }
 .c-band__waarde:hover { text-decoration: underline 3px; text-underline-offset: 0.15em; }
 @media (max-width: 52rem) {
-  .c-band { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; align-content: space-between; min-height: 78svh; }
+  .c-band { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; align-content: start; min-height: 78svh; }
   .c-band__waarden { gap: var(--r3); }
   .c-verhouding__naam { display: none; }
 }
@@ -25,13 +25,13 @@
 /* Staalkaart: vijf stalen naast elkaar, elke waarde is een knop die kopieert. */
 .c-staalkaart__titel { margin-top: var(--r6); margin-bottom: var(--r3); font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.02em; }
 .c-staalkaart { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--r3); }
-.c-staal { display: grid; align-content: start; border: 3px solid var(--inkt); background: var(--creme); }
+.c-staal { display: flex; flex-direction: column; border: 3px solid var(--inkt); background: var(--creme); }
 .c-staal__vlak { display: grid; align-content: space-between; aspect-ratio: 1 / 0.8; padding: var(--r2); background: var(--staal); color: var(--staal-tekst); border-bottom: 3px solid var(--inkt); transform-origin: top; transition: padding var(--traag) var(--ease); }
 .c-staal__naam { font: 800 clamp(1.4rem, 2.2vw, 2.1rem)/1 var(--slab); letter-spacing: -0.02em; }
 .c-staal__rol { font: 600 0.85rem/1 var(--tekst); }
 .c-staal__waarde {
   position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: var(--r1);
-  min-height: 2.9rem; padding: 0 var(--r2); border: 0; border-top: 1px solid var(--lijn); background: none; cursor: copy;
+  min-height: 2.9rem; padding: 0.85rem var(--r2); border: 0; border-top: 1px solid var(--lijn); background: none; cursor: copy;
   font: 800 1rem/1 var(--slab); font-variant-numeric: tabular-nums; text-align: right; isolation: isolate;
 }
 .c-staal__waarde:first-of-type { border-top: 0; }
@@ -42,7 +42,7 @@
 .c-staal__waarde:active { translate: 0 2px; }
 .c-staal:hover .c-staal__vlak { padding-top: var(--r4); }
 @media (max-width: 72rem) { .c-staalkaart { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 40rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r2); } .c-staal__waarde { padding: 0 var(--r1); font-size: 0.8rem; white-space: nowrap; letter-spacing: -0.02em; } }
+@media (max-width: 40rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r2); } .c-staal__waarde { min-height: 2.6rem; padding: 0.7rem var(--r1); font-size: 0.8rem; white-space: nowrap; letter-spacing: -0.02em; } }
 
 .c-verhouding { display: flex; height: var(--r6); margin-top: var(--r5); overflow: hidden; }
 .c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }

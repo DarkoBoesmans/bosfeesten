@@ -10,7 +10,9 @@ const KBO = { naam: 'KBO Public Search (FOD Economie)', url: 'https://kbopub.eco
 const FOTO = { naam: 'Sirius Legal, foto’s op sociale media', url: 'https://legalnews.be/privacy-gegevensbescherming/een-foto-posten-op-sociale-media-niet-zonder-geldige-rechtsgrond-sirius-legal/' };
 const AALST_APV = { naam: 'Stad Aalst, algemene politieverordening', url: 'https://aalst.be/sites/default/files/2024-03/algemene_politieverordening_aalst.pdf' };
 const AALST_EV = { naam: 'Stad Aalst, een evenement aanvragen', url: 'https://aalst.be/cultuur-sport-en-vrije-tijd/evenementen-en-activiteiten/zelf-een-evenement-organiseren/een' };
-const AALST_ORG = { naam: 'Stad Aalst, zelf een evenement organiseren', url: 'https://aalst.be/cultuur-sport-en-vrije-tijd/evenementen-en-activiteiten/zelf-een-evenement-organiseren' };
+const AALST_URL = 'https://aalst.be/cultuur-sport-en-vrije-tijd/evenementen-en-activiteiten/zelf-een-evenement-organiseren';
+const AALST_BOETE = { naam: 'Stad Aalst, evenement: boete per pijl', url: AALST_URL };
+const AALST_BORD = { naam: 'Stad Aalst, evenement: borden langs wegen', url: AALST_URL };
 const VLAIO_BORD = { naam: 'VLAIO, reclameborden en wegwijzers', url: 'https://www.vlaio.be/nl/nieuws/mag-ik-een-reclamebord-wegwijzer-naar-mijn-bedrijf-plaatsen' };
 const ALCOHOL = { naam: 'Vlaanderen.be, verkoop van alcohol', url: 'https://www.vlaanderen.be/regels-voor-verkoop-van-alcohol' };
 const RECLAME = { naam: 'Jubel, convenant alcoholreclame 2025', url: 'https://www.jubel.be/alcoholreclame-nieuwe-soft-law-regels-in-werking/' };
@@ -58,8 +60,8 @@ export const REGELGROEPEN: { titel: string; kort: string; regels: Regel[] }[] = 
       { tekst: 'Ophangen ten vroegste 48 uur voor de start, weghalen binnen 48 uur na de laatste dag.', bron: AALST_APV },
       { tekst: 'Niet aan verkeerslichten, verkeersborden of straatmeubilair, en niet met nagels of krammen.', bron: AALST_APV },
       { tekst: 'Pijlen mogen niemand hinderen. Bij schade of een ongeval is de vergunninghouder aansprakelijk.', bron: AALST_APV },
-      { tekst: 'Elke pijl die niet in orde is, kost 50 euro.', bron: AALST_ORG },
-      { tekst: 'Borden langs gemeentewegen zijn niet toegelaten. Langs gewestwegen beslist het Agentschap Wegen en Verkeer; op privégrond vraag je de eigenaar.', bron: AALST_ORG },
+      { tekst: 'Elke pijl die niet in orde is, kost 50 euro.', bron: AALST_BOETE },
+      { tekst: 'Borden langs gemeentewegen zijn niet toegelaten. Langs gewestwegen beslist het Agentschap Wegen en Verkeer; op privégrond vraag je de eigenaar.', bron: AALST_BORD },
       { tekst: 'Voor een vast reclamebord geldt de Vlaamse Publiciteitsverordening en heb je een toelating van de gemeente nodig.', bron: VLAIO_BORD },
       { tekst: 'Een reclamestoet op de openbare weg meld je minstens 8 dagen vooraf schriftelijk aan de burgemeester.', bron: AALST_APV },
       { tekst: 'Licht of logo’s projecteren op gevels mag alleen met schriftelijke toestemming van de burgemeester.', bron: AALST_APV },

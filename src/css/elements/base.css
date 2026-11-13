@@ -9,4 +9,3 @@ h1, h2, h3 { font-family: var(--slab); font-weight: 800; line-height: 0.95; text
 b, strong { font-weight: 600; }
 main:focus { outline: 0; }
 ::selection { background: var(--mandarijn); color: var(--inkt); }
-@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

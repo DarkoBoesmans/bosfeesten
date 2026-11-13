@@ -6,7 +6,7 @@ export const klein = (pad: string) => url(`voorbeeld/${pad.split('/').pop()!.rep
 /** Downloadlink met bestandstype en grootte. */
 export const bestand = (pad: string, label: string) =>
   `<a class="c-bestand" href="${url(pad)}" download>
-    <span class="c-bestand__soort">${soort(pad)}</span>
+    <span class="c-bestand__soort"><span>${soort(pad)}</span></span>
     <span class="c-bestand__label">${label}</span>
     <span class="c-bestand__omvang">${omvang(pad)}</span>
     <span class="c-bestand__pijl" aria-hidden="true">↓</span>

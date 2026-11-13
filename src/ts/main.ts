@@ -27,6 +27,15 @@ document.addEventListener('click', async (e) => {
     return;
   }
   if (lightbox?.open && (doel === lightbox || doel.closest('[data-sluit]'))) { lightbox.close(); return; }
+  const anker = doel.closest<HTMLAnchorElement>('a[href^="#"]');
+  const naar = anker && anker.hash.length > 1 ? document.querySelector<HTMLElement>(anker.hash) : null;
+  if (anker && naar) {
+    e.preventDefault();
+    naar.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+    history.replaceState(null, '', anker.hash);
+    if (anker.hash === '#main') naar.focus({ preventScroll: true });
+    return;
+  }
   const kopie = doel.closest<HTMLElement>('[data-kopie]');
   if (kopie) {
     try { await navigator.clipboard.writeText(kopie.dataset.kopie!); toast(`Gekopieerd: ${kopie.dataset.kopie}`); }

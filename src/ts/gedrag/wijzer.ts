@@ -13,11 +13,14 @@ export function wijzer() {
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.classList.contains('is-open')) { zet(false); knop.focus(); } });
 
   // Op gsm schuift de Inhoud-knop weg tijdens het lezen (naar beneden scrollen) en komt terug bij omhoog scrollen.
+  // Boven in de held staat ze nog niet: daar zou ze over de affiche vallen.
   let vorige = scrollY;
+  const zet_weg = (y: number, omlaag: boolean) => nav.classList.toggle('is-weg', y < innerHeight * 0.7 || (omlaag && y > 200));
+  zet_weg(scrollY, false);
   addEventListener('scroll', () => {
     const y = scrollY;
     if (Math.abs(y - vorige) < 8) return;
-    nav.classList.toggle('is-weg', y > vorige && y > 200);
+    zet_weg(y, y > vorige);
     vorige = y;
   }, { passive: true });
 

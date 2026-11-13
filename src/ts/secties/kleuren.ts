@@ -26,7 +26,7 @@ export const kleuren = () => `
       <ul class="c-staalkaart" data-toon>
         ${STAALKAART.map(({ kleur: k, staal }) => `
         <li class="c-staal" style="--staal:${k.hex};--staal-tekst:${tekstOp(k.hex)}">
-          <div class="c-staal__vlak"><span class="c-staal__naam">${k.naam}</span><span class="c-staal__rol">${staal}</span></div>
+          <div class="c-staal__vlak"><span class="c-staal__naam">${k.naam}</span><span class="c-staal__rol">Staal “${staal}”</span></div>
           <button type="button" class="c-staal__waarde" data-kopie="${k.hex}"><span>Hex</span>${k.hex}</button>
           <button type="button" class="c-staal__waarde" data-kopie="${cmykTekst(k.cmyk)}"><span>CMYK</span>${cmykTekst(k.cmyk)}</button>
           <button type="button" class="c-staal__waarde" data-kopie="${rgbTekst(k.hex)}"><span>RGB</span>${rgbTekst(k.hex)}</button>

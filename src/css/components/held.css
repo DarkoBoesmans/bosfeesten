@@ -3,7 +3,7 @@
   --mx: 0; --my: 0;
   position: relative; isolation: isolate; overflow: hidden;
   min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 1fr auto;
-  column-gap: var(--r5); align-items: center;
+  column-gap: var(--r6); align-items: center;
   padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r4)) 0 var(--zijde);
   background: var(--indigo); color: var(--creme);
 }
@@ -20,7 +20,7 @@
   position: relative; display: grid; justify-items: center; gap: var(--r3); text-align: center;
   padding: var(--r5) var(--r4);
 }
-.c-held__inhoud::before { content: ''; position: absolute; inset: -12% -8%; z-index: -1; background: radial-gradient(closest-side, var(--indigo) 62%, rgb(79 55 149 / 0)); }
+.c-held__inhoud { background: var(--indigo); box-shadow: 1.2rem 1.2rem 0 var(--inkt); }
 .c-held__boven { font: 600 0.95rem/1.3 var(--tekst); }
 .c-held__titel { line-height: 1; }
 .c-held__titel .c-woordmerk__rij { animation: c-op 1s var(--ease) both; }
@@ -47,7 +47,7 @@
 @keyframes c-loop { to { translate: -50% 0; } }
 @media (max-width: 60rem) {
   .c-held { grid-template-columns: minmax(0, 1fr); padding-top: var(--r6); padding-right: calc(var(--zijde-r) + var(--rail)); row-gap: var(--r4); }
-  .c-held__inhoud { padding-inline: 0; }
+  .c-held__inhoud { padding: var(--r4) var(--r2); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
   .c-held__affiche { justify-self: center; width: min(78%, 24rem); }
   .c-held__affiche img { height: auto; width: 100%; }
   .c-held__band { margin-inline: calc(-1 * var(--zijde)) calc(-1 * (var(--zijde-r) + var(--rail))); }

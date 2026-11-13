@@ -26,7 +26,7 @@
   .c-wijzer__knop { display: none; }
   .c-wijzer__lijst { display: grid; gap: 0.3rem; }
   .c-wijzer__pijl { margin-left: auto; width: 100%; }
-  .c-wijzer__merk { background: var(--creme); padding: var(--r0) var(--r1); margin-left: var(--r2); }
+  .c-wijzer__merk { background: var(--creme); padding: var(--r0) var(--r1); margin-left: var(--r2); box-shadow: 3px 3px 0 var(--inkt); }
 }
 @media (max-width: 71.99rem) {
   .c-wijzer__knop {
