@@ -25,7 +25,7 @@ export const kleuren = () => `
     </div>
     <div class="o-wrap">
       <div class="c-verhouding" role="img" aria-label="Verhouding 60 procent Indigo, 30 procent Groen, 10 procent Mandarijn" data-toon>
-        ${ROLLEN.filter((r) => r.deel).map(({ kleur: k, deel }) => `<span style="--deel:${deel};background:${k.hex};color:${tekstOp(k.hex)}">${deel}% ${k.naam}</span>`).join('')}
+        ${ROLLEN.filter((r) => r.deel).map(({ kleur: k, deel }) => `<span style="--deel:${deel};background:${k.hex};color:${tekstOp(k.hex)}">${deel}%<span class="c-verhouding__naam">&nbsp;${k.naam}</span></span>`).join('')}
       </div>
       <div class="c-bestanden" data-toon>
         ${bestand('kleuren/bosfeesten-2027.ase', 'Stalen voor Affinity, Illustrator en Canva')}

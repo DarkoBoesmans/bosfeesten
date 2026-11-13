@@ -8,6 +8,7 @@ import { sleep } from './gedrag/sleep';
 import { maker } from './gedrag/maker';
 
 toon();
+addEventListener('load', () => setTimeout(() => document.querySelectorAll<HTMLImageElement>('img[loading="lazy"]').forEach((i) => (i.loading = 'eager')), 400));
 wijzer();
 aanwijzer('[data-held], [data-patroon]');
 proef();

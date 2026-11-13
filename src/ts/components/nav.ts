@@ -20,12 +20,12 @@ const pijl = ([id, label, kleur]: (typeof HOOFDSTUKKEN)[number], i: number) =>
 
 export const nav = (jaar: number) => `
   <nav class="c-wijzer" id="wijzer" aria-label="Hoofdstukken">
-    <button type="button" class="c-wijzer__knop" aria-expanded="false" aria-controls="wijzer-lijst" data-menu>
+    <div class="c-wijzer__knop-houder"><button type="button" class="c-wijzer__knop" aria-expanded="false" aria-controls="wijzer-lijst" data-menu>
       <span class="c-wijzer__knop-tekst">Inhoud</span><span class="c-wijzer__teller" data-teller>01 / ${HOOFDSTUKKEN.length}</span>
-    </button>
+    </button></div>
     <div class="c-wijzer__paneel" id="wijzer-lijst">
       <a class="c-wijzer__merk" href="#top"><span class="c-wijzer__logo" aria-hidden="true"></span>Bosfeesten ${jaar}</a>
       <ol class="c-wijzer__lijst">${HOOFDSTUKKEN.map(pijl).join('')}</ol>
-      <a class="c-wijzer__zip" href="${url(ZIP)}" download style="--pijl:${INDIGO.hex}">Alles downloaden <span>ZIP · ${omvang(ZIP)}</span></a>
+      <div class="c-wijzer__zip-houder"><a class="c-wijzer__zip" href="${url(ZIP)}" download style="--pijl:${INDIGO.hex}">Alles downloaden <span>ZIP · ${omvang(ZIP)}</span></a></div>
     </div>
   </nav>`;

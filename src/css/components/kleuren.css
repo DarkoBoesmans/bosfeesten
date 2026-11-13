@@ -18,7 +18,7 @@
 .c-band__waarde:hover .c-band__kopie, .c-band__waarde:focus-visible .c-band__kopie { opacity: 1; translate: 0 0; }
 .c-band__waarde { cursor: copy; }
 .c-band__waarde:hover { text-decoration: underline 3px; text-underline-offset: 0.15em; }
-@media (max-width: 52rem) { .c-band { grid-template-columns: 1fr; padding-top: var(--r5); } }
+@media (max-width: 52rem) { .c-band { grid-template-columns: 1fr; padding-top: var(--r5); min-height: 80svh; } .c-band:last-child { min-height: 60svh; } .c-verhouding__naam { display: none; } }
 
 .c-verhouding { display: flex; height: var(--r6); margin-top: var(--r6); overflow: hidden; }
 .c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }
