@@ -1,4 +1,4 @@
-Indigo     CMYK 85 95 0 0   druk #4F3795   scherm #5828B8
-Groen      CMYK 65 0 100 0   druk #60BC46   scherm #37CB00
-Mandarijn  CMYK 0 60 100 0   druk #F5821F   scherm #FB8316
-Crème      CMYK 2 2 14 0   druk #FAF6DE   scherm #FFF8DC
+Indigo     CMYK 85 95 0 0   hex #4F3795
+Groen      CMYK 65 0 100 0   hex #60BC46
+Mandarijn  CMYK 0 60 100 0   hex #F5821F
+Crème      CMYK 2 2 14 0   hex #FAF6DE

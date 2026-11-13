@@ -1,15 +1,16 @@
-// De vier kleuren van Bosfeesten 2027. CMYK is de bron (profiel U.S. Web Coated SWOP v2).
-// Dezelfde waarden staan in tools/kit.py voor de downloads.
+// De vier kleuren van Bosfeesten 2027. CMYK is de bron (profiel U.S. Web Coated SWOP v2),
+// de hex is diezelfde kleur op het scherm. Dezelfde waarden staan in tools/kit.py.
 import type { Kleur } from '../types';
 
-export const INDIGO: Kleur = { naam: 'Indigo', cmyk: [85, 95, 0, 0], druk: '#4F3795', scherm: '#5828B8' };
-export const GROEN: Kleur = { naam: 'Groen', cmyk: [65, 0, 100, 0], druk: '#60BC46', scherm: '#37CB00' };
-export const MANDARIJN: Kleur = { naam: 'Mandarijn', cmyk: [0, 60, 100, 0], druk: '#F5821F', scherm: '#FB8316' };
-export const CREME: Kleur = { naam: 'Crème', cmyk: [2, 2, 14, 0], druk: '#FAF6DE', scherm: '#FFF8DC' };
+export const INDIGO: Kleur = { naam: 'Indigo', cmyk: [85, 95, 0, 0], hex: '#4F3795' };
+export const GROEN: Kleur = { naam: 'Groen', cmyk: [65, 0, 100, 0], hex: '#60BC46' };
+export const MANDARIJN: Kleur = { naam: 'Mandarijn', cmyk: [0, 60, 100, 0], hex: '#F5821F' };
+export const CREME: Kleur = { naam: 'Crème', cmyk: [2, 2, 14, 0], hex: '#FAF6DE' };
+export const ZWART: Kleur = { naam: 'Zwart', cmyk: [0, 0, 0, 100], hex: '#1D1D1B' };
 
 export const ROLLEN = [
-  { kleur: INDIGO, rol: 'Hoofdkleur', deel: 60, gebruik: 'Achtergrond van affiche, flyer en sociale media. Zware drankbon.' },
-  { kleur: GROEN, rol: 'Tweede kleur', deel: 30, gebruik: 'Boompjespatroon, rand rond de titel, Meis-badge.' },
-  { kleur: MANDARIJN, rol: 'Accent', deel: 10, gebruik: 'Jaartal, datumblokken, Plein-badge, knoppen. Lichte drankbon.' },
-  { kleur: CREME, rol: 'Papier', deel: 0, gebruik: 'Papier, titel "BOS FEESTEN" en tekst op de gekleurde vlakken.' },
+  { kleur: INDIGO, staal: 'Primary', deel: 60, gebruik: 'De grond onder alles: affiche, flyer, sociale media. En de zware drankbon.' },
+  { kleur: GROEN, staal: 'Secondary', deel: 30, gebruik: 'Het boompjespatroon, de rand rond de titel en de Meis-badge.' },
+  { kleur: MANDARIJN, staal: 'Accent', deel: 10, gebruik: 'Het jaartal, datumblokken, de Plein-badge. En de lichte drankbon.' },
+  { kleur: CREME, staal: 'Wit', deel: 0, gebruik: 'Het papier, de titel en alle tekst op een gekleurd vlak.' },
 ];

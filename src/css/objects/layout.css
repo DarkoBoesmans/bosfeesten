@@ -1,13 +1,3 @@
-/* Objects: secties met een vaste rand en breedte. */
-.o-sectie {
-  max-width: var(--breed); margin-inline: auto;
-  padding-block: var(--r6) 0;
-  padding-left: var(--rand); padding-right: max(var(--r3), env(safe-area-inset-right, 0px));
-}
-.o-sectie--donker {
-  max-width: none; margin-top: var(--r6); padding-block: var(--r6);
-  background: var(--indigo); color: var(--creme);
-  padding-left: max(var(--rand), calc((100% - var(--breed)) / 2 + var(--r3)));
-  padding-right: max(var(--r3), calc((100% - var(--breed)) / 2 + var(--r3)));
-}
-.o-sectie--donker + .o-sectie { padding-top: var(--r6); }
+/* Objects. o-wrap houdt de inhoud links van de wegwijzer en op een leesbare breedte. */
+.o-wrap { max-width: calc(80rem + var(--rail)); margin-inline: auto; padding-left: var(--zijde); padding-right: calc(var(--zijde-r) + var(--rail)); }
+main > section { padding-top: var(--r7); }

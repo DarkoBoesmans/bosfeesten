@@ -1,7 +1,6 @@
-#patroon { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--r4); align-items: stretch; }
-.c-patroon { min-height: 24rem; background: var(--indigo) var(--patroon) 0 0 / 14rem; outline: 3px solid var(--creme); outline-offset: -3px; animation: c-held-wind 120s linear infinite reverse; }
-.c-patroon__inhoud .c-kop { border-color: var(--creme); }
-.c-patroon__inhoud .c-lijst li { border-color: rgb(250 246 222 / 0.25); }
-.c-patroon__inhoud .c-lijst li::before { background: var(--groen); }
-@media (max-width: 56rem) { #patroon { grid-template-columns: 1fr; } .c-patroon { min-height: 14rem; } }
-.c-patroon__inhoud .c-kop { grid-template-columns: 1fr; }
+/* Patroon: een heel bos dat meeschuift met de muis, met de regels op een kaartje erboven. */
+.c-patroon { --mx: 0; --my: 0; position: relative; isolation: isolate; overflow: hidden; margin-top: var(--r7); padding: var(--r7) calc(var(--zijde-r) + var(--rail)) var(--r7) var(--zijde) !important; background: var(--indigo); }
+.c-patroon__bos { position: absolute; inset: -10rem; z-index: -1; background: var(--patroon) 0 0 / 15rem; translate: calc(var(--mx) * -3rem) calc(var(--my) * -3rem); scale: calc(1 + var(--my) * 0.03); transition: translate 1s var(--ease), scale 1s var(--ease); animation: c-wind 60s linear infinite reverse; }
+.c-patroon__kaart { position: relative; max-width: 40rem; background: var(--creme); padding: var(--r5) var(--r4) var(--r4); box-shadow: 1rem 1rem 0 var(--inkt); }
+.c-patroon__kaart .c-kop { grid-template-columns: auto minmax(0, 1fr); margin-bottom: var(--r3); }
+.c-patroon__kaart .c-kop__titel { font-size: clamp(2.8rem, 6vw, 5rem); }

@@ -1,17 +1,21 @@
-/* ITCSS: van algemeen naar specifiek. Klassen volgen BEM (blok__element--modifier). */
+/* ITCSS: settings, generic, elements, objects, components, utilities. Klassen in BEM. */
 @import './settings/tokens.css';
 @import './generic/reset.css';
 @import './elements/base.css';
 @import './objects/layout.css';
-@import './components/nav.css';
+@import './components/woordmerk.css';
+@import './components/wijzer.css';
 @import './components/held.css';
 @import './components/kop.css';
 @import './components/knop.css';
-@import './components/kleur.css';
+@import './components/kleuren.css';
 @import './components/logo.css';
 @import './components/letters.css';
 @import './components/patroon.css';
 @import './components/beelden.css';
-@import './components/lijst.css';
-@import './utilities/utils.css';
+@import './components/maker.css';
+@import './components/wet.css';
+@import './components/downloads.css';
+@import './components/voet.css';
+@import './utilities/beweging.css';
 @import './utilities/print.css';

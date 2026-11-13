@@ -1,4 +1,5 @@
-.c-kop { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--r2) var(--r4); align-items: end; margin-bottom: var(--r4); padding-bottom: var(--r2); border-bottom: 3px solid currentColor; }
-.c-kop__titel { font: 400 clamp(2.6rem, 6vw, 5rem)/0.9 var(--titel); text-transform: uppercase; letter-spacing: -0.01em; margin-left: -0.03em; }
-.c-kop__tekst { max-width: 40rem; font-size: 1.05rem; }
-@media (max-width: 48rem) { .c-kop { grid-template-columns: 1fr; } }
+/* Hoofdstukkop: een groot nummer, de titel, en een inleiding die naast de titel staat. */
+.c-kop { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--r3); row-gap: var(--r2); align-items: end; margin-bottom: var(--r5); }
+.c-kop__nr { grid-row: span 2; align-self: start; font: 800 clamp(1rem, 1.6vw, 1.3rem)/1 var(--slab); color: var(--mandarijn); background: var(--inkt); padding: var(--r0) var(--r1); font-variant-numeric: tabular-nums; }
+.c-kop__titel { font-size: clamp(3rem, 9vw, 8.5rem); letter-spacing: -0.035em; line-height: 0.88; margin-left: -0.04em; }
+.c-kop__tekst { max-width: 38rem; font-size: 1.2rem; line-height: 1.55; }

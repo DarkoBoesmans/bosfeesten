@@ -1,0 +1,53 @@
+/* Navigatie als wegwijzers: pijlen in de merkkleuren, zoals de bordjes die naar de wei wijzen. */
+.c-wijzer__merk { display: flex; align-items: center; gap: var(--r1); margin-bottom: var(--r2); font: 800 1.05rem/1 var(--slab); text-decoration: none; color: var(--inkt); }
+.c-wijzer__logo { width: 2.6rem; height: 2.6rem; background: var(--indigo); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; transition: rotate var(--traag) var(--ease); }
+.c-wijzer__merk:hover .c-wijzer__logo { rotate: -16deg; }
+
+.c-wijzer__pijl, .c-wijzer__zip {
+  --tip: 1.1rem;
+  display: flex; align-items: center; gap: var(--r1); min-height: 2.75rem; padding: 0 var(--r2) 0 calc(var(--tip) + var(--r1));
+  background: var(--pijl); color: var(--inkt); text-decoration: none; font: 800 0.95rem/1 var(--slab);
+  clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%);
+  transition: translate var(--snel) var(--ease), background var(--snel);
+}
+.c-wijzer__nr { font: 600 0.72rem/1 var(--tekst); font-variant-numeric: tabular-nums; }
+.c-wijzer__pijl:hover { translate: calc(-1 * var(--r1)) 0; }
+.c-wijzer__pijl[aria-current] { translate: calc(-1 * var(--r3)) 0; background: var(--inkt); color: var(--pijl); }
+.c-wijzer__zip { margin-top: var(--r1); background: var(--indigo); color: var(--creme); }
+.c-wijzer__zip span { font: 600 0.72rem/1 var(--tekst); opacity: 0.8; }
+.c-wijzer__zip:hover { translate: calc(-1 * var(--r1)) 0; background: var(--inkt); }
+.c-wijzer__teller { font: 600 0.78rem/1 var(--tekst); font-variant-numeric: tabular-nums; opacity: 0.75; }
+
+@media (min-width: 72rem) {
+  .c-wijzer { position: fixed; z-index: 30; right: 0; top: 50%; translate: 0 -50%; width: var(--rail); }
+  .c-wijzer__knop { display: none; }
+  .c-wijzer__lijst { display: grid; gap: 0.3rem; }
+  .c-wijzer__pijl { margin-left: auto; width: 100%; }
+  .c-wijzer__merk { background: var(--creme); padding: var(--r0) var(--r1); margin-left: var(--r2); }
+}
+@media (max-width: 71.99rem) {
+  .c-wijzer__knop {
+    position: fixed; z-index: 40; right: var(--zijde-r); bottom: calc(var(--r2) + env(safe-area-inset-bottom, 0px));
+    display: flex; align-items: center; gap: var(--r2); min-height: 3.25rem; padding: 0 var(--r3) 0 calc(1.3rem + var(--r2));
+    border: 0; background: var(--mandarijn); color: var(--inkt); font: 800 1.05rem/1 var(--slab);
+    clip-path: polygon(1.3rem 0, 100% 0, 100% 100%, 1.3rem 100%, 0 50%);
+    transition: translate var(--snel) var(--ease);
+  }
+  .c-wijzer__knop:active { translate: -4px 0; }
+  .c-wijzer.is-open .c-wijzer__knop { background: var(--creme); }
+  .c-wijzer__paneel {
+    position: fixed; z-index: 35; inset: 0; overflow-y: auto; display: grid; align-content: center; gap: var(--r3);
+    padding: var(--r6) var(--zijde-r) var(--r6) var(--zijde);
+    background: var(--indigo) var(--patroon) 0 0 / 14rem;
+    visibility: hidden; clip-path: circle(0 at calc(100% - 4rem) calc(100% - 3rem)); transition: clip-path var(--traag) var(--ease), visibility 0s var(--traag);
+  }
+  .c-wijzer.is-open .c-wijzer__paneel { visibility: visible; clip-path: circle(150% at calc(100% - 4rem) calc(100% - 3rem)); transition: clip-path var(--traag) var(--ease); }
+  .c-wijzer__lijst { display: grid; gap: 0.4rem; justify-items: end; }
+  .c-wijzer__merk { justify-self: end; color: var(--creme); }
+  .c-wijzer__logo { background: var(--groen); }
+  .c-wijzer__pijl { min-height: 3.1rem; font-size: 1.3rem; }
+  .c-wijzer__zip { justify-self: end; }
+  .menu-open { overflow: hidden; }
+}
+.c-skip { position: absolute; left: -999rem; z-index: 70; }
+.c-skip:focus { left: var(--r2); top: var(--r2); background: var(--inkt); color: var(--creme); padding: var(--r1) var(--r2); }

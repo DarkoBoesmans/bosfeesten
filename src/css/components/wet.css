@@ -1,0 +1,22 @@
+/* Regels: uitklapbare groepen, elke regel met een bron die je kan aanklikken. */
+.c-wet { margin-top: var(--r7); padding-bottom: var(--r7); background: var(--inkt); color: var(--creme); }
+.c-wet .c-kop__nr { background: var(--mandarijn); color: var(--inkt); }
+.c-wet__groepen { border-top: 3px solid var(--creme); }
+.c-wet__groep { border-bottom: 3px solid var(--creme); }
+.c-wet__kop { display: grid; grid-template-columns: minmax(0, 1fr) auto 2.5rem; align-items: center; gap: var(--r3); padding: var(--r3) 0; cursor: pointer; list-style: none; }
+.c-wet__kop::-webkit-details-marker { display: none; }
+.c-wet__kop::after { content: '→'; justify-self: end; font: 800 1.8rem/1 var(--slab); color: var(--mandarijn); transition: rotate var(--traag) var(--ease); }
+.c-wet__groep[open] > .c-wet__kop::after { rotate: 90deg; }
+.c-wet__titel { font: 800 clamp(1.8rem, 4vw, 3.2rem)/1 var(--slab); letter-spacing: -0.025em; transition: translate var(--snel) var(--ease), color var(--snel); }
+.c-wet__kop:hover .c-wet__titel { translate: var(--r1) 0; color: var(--mandarijn); }
+.c-wet__kort { font-size: 0.92rem; opacity: 0.8; text-align: right; }
+.c-wet__regels { counter-reset: regel; display: grid; gap: 0; padding-bottom: var(--r4); }
+.c-wet__regel { counter-increment: regel; display: grid; grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 0.7fr); gap: var(--r1) var(--r3); padding: var(--r2) 0; border-top: 1px solid rgb(250 246 222 / 0.2); }
+.c-wet__regel::before { content: counter(regel, decimal-leading-zero); font: 800 1rem/1.6 var(--slab); color: var(--groen); font-variant-numeric: tabular-nums; }
+.c-wet__regel p { font-size: 1.08rem; line-height: 1.55; }
+.c-wet__bron { align-self: start; justify-self: start; display: inline-block; padding: 0.3rem 0.5rem; border: 1px solid rgb(250 246 222 / 0.45); font-size: 0.85rem; text-decoration: none; line-height: 1.35; transition: background var(--snel), color var(--snel), border-color var(--snel); }
+.c-wet__bron:hover { background: var(--creme); color: var(--inkt); border-color: var(--creme); }
+.c-wet__vu { margin-top: var(--r5); max-width: 46rem; padding: var(--r4); background: var(--mandarijn); color: var(--inkt); rotate: -0.6deg; box-shadow: 0.8rem 0.8rem 0 var(--groen); }
+.c-wet__vu h3 { font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: var(--r2); }
+.c-wet__voorbeeld { margin-bottom: var(--r2); padding: var(--r2); background: var(--creme); font: 700 1.05rem/1.5 var(--slab); }
+@media (max-width: 52rem) { .c-wet__regel { grid-template-columns: 2.4rem minmax(0, 1fr); } .c-wet__bron { grid-column: 2; } .c-wet__kop { grid-template-columns: minmax(0, 1fr) 2rem; } .c-wet__kort { display: none; } }

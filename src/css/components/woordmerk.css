@@ -1,0 +1,6 @@
+/* Het woordmerk. Crème met groene rand, het jaartal in Mandarijn. */
+.c-woordmerk { display: inline-flex; flex-direction: column; font: 400 1em/0.88 var(--merk); text-transform: uppercase; letter-spacing: -0.01em; color: var(--creme); -webkit-text-stroke: 0.075em var(--groen); paint-order: stroke fill; }
+.c-woordmerk__rij { display: block; white-space: nowrap; }
+.c-woordmerk__jaar { color: var(--mandarijn); -webkit-text-stroke-color: var(--creme); }
+.c-woordmerk--groot { font-size: clamp(3.6rem, 10.5vw, 10.5rem); }
+.c-woordmerk--voet { font-size: clamp(3.2rem, 15.5vw, 17rem); }

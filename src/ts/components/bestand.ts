@@ -6,12 +6,14 @@ export const klein = (pad: string) => url(`voorbeeld/${pad.split('/').pop()!.rep
 /** Downloadlink met bestandstype en grootte. */
 export const bestand = (pad: string, label: string) =>
   `<a class="c-bestand" href="${url(pad)}" download>
+    <span class="c-bestand__soort">${soort(pad)}</span>
     <span class="c-bestand__label">${label}</span>
-    <span class="c-bestand__meta">${soort(pad)} · ${omvang(pad)}</span>
+    <span class="c-bestand__omvang">${omvang(pad)}</span>
+    <span class="c-bestand__pijl" aria-hidden="true">↓</span>
   </a>`;
 
 /** Voorbeeldbeeld dat groot opent bij een klik. */
-export const voorbeeld = (pad: string, alt: string, b: number, h: number) =>
-  `<button type="button" class="c-voorbeeld" data-groot="${url(pad)}" data-alt="${alt}" aria-label="${alt} groot bekijken">
-    <img src="${klein(pad)}" alt="${alt}" width="${b}" height="${h}" style="aspect-ratio:${b} / ${h}" decoding="async">
+export const voorbeeld = (pad: string, alt: string, b: number, h: number, extra = '') =>
+  `<button type="button" class="c-voorbeeld ${extra}" data-groot="${url(pad)}" data-alt="${alt}" aria-label="${alt} groot bekijken">
+    <img src="${klein(pad)}" alt="${alt}" width="${b}" height="${h}" style="aspect-ratio:${b} / ${h}" loading="lazy" decoding="async">
   </button>`;

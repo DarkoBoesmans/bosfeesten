@@ -1,32 +1,37 @@
-/* Knoppen en downloads: vlak, harde rand, bewegen bij hover zoals een bon die je meeneemt. */
+/* Knoppen: vlak, harde rand, en ze schuiven op als een bon die over de toog gaat. */
 .c-knop {
-  display: inline-flex; align-items: center; gap: var(--r1); min-height: 3.25rem; padding: 0 var(--r3);
-  border: 3px solid currentColor; background: transparent; text-decoration: none;
-  font: 400 1.05rem/1 var(--titel); text-transform: uppercase;
-  transition: translate 0.2s cubic-bezier(.2,.8,.2,1), box-shadow 0.2s cubic-bezier(.2,.8,.2,1);
+  position: relative; display: inline-flex; align-items: center; gap: var(--r1); min-height: 3.5rem; padding: 0 var(--r3);
+  border: 3px solid currentColor; background: transparent; text-decoration: none; font: 800 1.05rem/1 var(--slab);
+  transition: translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease), background var(--snel);
 }
-.c-knop:hover { translate: -3px -3px; box-shadow: 6px 6px 0 var(--groen); }
+.c-knop::after { content: '→'; transition: translate var(--snel) var(--ease); }
+.c-knop:hover { translate: -4px -4px; box-shadow: 6px 6px 0 var(--groen); }
+.c-knop:hover::after { translate: 0.3rem 0; }
 .c-knop:active { translate: 0 0; box-shadow: none; }
 .c-knop--vol { background: var(--mandarijn); border-color: var(--mandarijn); color: var(--inkt); }
-.c-knop--vol:hover { background: var(--creme); border-color: var(--creme); box-shadow: 6px 6px 0 var(--mandarijn); }
-.c-knop--groot { min-height: 4.2rem; font-size: 1.4rem; margin-bottom: var(--r4); }
-.c-knop__meta { font: 600 0.75rem/1 var(--tekst); text-transform: none; opacity: 0.8; white-space: nowrap; }
+.c-knop--vol:hover { background: var(--groen); border-color: var(--groen); box-shadow: 6px 6px 0 var(--inkt); }
+.c-knop__meta { font: 600 0.78rem/1 var(--tekst); opacity: 0.8; white-space: nowrap; }
+[download].c-knop::after { content: '↓'; }
+[download].c-knop:hover::after { translate: 0 0.2rem; }
 
-.c-bestanden { display: flex; flex-wrap: wrap; gap: var(--r1); margin-top: var(--r3); }
+.c-bestanden { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr)); gap: 0 var(--r3); margin-top: var(--r4); }
 .c-bestand {
-  display: inline-flex; align-items: center; justify-content: space-between; gap: var(--r2); min-height: 2.75rem; padding: var(--r0) var(--r2);
-  border: 2px solid currentColor; text-decoration: none; font-weight: 500; font-size: 0.92rem;
-  transition: background 0.2s, color 0.2s, translate 0.2s cubic-bezier(.2,.8,.2,1);
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) 1.4rem; grid-template-rows: auto auto; align-items: center; column-gap: var(--r2);
+  min-height: 3.5rem; padding: var(--r0) var(--r1); border-bottom: 2px solid currentColor; text-decoration: none; isolation: isolate;
 }
-.c-bestand { flex-wrap: wrap; row-gap: 0; }
-.c-bestand__meta { font-size: 0.75rem; font-weight: 600; opacity: 0.75; white-space: nowrap; }
-.c-bestand__meta::after { content: ' ↓'; display: inline-block; transition: translate 0.2s cubic-bezier(.2,.8,.2,1); }
-.c-bestand:hover { background: var(--inkt); color: var(--creme); }
-.o-sectie--donker .c-bestand:hover { background: var(--creme); color: var(--indigo); }
-.c-bestand:hover .c-bestand__meta::after { translate: 0 3px; }
+.c-bestand::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--inkt); scale: 1 0; transform-origin: bottom; transition: scale var(--snel) var(--ease); }
+.c-bestand:hover { color: var(--creme); }
+.c-bestand:hover::before { scale: 1 1; }
+.c-bestand__soort { grid-row: span 2; font: 800 0.72rem/1 var(--slab); letter-spacing: 0.06em; padding: 0.3rem 0.35rem; border: 2px solid currentColor; justify-self: start; }
+.c-bestand__label { font-weight: 600; font-size: 0.98rem; line-height: 1.3; transition: translate var(--snel) var(--ease); }
+.c-bestand:hover .c-bestand__label { translate: 0.3rem 0; }
+.c-bestand__omvang { grid-column: 2; grid-row: 2; font-size: 0.8rem; font-variant-numeric: tabular-nums; opacity: 0.8; }
+.c-bestand__pijl { grid-column: 3; grid-row: 1 / span 2; font: 800 1.1rem/1 var(--slab); transition: translate var(--snel) var(--ease); }
+.c-bestand:hover .c-bestand__pijl { translate: 0 0.25rem; }
 
-.c-kopie { background: none; border: 0; padding: var(--r0) 0; font-weight: 600; font-variant-numeric: tabular-nums; text-decoration: underline dotted; text-underline-offset: 3px; }
-.c-kopie:hover { text-decoration-style: solid; }
-
-.c-toast { position: fixed; left: 50%; bottom: calc(var(--r3) + env(safe-area-inset-bottom, 0px)); translate: -50% 0; background: var(--inkt); color: var(--creme); padding: var(--r1) var(--r3); z-index: 30; }
+.c-toast { position: fixed; z-index: 60; left: 50%; bottom: calc(var(--r5) + env(safe-area-inset-bottom, 0px)); translate: -50% 0; background: var(--inkt); color: var(--creme); padding: var(--r1) var(--r3); font-weight: 500; }
 .c-toast:empty { display: none; }
+
+.c-lijst li { position: relative; padding: var(--r1) 0 var(--r1) var(--r3); border-bottom: 1px solid currentColor; border-color: color-mix(in srgb, currentColor 20%, transparent); }
+.c-lijst li::before { content: ''; position: absolute; left: 0.2rem; top: 1.05rem; width: 0.7rem; height: 0.7rem; background: var(--mandarijn); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+.c-lijst--klein li { font-size: 0.98rem; }

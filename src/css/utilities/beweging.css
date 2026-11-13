@@ -1,0 +1,9 @@
+/* Binnenschuiven: elementen staan er altijd, ze schuiven alleen zacht op hun plaats als ze in beeld komen. */
+.js-toon [data-toon] { transition: translate 0.9s var(--ease), rotate 0.9s var(--ease); }
+.js-toon [data-toon]:not(.is-getoond) { translate: 0 3rem; }
+.js-toon .c-kop[data-toon]:not(.is-getoond) .c-kop__titel { clip-path: inset(0 0 100% 0); }
+.c-kop__titel { transition: clip-path 0.9s var(--ease); clip-path: inset(0 0 -10% 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

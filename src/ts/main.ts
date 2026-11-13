@@ -1,17 +1,34 @@
-// Gedrag van de media kit: beelden vergroten en waarden kopiëren. De HTML zelf wordt bij het bouwen gemaakt (pagina.ts).
-import { openLightbox, sluitLightbox } from './components/lightbox';
+// Gedrag van de media kit. De HTML wordt bij het bouwen gemaakt (pagina.ts); dit maakt ze levendig.
 import { toast } from './components/toast';
+import { toon } from './gedrag/toon';
+import { wijzer } from './gedrag/wijzer';
+import { aanwijzer } from './gedrag/aanwijzer';
+import { proef } from './gedrag/proef';
+import { sleep } from './gedrag/sleep';
+import { maker } from './gedrag/maker';
 
-async function kopieer(tekst: string) {
-  try { await navigator.clipboard.writeText(tekst); toast(`Gekopieerd: ${tekst}`); }
-  catch { toast('Kopiëren lukt hier niet. Selecteer de tekst zelf.'); }
-}
+toon();
+wijzer();
+aanwijzer('[data-held], [data-patroon]');
+proef();
+sleep();
+maker().catch(() => toast('De postmaker kon niet laden. Herlaad de pagina.'));
 
-document.addEventListener('click', (e) => {
+const lightbox = document.getElementById('lightbox') as HTMLDialogElement | null;
+
+document.addEventListener('click', async (e) => {
   const doel = e.target as Element;
   const groot = doel.closest<HTMLElement>('[data-groot]');
-  if (groot) { openLightbox(groot.dataset.groot!, groot.dataset.alt ?? ''); return; }
+  if (groot && lightbox) {
+    const img = lightbox.querySelector('img')!;
+    img.src = groot.dataset.groot!; img.alt = groot.dataset.alt ?? '';
+    lightbox.showModal();
+    return;
+  }
+  if (lightbox?.open && (doel === lightbox || doel.closest('[data-sluit]'))) { lightbox.close(); return; }
   const kopie = doel.closest<HTMLElement>('[data-kopie]');
-  if (kopie) { kopieer(kopie.dataset.kopie!); return; }
-  sluitLightbox(doel);
+  if (kopie) {
+    try { await navigator.clipboard.writeText(kopie.dataset.kopie!); toast(`Gekopieerd: ${kopie.dataset.kopie}`); }
+    catch { toast('Kopiëren lukt hier niet. Selecteer de tekst zelf.'); }
+  }
 });

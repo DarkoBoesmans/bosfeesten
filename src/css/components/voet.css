@@ -1,0 +1,13 @@
+/* Voet: een rand van bos, dan het woordmerk zo breed als het scherm, en de feiten. */
+.c-voet { margin-top: var(--r7); background: var(--inkt); color: var(--creme); }
+.c-voet__bos { height: var(--r6); background: var(--indigo) var(--patroon) 0 0 / 9rem; animation: c-wind 50s linear infinite; }
+.c-voet__inhoud { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4); padding: var(--r5) calc(var(--zijde-r) + var(--rail)) calc(var(--r6) + env(safe-area-inset-bottom, 0px)) var(--zijde); }
+.c-voet__merk { grid-column: 1 / -1; justify-self: start; text-decoration: none; line-height: 1; transition: translate var(--traag) var(--ease); }
+.c-voet__merk:hover { translate: 0 -0.5rem; }
+.c-voet__feiten { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4); border-top: 3px solid var(--creme); padding-top: var(--r3); }
+.c-voet__feiten dt { font: 600 0.8rem/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; color: var(--groen); margin-bottom: var(--r1); }
+.c-voet__feiten dd { font: 700 clamp(1.15rem, 2vw, 1.5rem)/1.3 var(--slab); }
+.c-voet__colofon { grid-column: 1 / 3; font-size: 0.92rem; opacity: 0.8; }
+.c-voet__boven { justify-self: end; align-self: end; font: 800 1rem/1 var(--slab); text-decoration: none; padding: var(--r1) 0; border-bottom: 2px solid var(--mandarijn); }
+.c-voet__boven:hover { color: var(--mandarijn); }
+@media (max-width: 52rem) { .c-voet__inhoud, .c-voet__feiten { grid-template-columns: 1fr; } .c-voet__colofon { grid-column: 1; } .c-voet__boven { justify-self: start; } }

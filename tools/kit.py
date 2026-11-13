@@ -11,11 +11,11 @@ from proef import kleur_in  # noqa: E402
 ROOT = Path(__file__).resolve().parent.parent
 KIT = ROOT / 'assets' / 'kit'
 
-KLEUREN = {  # naam: (cmyk, hex druk, hex scherm) -- zelfde waarden als src/ts/data/kleuren.ts
-    'Indigo': ((85, 95, 0, 0), '#4F3795', '#5828B8'),
-    'Groen': ((65, 0, 100, 0), '#60BC46', '#37CB00'),
-    'Mandarijn': ((0, 60, 100, 0), '#F5821F', '#FB8316'),
-    'Crème': ((2, 2, 14, 0), '#FAF6DE', '#FFF8DC'),
+KLEUREN = {  # naam: (cmyk, hex) -- zelfde waarden als src/ts/data/kleuren.ts
+    'Indigo': ((85, 95, 0, 0), '#4F3795'),
+    'Groen': ((65, 0, 100, 0), '#60BC46'),
+    'Mandarijn': ((0, 60, 100, 0), '#F5821F'),
+    'Crème': ((2, 2, 14, 0), '#FAF6DE'),
 }
 I, G, M, C = (KLEUREN[k][1] for k in ('Indigo', 'Groen', 'Mandarijn', 'Crème'))
 PALET = dict(P=I, S=G, A=M, B=G, L=C)
@@ -40,7 +40,7 @@ def patroon_svg(kleur, achter=None):
 def ase(kleuren):
     """Adobe Swatch Exchange met globale CMYK-stalen (Affinity: Stalen > Palet importeren)."""
     blokken = b''
-    for naam, (cmyk, *_rest) in kleuren.items():
+    for naam, (cmyk, _hex) in kleuren.items():
         n = (naam + '\0').encode('utf-16-be')
         data = struct.pack('>H', len(n) // 2) + n + b'CMYK' + struct.pack('>4f', *[v / 100 for v in cmyk]) + struct.pack('>H', 0)
         blokken += struct.pack('>HI', 1, len(data)) + data
@@ -53,7 +53,7 @@ def data_uri(svg):
 
 FONTS = ''.join(
     f"@font-face{{font-family:'{fam}';font-weight:{w};src:url('{(ROOT / 'assets/fonts' / f).as_uri()}') format('woff2')}}"
-    for fam, w, f in [('Hipstelvetica', 400, 'hipstelvetica.woff2'), ('Roboto Slab', 700, 'roboto-slab-latin-700-normal.woff2'),
+    for fam, w, f in [('Hipstelvetica', 400, 'hipstelvetica.woff2'), ('Roboto Slab', 700, 'roboto-slab-latin-700-normal.woff2'), ('Roboto Slab', 800, 'roboto-slab-latin-800-normal.woff2'),
                       ('Poppins', 600, 'poppins-latin-600-normal.woff2'), ('Poppins', 500, 'poppins-latin-500-normal.woff2')])
 
 
@@ -75,7 +75,7 @@ def sjabloon(b, h, leeg=False):
       .boven,.adres{{font:600 {k * .026}px/1.2 Poppins;text-transform:uppercase;letter-spacing:.14em}}
       .titel{{font:400 {k * .15}px/.92 Hipstelvetica;text-transform:uppercase;color:{C};-webkit-text-stroke:{k * .012}px {G};paint-order:stroke fill;margin:{k * .01}px 0}}
       .jaar{{color:{M};-webkit-text-stroke-color:{C}}}
-      .editie{{font:400 {k * .03}px/1 Hipstelvetica;text-transform:uppercase;background:{M};color:{I};padding:{k * .012}px {k * .022}px}}
+      .editie{{font:800 {k * .03}px/1 'Roboto Slab';text-transform:uppercase;letter-spacing:.04em;background:{M};color:{I};padding:{k * .012}px {k * .022}px}}
       .datum{{font:700 {k * .052}px/1.1 'Roboto Slab'}}
       .logo{{width:{k * .2}px;height:auto}}
       .vlak.leeg{{justify-content:flex-end}}
@@ -115,7 +115,7 @@ def main():
         schrijf(f'logo/bosfeesten-logo-{n}.svg', logo_svg(kl))
     schrijf('kleuren/bosfeesten-2027.ase', ase(KLEUREN))
     schrijf('kleuren/bosfeesten-2027-kleuren.txt', '\n'.join(
-        f'{n:<10} CMYK {c[0]} {c[1]} {c[2]} {c[3]}   druk {d}   scherm {s}' for n, (c, d, s) in KLEUREN.items()) + '\n')
+        f'{n:<10} CMYK {c[0]} {c[1]} {c[2]} {c[3]}   hex {h}' for n, (c, h) in KLEUREN.items()) + '\n')
     schrijf('patroon/bosfeesten-patroon-indigo.svg', patroon_svg(G, I))
     schrijf('patroon/bosfeesten-patroon-transparant.svg', patroon_svg(G))
     for naam in ('affiche', 'flyer', 'prijslijst', 'bonnetjes'):
@@ -160,6 +160,9 @@ def main():
             im = Image.open(KIT / pad).convert('RGB')
             im.thumbnail((900, 1200))
             im.save(KIT / 'voorbeeld' / (Path(pad).stem + '.webp'), quality=82)
+            if pad == 'drukwerk/affiche.jpg':  # kleiner beeld voor bovenaan de pagina
+                held = Image.open(KIT / pad).convert('RGB'); held.thumbnail((600, 848))
+                held.save(KIT / 'voorbeeld' / 'affiche-held.webp', quality=80)
 
     with zipfile.ZipFile(KIT / 'bosfeesten-2027-mediakit.zip', 'w', zipfile.ZIP_DEFLATED) as z:
         for pad in lijst:

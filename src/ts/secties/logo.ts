@@ -1,29 +1,30 @@
 import { CREME, GROEN, INDIGO, MANDARIJN } from '../data/kleuren';
 import { LOGOS } from '../data/kit';
-import type { Kleur } from '../types';
 import { bestand } from '../components/bestand';
 import { kop } from './kop';
 
-const tegel = (voor: Kleur, achter: Kleur, mag: boolean, uitleg: string, extra = '') => `
-      <figure class="c-logotegel${mag ? '' : ' c-logotegel--niet'}">
-        <div class="c-logotegel__vlak" style="background:${achter.druk}">
-          <span class="c-logo${extra}" style="--logo-kleur:${voor.druk}" role="img" aria-label="Logo in ${voor.naam} op ${achter.naam}"></span>
-        </div>
-        <figcaption><b>${mag ? 'Wel' : 'Niet'}</b> ${uitleg}</figcaption>
-      </figure>`;
+const KEUZES = [INDIGO, GROEN, MANDARIJN, CREME];
+const staal = (rol: 'voor' | 'achter', k: (typeof KEUZES)[number], aan: boolean) =>
+  `<button type="button" class="c-proef__staal" style="--staal:${k.hex}" data-proef="${rol}" data-hex="${k.hex}" data-naam="${k.naam}" aria-pressed="${aan}">${k.naam}</button>`;
 
 export const logo = () => `
-  <section class="o-sectie" id="logo" aria-labelledby="logo-titel">
-    ${kop('logo', 'Logo', 'Het boomlogo is altijd in één kleur. Laat rondom minstens een kwart van zijn breedte vrij, en gebruik het nooit kleiner dan 15 mm op papier of 48 px op een scherm.')}
-    <div class="c-logos">
-      ${tegel(CREME, INDIGO, true, 'Crème op Indigo. De standaard.')}
-      ${tegel(INDIGO, CREME, true, 'Indigo op Crème, voor papier en sponsorvlakken.')}
-      ${tegel(INDIGO, MANDARIJN, true, 'Indigo op Mandarijn, voor kleine badges.')}
-      ${tegel(GROEN, CREME, false, 'Groen op Crème: te weinig contrast.')}
-      ${tegel(CREME, INDIGO, false, 'uitgerekt, gedraaid of vervormd.', ' c-logo--uitgerekt')}
-      ${tegel(MANDARIJN, GROEN, false, 'Mandarijn op Groen: de kleuren vechten.')}
+  <section class="c-hoofdstuk o-wrap" id="logo" aria-labelledby="logo-titel">
+    ${kop('logo', 2, 'Logo', 'De boom in de cirkel. Altijd in één kleur, met rondom minstens een kwart van zijn breedte vrij. Nooit kleiner dan 15 mm op papier of 48 px op een scherm. Probeer hieronder welke combinaties werken.')}
+    <div class="c-proef" data-toon>
+      <div class="c-proef__vlak" style="--proef-achter:${INDIGO.hex};--proef-voor:${CREME.hex}" data-proef-vlak>
+        <span class="c-logo" role="img" aria-label="Bosfeesten-logo"></span>
+        <p class="c-proef__oordeel" role="status" data-proef-oordeel>Crème op Indigo. De standaard.</p>
+      </div>
+      <div class="c-proef__keuze">
+        <fieldset class="c-proef__rij"><legend>Logo</legend>${KEUZES.map((k) => staal('voor', k, k === CREME)).join('')}</fieldset>
+        <fieldset class="c-proef__rij"><legend>Achtergrond</legend>${KEUZES.map((k) => staal('achter', k, k === INDIGO)).join('')}</fieldset>
+        <ul class="c-lijst c-lijst--klein">
+          <li>Gebruik het logo nooit uitgerekt, gedraaid, met een schaduw of met een rand.</li>
+          <li>In het woordmerk staat de boom in de O van BOS.</li>
+        </ul>
+      </div>
     </div>
-    <div class="c-bestanden">
+    <div class="c-bestanden" data-toon>
       ${LOGOS.flatMap((l) => [bestand(l.svg, `Logo ${l.naam}`), bestand(l.png, `Logo ${l.naam}`)]).join('')}
     </div>
   </section>`;

@@ -1,0 +1,25 @@
+/* Kleuren als banden die over elkaar schuiven bij het scrollen. */
+.c-banden { position: relative; }
+.c-band {
+  position: sticky; top: 0; min-height: 100svh;
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); grid-template-rows: auto auto 1fr; align-content: start; gap: var(--r4) var(--r5);
+  padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r5) var(--zijde);
+  background: var(--band); color: var(--band-tekst);
+  box-shadow: 0 -1.5rem 3rem rgb(30 21 56 / 0.18);
+}
+.c-band__kop { grid-column: 1 / -1; }
+.c-band__staal { font: 600 0.9rem/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: var(--r2); }
+.c-band__naam { font-size: clamp(4rem, 14vw, 13rem); letter-spacing: -0.045em; line-height: 0.82; margin-left: -0.05em; }
+.c-band__gebruik { font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
+.c-band__waarden { display: flex; flex-wrap: wrap; align-content: start; gap: var(--r3) var(--r4); border-top: 3px solid currentColor; padding-top: var(--r3); }
+.c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.25rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.4rem, 2.6vw, 2.2rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
+.c-band__label { font: 600 0.75rem/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.8; }
+.c-band__kopie { position: absolute; left: 0; bottom: -1.4rem; font: 600 0.75rem/1 var(--tekst); opacity: 0; translate: 0 -0.3rem; transition: opacity var(--snel), translate var(--snel) var(--ease); }
+.c-band__waarde:hover .c-band__kopie, .c-band__waarde:focus-visible .c-band__kopie { opacity: 1; translate: 0 0; }
+.c-band__waarde { cursor: copy; }
+.c-band__waarde:hover { text-decoration: underline 3px; text-underline-offset: 0.15em; }
+@media (max-width: 52rem) { .c-band { grid-template-columns: 1fr; padding-top: var(--r5); } }
+
+.c-verhouding { display: flex; height: var(--r6); margin-top: var(--r6); overflow: hidden; }
+.c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }
+.js-toon .c-verhouding:not(.is-getoond) span { flex-grow: 1; }

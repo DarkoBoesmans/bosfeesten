@@ -1,9 +1,12 @@
-.c-letters__rij { display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); gap: var(--r2) var(--r4); align-items: center; padding-block: var(--r4); border-bottom: 1px solid var(--lijn); }
-.c-letters__voorbeeld--titel { font: 400 clamp(2.8rem, 7vw, 6.5rem)/0.9 var(--titel); text-transform: uppercase; letter-spacing: -0.01em; margin-left: -0.03em; color: var(--indigo); }
-.c-letters__voorbeeld--slab { font: 700 clamp(1.6rem, 3.4vw, 2.8rem)/1.15 var(--slab); }
-.c-letters__voorbeeld--tekst { font: 400 clamp(1.15rem, 2vw, 1.5rem)/1.5 var(--tekst); max-width: 36rem; }
-.c-letters__uitleg { display: grid; gap: var(--r1); }
-.c-letters__bron { font-size: 0.85rem; color: var(--grijs); }
-@media (max-width: 48rem) { .c-letters__rij { grid-template-columns: 1fr; } }
-.c-letters__bron a { display: inline-block; padding-block: 0.2rem; text-decoration-thickness: 1px; }
-.c-letters__bron a:hover { color: var(--indigo); text-decoration-thickness: 3px; }
+.c-letters { display: grid; }
+.c-letter { display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); gap: var(--r3) var(--r5); align-items: center; padding: var(--r5) 0; border-top: 3px solid var(--inkt); }
+.c-letter__proef { min-width: 0; }
+.c-letter--merk .c-letter__proef { background: var(--indigo); padding: var(--r4); font-size: clamp(2.6rem, 7vw, 6.5rem); }
+.c-letter__groot { display: block; font: 800 clamp(2.4rem, 6.5vw, 6rem)/0.95 var(--slab); letter-spacing: -0.03em; }
+.c-letter__klein { display: block; margin-top: var(--r2); font: 700 clamp(1.3rem, 2.4vw, 2rem)/1.2 var(--slab); color: var(--indigo); }
+.c-letter--tekst .c-letter__proef p { font: 400 clamp(1.3rem, 2.4vw, 1.9rem)/1.45 var(--tekst); max-width: 34rem; }
+.c-letter__uitleg { display: grid; gap: var(--r1); }
+.c-letter__uitleg h3 { font-size: clamp(1.8rem, 3vw, 2.6rem); letter-spacing: -0.02em; }
+.c-letter__uitleg a { justify-self: start; display: inline-block; padding: var(--r0) 0; font-weight: 600; text-decoration-thickness: 2px; text-decoration-color: var(--mandarijn); transition: text-decoration-thickness var(--snel), text-underline-offset var(--snel); }
+.c-letter__uitleg a:hover { text-decoration-thickness: 0.4em; text-underline-offset: -0.1em; }
+@media (max-width: 52rem) { .c-letter { grid-template-columns: 1fr; } }

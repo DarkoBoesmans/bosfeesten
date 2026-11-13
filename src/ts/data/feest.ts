@@ -1,6 +1,6 @@
 // Vaste gegevens van het feest. De editie telt mee met het jaar: 2023 was de 60ste.
 export const FEEST = {
-  organisator: 'vzw Chiro Popov',
+  organisator: 'Chiro Popov',
   adres: 'Eerste Bochtweg 1',
   gemeente: '9308 Gijzegem',
   dagen: '13, 14 & 15 augustus',

@@ -1,0 +1,24 @@
+/* Postmaker: formulier links, het beeld rechts, op een Indigo grond met boompjes. */
+.c-maker { position: relative; isolation: isolate; margin-top: var(--r7); padding-bottom: var(--r7); background: var(--indigo); color: var(--creme); }
+.c-maker::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--patroon) 0 0 / 12rem; opacity: 0.18; }
+.c-maker .c-kop__nr { background: var(--mandarijn); color: var(--inkt); }
+.c-maker__werk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--r5); align-items: start; }
+.c-maker__form { display: grid; gap: var(--r3); background: var(--creme); color: var(--inkt); padding: var(--r4); box-shadow: 1rem 1rem 0 var(--inkt); }
+.c-veld { display: grid; gap: var(--r0); }
+.c-veld > span, .c-veld legend { font: 800 1rem/1 var(--slab); margin-bottom: var(--r0); }
+.c-veld input[type='text'], .c-veld select { width: 100%; min-height: 3.25rem; padding: 0 var(--r2); border: 2px solid var(--inkt); background: #fff; font-size: 1.1rem; border-radius: 0; transition: box-shadow var(--snel) var(--ease); }
+.c-veld input[type='text']:focus, .c-veld select:focus { outline: 0; box-shadow: 5px 5px 0 var(--mandarijn); }
+.c-veld__rij { display: grid; grid-template-columns: 1.618fr 1fr; gap: var(--r2); }
+.c-veld--keuze { display: flex; flex-wrap: wrap; gap: var(--r0); }
+.c-veld--keuze legend { width: 100%; }
+.c-veld--keuze label { position: relative; }
+.c-veld--keuze input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+.c-veld--keuze span { display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 var(--r2); border: 2px solid var(--inkt); font-weight: 600; font-size: 0.95rem; transition: background var(--snel), color var(--snel); }
+.c-veld--keuze input:checked + span { background: var(--inkt); color: var(--creme); }
+.c-veld--keuze input:focus-visible + span { outline: 3px solid var(--mandarijn); outline-offset: 2px; }
+.c-veld--foto input { font-size: 0.95rem; }
+.c-veld--foto input::file-selector-button { min-height: 2.75rem; margin-right: var(--r1); padding: 0 var(--r2); border: 2px solid var(--inkt); background: var(--groen); color: var(--inkt); font: 800 0.95rem/1 var(--slab); cursor: pointer; }
+.c-maker__noot { font-size: 0.88rem; }
+.c-maker__voorbeeld { position: sticky; top: var(--r3); display: grid; justify-items: center; }
+.c-maker__canvas { width: auto; max-width: 100%; max-height: 82svh; height: auto; box-shadow: 1rem 1rem 0 var(--inkt); }
+@media (max-width: 60rem) { .c-maker__werk { grid-template-columns: 1fr; } .c-maker__voorbeeld { position: static; order: -1; } .c-maker__canvas { max-height: 70svh; } }

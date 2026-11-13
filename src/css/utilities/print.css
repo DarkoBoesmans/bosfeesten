@@ -1,15 +1,10 @@
-/* Afdrukversie: A4, kleuren zoals op scherm, zonder navigatie, knoppen en downloads. */
 @media print {
   @page { size: A4; margin: 12mm; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; animation: none !important; }
-  body { font-size: 10pt; }
-  .c-nav, .c-held__acties, .c-bestanden, figcaption .c-bestand, #downloads, .c-toast, .c-lightbox, .c-skip { display: none !important; }
-  .c-held { break-after: page; grid-template-columns: 1.618fr 1fr; }
-  .o-sectie { padding-top: 0; break-before: page; }
-  .o-sectie--donker { margin-top: 0; }
-  .c-kleur, .c-logotegel, .c-raster__item, .c-letters__rij, .c-sociaal__item, .c-lijst li, .c-wet__blok { break-inside: avoid; }
-  .c-kleuren { grid-template-columns: repeat(4, 1fr); }
-  .c-sociaal { grid-template-columns: repeat(6, 1fr); }
-  .c-kop__titel { font-size: 2.6rem; }
-  a { text-decoration: none; }
+  .c-merkje, .c-wijzer, .c-maker, .c-bestanden, .c-bestand, .c-zip, #downloads, .c-toast, .c-lightbox, .c-held__acties, .c-held__band { display: none !important; }
+  :root { --rail: 0rem; }
+  .c-band { position: static; min-height: 0; break-inside: avoid; }
+  main > section { padding-top: 0; break-before: page; }
+  .c-wet__groep { break-inside: avoid; }
+  .c-wet__groep:not([open]) > *:not(summary) { display: block; }
 }

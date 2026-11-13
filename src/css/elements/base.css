@@ -1,10 +1,12 @@
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--nav) + var(--r2)); }
-body { background: var(--creme); color: var(--inkt); font: 400 1.0625rem/1.55 var(--tekst); }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--r3); }
+body { background: var(--creme); color: var(--inkt); font: 400 1.125rem/1.6 var(--tekst); overflow-x: clip; }
 img { display: block; max-width: 100%; height: auto; }
-a { color: inherit; text-underline-offset: 3px; }
-button { font: inherit; color: inherit; cursor: pointer; }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+button, input, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--mandarijn); outline-offset: 3px; }
-h1, h2, h3 { text-wrap: balance; line-height: 1; }
-b { font-weight: 600; }
+h1, h2, h3 { font-family: var(--slab); font-weight: 800; line-height: 0.95; text-wrap: balance; }
+b, strong { font-weight: 600; }
 main:focus { outline: 0; }
+::selection { background: var(--mandarijn); color: var(--inkt); }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }

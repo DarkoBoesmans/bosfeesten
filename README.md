@@ -1,7 +1,7 @@
 # Bosfeesten media kit
 
-Huisstijl en media kit van de Bosfeesten (vzw Chiro Popov, Gijzegem): kleuren, logo, letters, patroon,
-drukwerk, drankbonnen, sjablonen voor sociale media, wettelijke vermeldingen en alle downloads.
+Huisstijl en media kit van de Bosfeesten (Chiro Popov, Gijzegem): kleuren, logo, letters, patroon,
+drukwerk, drankbonnen, sjablonen en een postmaker voor sociale media, alle regels met bronnen, en alle downloads.
 Live: https://darkoboesmans.github.io/bosfeesten/
 
 ## Stack
@@ -16,7 +16,9 @@ Live: https://darkoboesmans.github.io/bosfeesten/
 | --- | --- |
 | `src/ts/data` | kleuren (CMYK eerst), feestgegevens en editie, lijst van downloads |
 | `src/ts/secties` | één bestand per sectie van de pagina |
-| `src/ts/components` | navigatie, downloadknop, lightbox, melding |
+| `src/ts/components` | wegwijzer-navigatie, woordmerk, downloadknop, lightbox |
+| `src/ts/gedrag` | wat beweegt: binnenschuiven, navigatie, logo-proef, postmaker |
+| `src/ts/data/regels.ts` | alle regels voor drukwerk, flyers, pijlen en alcohol, elk met bron |
 | `assets/kit` | alle downloads, gemaakt met `tools/kit.py` |
 | `tools` | Python-scripts: kleurlagen uit drukwerk.af (`lagen.py`) en de media kit (`kit.py`) |
 
