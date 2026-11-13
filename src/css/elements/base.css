@@ -7,5 +7,6 @@ button { cursor: pointer; }
 :focus-visible { outline: 3px solid var(--mandarijn); outline-offset: 3px; }
 h1, h2, h3 { font-family: var(--slab); font-weight: 800; line-height: 0.95; text-wrap: balance; }
 b, strong { font-weight: 600; }
+main { overflow-x: clip; }
 main:focus { outline: 0; }
 ::selection { background: var(--mandarijn); color: var(--inkt); }
