@@ -20,7 +20,9 @@
   position: relative; display: grid; justify-items: center; gap: var(--r3); text-align: center;
   padding: var(--r5) var(--r4);
 }
-.c-held__inhoud { background: var(--indigo); box-shadow: 1.2rem 1.2rem 0 var(--inkt); }
+.c-held__inhoud { container-type: inline-size; background: var(--indigo); box-shadow: 1.2rem 1.2rem 0 var(--inkt); }
+.c-held__titel .c-woordmerk { font-size: min(13rem, 18cqi); }
+.c-held__uitleg { max-width: min(34rem, 100%); }
 .c-held__boven { font: 600 0.95rem/1.3 var(--tekst); }
 .c-held__titel { line-height: 1; }
 .c-held__titel .c-woordmerk__rij { animation: c-op 1s var(--ease) both; }
@@ -36,7 +38,7 @@
 }
 @keyframes c-val { from { translate: 0 -40%; rotate: 8deg; opacity: 0; } }
 .c-held__affiche img {
-  height: min(80svh, 64rem); width: auto; rotate: 3deg; box-shadow: 1.2rem 1.2rem 0 var(--inkt);
+  height: min(80svh, 64rem, 44vw); width: auto; rotate: 3deg; box-shadow: 1.2rem 1.2rem 0 var(--inkt);
   transform: rotateY(calc(var(--mx) * 10deg)) rotateX(calc(var(--my) * -8deg));
   transition: transform 0.6s var(--ease), rotate var(--traag) var(--ease), box-shadow var(--traag) var(--ease);
 }

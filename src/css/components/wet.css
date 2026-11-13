@@ -9,7 +9,7 @@
 .c-wet__groep[open] > .c-wet__kop::after { rotate: 90deg; }
 .c-wet__titel { font: 800 clamp(1.8rem, 4vw, 3.2rem)/1 var(--slab); letter-spacing: -0.025em; transition: translate var(--snel) var(--ease), color var(--snel); }
 .c-wet__kop:hover .c-wet__titel { translate: var(--r1) 0; color: var(--mandarijn); }
-.c-wet__kort { font-size: 0.92rem; opacity: 0.8; text-align: right; }
+.c-wet__kort { font-size: 0.92rem; text-align: right; }
 .c-wet__regels { counter-reset: regel; display: grid; gap: 0; padding-bottom: var(--r4); }
 .c-wet__regel { counter-increment: regel; display: grid; grid-template-columns: 3rem minmax(0, 1fr) minmax(0, 0.7fr); gap: var(--r1) var(--r3); padding: var(--r2) 0; border-top: 1px solid rgb(250 246 222 / 0.2); }
 .c-wet__regel::before { content: counter(regel, decimal-leading-zero); font: 800 1rem/1.6 var(--slab); color: var(--groen); font-variant-numeric: tabular-nums; }

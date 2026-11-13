@@ -1,23 +1,22 @@
 /* Kleuren als banden die over elkaar schuiven bij het scrollen, daarna de staalkaart om te kopiëren. */
 .c-banden { position: relative; }
 .c-band {
-  position: sticky; top: 0; min-height: 86svh;
-  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: auto auto; align-content: start; gap: var(--r4) var(--r5);
+  position: relative; min-height: 72svh;
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto auto; align-content: start; gap: var(--r4) var(--r5);
   padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r5) var(--zijde);
   background: var(--band); color: var(--band-tekst);
-  box-shadow: 0 -0.35rem 0 var(--inkt);
 }
 .c-band__naam { grid-column: 1 / -1; align-self: start; font-size: clamp(4rem, 15vw, 16rem); letter-spacing: -0.045em; line-height: 0.86; padding-bottom: 0.08em; margin-left: -0.05em; }
 .c-band__gebruik { align-self: start; font-size: 1.3rem; line-height: 1.5; max-width: 30rem; }
-.c-band__waarden { align-self: start; display: grid; grid-template-columns: repeat(2, max-content); gap: var(--r3) var(--r5); border-top: 3px solid currentColor; padding-top: var(--r3); }
-.c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.35rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.3rem, 2.2vw, 2rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
-.c-band__label { font: 600 0.8rem/1 var(--tekst); opacity: 0.85; }
+.c-band__waarden { align-self: start; display: grid; grid-template-columns: repeat(2, minmax(0, max-content)); gap: var(--r3) var(--r5); border-top: 3px solid currentColor; padding-top: var(--r3); }
+.c-band__waarde, .c-band__inkt { position: relative; display: grid; gap: 0.35rem; border: 0; background: none; padding: 0; text-align: left; font: 800 clamp(1.2rem, 1.8vw, 1.9rem)/1.05 var(--slab); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.c-band__label { font: 600 0.8rem/1 var(--tekst); }
 .c-band__kopie { position: absolute; left: 0; bottom: -1.3rem; font: 600 0.75rem/1 var(--tekst); opacity: 0; translate: 0 -0.3rem; transition: opacity var(--snel), translate var(--snel) var(--ease); }
 .c-band__waarde:hover .c-band__kopie, .c-band__waarde:focus-visible .c-band__kopie { opacity: 1; translate: 0 0; }
 .c-band__waarde { cursor: copy; }
 .c-band__waarde:hover { text-decoration: underline 3px; text-underline-offset: 0.15em; }
 @media (max-width: 52rem) {
-  .c-band { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; align-content: start; min-height: 78svh; }
+  .c-band { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto; align-content: start; min-height: 0; }
   .c-band__waarden { gap: var(--r3); }
   .c-verhouding__naam { display: none; }
 }

@@ -11,3 +11,6 @@
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+/* Kleurnamen schuiven van links het beeld in, de grootste beweging van de pagina. */
+.js-toon .c-band__naam[data-toon]:not(.is-getoond) { translate: -12% 0; }
+.js-toon .c-band__naam[data-toon] { transition: translate 1.1s var(--ease); }

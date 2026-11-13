@@ -11,7 +11,7 @@ export const kleuren = () => `
     <div class="c-banden">
       ${ROLLEN.map(({ kleur: k, staal, deel, gebruik }, i) => `
       <article class="c-band" style="--band:${k.hex};--band-tekst:${tekstOp(k.hex)};--i:${i}" aria-label="${k.naam}">
-        <h3 class="c-band__naam">${k.naam}</h3>
+        <h3 class="c-band__naam" data-toon>${k.naam}</h3>
         <p class="c-band__gebruik">${gebruik}</p>
         <div class="c-band__waarden">
           ${kopie(cmykTekst(k.cmyk), 'CMYK')}
