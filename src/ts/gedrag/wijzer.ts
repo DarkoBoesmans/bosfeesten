@@ -15,7 +15,11 @@ export function wijzer() {
   // Op gsm schuift de Inhoud-knop weg tijdens het lezen (naar beneden scrollen) en komt terug bij omhoog scrollen.
   // In de held staat de knop nog niet (daar zou hij over de affiche vallen); daarna altijd.
   let vorige = scrollY;
-  const zet_weg = (y: number, _omlaag: boolean) => nav.classList.toggle('is-weg', y < innerHeight * 0.6);
+  const voet = document.querySelector('footer');
+  const zet_weg = (y: number, _omlaag: boolean) => {
+    const voetInBeeld = !!voet && voet.getBoundingClientRect().top < innerHeight * 0.85;
+    nav.classList.toggle('is-weg', y < innerHeight * 0.6 || voetInBeeld);
+  };
   zet_weg(scrollY, false);
   addEventListener('scroll', () => {
     const y = scrollY;

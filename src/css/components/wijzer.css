@@ -6,21 +6,23 @@
 .c-wijzer__pijl, .c-wijzer__zip {
   --tip: 1.1rem;
   display: flex; align-items: center; gap: var(--r1); min-height: 2.75rem; padding: 0 var(--r2) 0 calc(var(--tip) + var(--r1));
-  background: var(--pijl); color: var(--inkt); text-decoration: none; font: 800 0.95rem/1 var(--slab);
+  position: relative; isolation: isolate; background: var(--inkt); color: var(--inkt); text-decoration: none; font: 800 0.95rem/1 var(--slab);
   clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%);
   transition: translate var(--snel) var(--ease), background var(--snel);
 }
+.c-wijzer__pijl::before, .c-wijzer__zip::before { content: ''; position: absolute; inset: 2px 0 2px 2px; z-index: -1; background: var(--pijl); clip-path: polygon(calc(var(--tip) - 1px) 0, 100% 0, 100% 100%, calc(var(--tip) - 1px) 100%, 0 50%); transition: background var(--snel); }
+.c-wijzer__pijl[aria-current]::before, .c-wijzer__pijl:focus-visible::before { background: var(--inkt); }
 .c-wijzer__nr { font: 600 0.72rem/1 var(--tekst); font-variant-numeric: tabular-nums; }
 .c-wijzer__lijst li, .c-wijzer__zip-houder { filter: drop-shadow(3px 3px 0 var(--inkt)); }
 .c-wijzer__lijst li:has([aria-current]) { filter: drop-shadow(2px 0 0 var(--creme)) drop-shadow(-2px 0 0 var(--creme)) drop-shadow(0 2px 0 var(--creme)) drop-shadow(0 -2px 0 var(--creme)) drop-shadow(4px 4px 0 var(--mandarijn)); }
 .c-wijzer__pijl:focus-visible, .c-wijzer__zip:focus-visible { outline: 0; background: var(--inkt); color: var(--pijl); translate: calc(-1 * var(--r3)) 0; text-decoration: underline 2px; text-underline-offset: 3px; }
 .c-wijzer__pijl:hover { translate: calc(-1 * var(--r1)) 0; }
 .c-wijzer__pijl[aria-current] { translate: calc(-1 * var(--r3)) 0; background: var(--inkt); color: var(--pijl); }
-.c-wijzer__zip { margin-top: var(--r1); background: var(--creme); color: var(--inkt); }
+.c-wijzer__zip { --pijl: var(--creme); margin-top: var(--r1); color: var(--inkt); }
 .c-wijzer__zip { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.25rem; padding-block: 0.5rem; }
 .c-wijzer__zip b { font-weight: 800; white-space: nowrap; }
 .c-wijzer__zip span { font: 600 0.75rem/1 var(--tekst); white-space: nowrap; }
-.c-wijzer__zip:hover { translate: calc(-1 * var(--r1)) 0; background: var(--mandarijn); }
+.c-wijzer__zip:hover { translate: calc(-1 * var(--r1)) 0; --pijl: var(--mandarijn); }
 .c-wijzer__teller { font: 600 0.78rem/1 var(--tekst); font-variant-numeric: tabular-nums; }
 
 @media (min-width: 72rem) {

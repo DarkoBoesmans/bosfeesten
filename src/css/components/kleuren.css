@@ -1,9 +1,9 @@
 /* Kleuren als banden die over elkaar schuiven bij het scrollen, daarna de staalkaart om te kopiëren. */
 .c-banden { position: relative; }
 .c-band {
-  position: relative; min-height: 72svh;
+  position: relative;
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto auto; align-content: start; gap: var(--r4) var(--r5);
-  padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r5) var(--zijde);
+  padding: var(--r6) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r6) var(--zijde);
   background: var(--band); color: var(--band-tekst);
 }
 .c-band__naam { grid-column: 1 / -1; align-self: start; font-size: clamp(4rem, 15vw, 16rem); letter-spacing: -0.045em; line-height: 0.86; padding-bottom: 0.08em; margin-left: -0.05em; }
@@ -39,6 +39,8 @@
 .c-staal__waarde:hover, .c-staal__waarde:focus-visible { color: var(--staal-tekst); }
 .c-staal__waarde:hover::before, .c-staal__waarde:focus-visible::before { scale: 1 1; }
 .c-staal__waarde:active { translate: 0 2px; }
+.c-staal { transition: translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease); }
+.c-staal:hover { translate: -4px -4px; box-shadow: 6px 6px 0 var(--inkt); }
 .c-staal:hover .c-staal__vlak { padding-top: var(--r4); }
 @media (max-width: 72rem) { .c-staalkaart { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 40rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r2); } .c-staal__waarde { min-height: 2.6rem; padding: 0.7rem var(--r1); font-size: 0.8rem; white-space: nowrap; letter-spacing: -0.02em; } }

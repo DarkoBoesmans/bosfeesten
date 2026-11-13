@@ -1,5 +1,5 @@
 import { ZIP, omvang, url } from '../data/kit';
-import { INDIGO, GROEN, MANDARIJN, CREME } from '../data/kleuren';
+import { GROEN, MANDARIJN, CREME } from '../data/kleuren';
 
 /** De hoofdstukken. De navigatie zijn wegwijzers, zoals de pijlen die naar het feest wijzen. */
 export const HOOFDSTUKKEN = [
@@ -26,6 +26,6 @@ export const nav = (jaar: number) => `
     <div class="c-wijzer__paneel" id="wijzer-lijst">
       <a class="c-wijzer__merk" href="#top"><span class="c-wijzer__logo" aria-hidden="true"></span>Bosfeesten ${jaar}</a>
       <ol class="c-wijzer__lijst">${HOOFDSTUKKEN.map(pijl).join('')}</ol>
-      <div class="c-wijzer__zip-houder"><a class="c-wijzer__zip" href="${url(ZIP)}" download style="--pijl:${INDIGO.hex}"><b>Alles downloaden</b><span>ZIP · ${omvang(ZIP)}</span></a></div>
+      <div class="c-wijzer__zip-houder"><a class="c-wijzer__zip" href="${url(ZIP)}" download><b>Alles downloaden</b><span>ZIP · ${omvang(ZIP)}</span></a></div>
     </div>
   </nav>`;
