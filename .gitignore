@@ -4,3 +4,4 @@ node_modules/
 dist/
 .kit-tmp.html
 .shots/
+.werk/

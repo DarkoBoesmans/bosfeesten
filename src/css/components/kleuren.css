@@ -1,7 +1,7 @@
 /* Kleuren als banden die over elkaar schuiven bij het scrollen, daarna de staalkaart om te kopiëren. */
 .c-banden { position: relative; }
 .c-band {
-  position: relative;
+  position: sticky; top: 0; min-height: 100svh;
   display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: auto auto; align-content: start; gap: var(--r4) var(--r5);
   padding: var(--r6) calc(var(--zijde-r) + var(--rail) + var(--r3)) var(--r6) var(--zijde);
   background: var(--band); color: var(--band-tekst);
@@ -21,29 +21,21 @@
   .c-verhouding__naam { display: none; }
 }
 
-/* Staalkaart: vijf stalen naast elkaar, elke waarde is een knop die kopieert. */
-.c-staalkaart__titel { margin-top: var(--r6); margin-bottom: var(--r3); font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.02em; }
-.c-staalkaart { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--r3); }
-.c-staal { display: flex; flex-direction: column; border: 3px solid var(--inkt); background: var(--creme); }
-.c-staal__vlak { display: grid; align-content: space-between; aspect-ratio: 1 / 0.8; padding: var(--r2); background: var(--staal); color: var(--staal-tekst); border-bottom: 3px solid var(--inkt); transform-origin: top; transition: padding var(--traag) var(--ease); }
-.c-staal__naam { font: 800 clamp(1.4rem, 2.2vw, 2.1rem)/1 var(--slab); letter-spacing: -0.02em; }
-.c-staal__rol { font: 600 0.85rem/1 var(--tekst); }
-.c-staal__waarde {
-  position: relative; display: flex; justify-content: space-between; align-items: baseline; gap: var(--r1);
-  min-height: 2.9rem; padding: 0.85rem var(--r2); border: 0; border-top: 1px solid var(--lijn); background: none; cursor: copy;
-  font: 800 1rem/1 var(--slab); font-variant-numeric: tabular-nums; text-align: right; isolation: isolate;
+/* Staalkaart: alle kleuren op een rij. Eén klik op een kleur kopieert de hex. */
+.c-staalkaart__titel { margin-top: var(--r6); font-size: clamp(1.8rem, 3.4vw, 3rem); letter-spacing: -0.02em; }
+.c-staalkaart__uitleg { margin: var(--r1) 0 var(--r3); }
+.c-staalkaart { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--r2); }
+.c-staal {
+  position: relative; display: grid; grid-template-rows: 1fr auto; aspect-ratio: 1 / 1.15; width: 100%; padding: 0; border: 3px solid var(--inkt); background: var(--staal); color: var(--staal-tekst);
+  cursor: copy; text-align: left; transition: translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease);
 }
-.c-staal__waarde:first-of-type { border-top: 0; }
-.c-staal__waarde span { font: 600 0.78rem/1 var(--tekst); }
-.c-staal__waarde::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--staal); scale: 0 1; transform-origin: left; transition: scale var(--snel) var(--ease); }
-.c-staal__waarde:hover, .c-staal__waarde:focus-visible { color: var(--staal-tekst); }
-.c-staal__waarde:hover::before, .c-staal__waarde:focus-visible::before { scale: 1 1; }
-.c-staal__waarde:active { translate: 0 2px; }
-.c-staal { transition: translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease); }
-.c-staal:hover { translate: -4px -4px; box-shadow: 6px 6px 0 var(--inkt); }
-.c-staal:hover .c-staal__vlak { padding-top: var(--r4); }
-@media (max-width: 72rem) { .c-staalkaart { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 40rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r2); } .c-staal__waarde { min-height: 2.6rem; padding: 0.7rem var(--r1); font-size: 0.8rem; white-space: nowrap; letter-spacing: -0.02em; } }
+.c-staal__naam { padding: var(--r2); font: 800 clamp(1.3rem, 2vw, 1.9rem)/1 var(--slab); letter-spacing: -0.02em; }
+.c-staal__hex { display: flex; justify-content: space-between; align-items: baseline; gap: var(--r1); padding: var(--r2); background: var(--creme); color: var(--inkt); border-top: 3px solid var(--inkt); font: 800 clamp(1.1rem, 1.6vw, 1.5rem)/1 var(--slab); font-variant-numeric: tabular-nums; }
+.c-staal__hex small { font: 600 0.8rem/1 var(--tekst); opacity: 0; translate: 0.4rem 0; transition: opacity var(--snel), translate var(--snel) var(--ease); }
+.c-staal:hover, .c-staal:focus-visible { translate: -4px -4px; box-shadow: 6px 6px 0 var(--inkt); outline: 0; }
+.c-staal:hover small, .c-staal:focus-visible small { opacity: 1; translate: 0 0; }
+.c-staal:active { translate: 0 0; box-shadow: none; }
+@media (max-width: 52rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-staal { aspect-ratio: auto; min-height: 9rem; } .c-staal:last-child { grid-column: 1 / -1; } .c-staal__hex small { opacity: 1; translate: 0 0; } }
 
 .c-verhouding { display: flex; height: var(--r6); margin-top: var(--r5); overflow: hidden; }
 .c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }

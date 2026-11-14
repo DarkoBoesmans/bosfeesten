@@ -21,7 +21,10 @@ export function wijzer() {
     nav.classList.toggle('is-weg', y < innerHeight * 0.6 || voetInBeeld);
   };
   zet_weg(scrollY, false);
+  const voortgang = () => nav.style.setProperty('--voortgang', String(Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight))));
+  voortgang();
   addEventListener('scroll', () => {
+    voortgang();
     const y = scrollY;
     if (Math.abs(y - vorige) < 8) return;
     zet_weg(y, y > vorige);
@@ -33,6 +36,11 @@ export function wijzer() {
     for (const it of items) {
       if (!it.isIntersecting) continue;
       const id = it.target.id;
+      const nieuw = [...pijlen].find(([k]) => k === id)?.[1];
+      if (nieuw && !nieuw.hasAttribute('aria-current')) {
+        // Nieuw hoofdstuk: dat bordje zwaait uit, op gsm zwaait de Inhoud-knop mee.
+        for (const el of [nieuw, knop]) { el.classList.remove('is-zwaai'); void el.offsetWidth; el.classList.add('is-zwaai'); }
+      }
       pijlen.forEach((a, k) => a?.toggleAttribute('aria-current', k === id));
       const i = HOOFDSTUKKEN.findIndex(([h]) => h === id);
       if (teller && i >= 0) teller.textContent = `${String(i + 1).padStart(2, '0')} / ${HOOFDSTUKKEN.length}`;

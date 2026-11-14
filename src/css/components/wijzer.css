@@ -10,19 +10,25 @@
   clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%);
   transition: translate var(--snel) var(--ease), background var(--snel);
 }
-.c-wijzer__pijl::before, .c-wijzer__zip::before { content: ''; position: absolute; inset: 2px 0 2px 2px; z-index: -1; background: var(--pijl); clip-path: polygon(calc(var(--tip) - 1px) 0, 100% 0, 100% 100%, calc(var(--tip) - 1px) 100%, 0 50%); transition: background var(--snel); }
-.c-wijzer__pijl[aria-current]::before, .c-wijzer__pijl:focus-visible::before { background: var(--inkt); }
+.c-wijzer__pijl::before, .c-wijzer__zip::before { content: ''; position: absolute; inset: 2px 0 2px 2px; z-index: -1; background: var(--creme); clip-path: polygon(calc(var(--tip) - 1px) 0, 100% 0, 100% 100%, calc(var(--tip) - 1px) 100%, 0 50%); transition: background var(--snel); }
+.c-wijzer__pijl:hover::before, .c-wijzer__pijl[aria-current]::before, .c-wijzer__zip:hover::before { background: var(--pijl); }
+.c-wijzer__pijl:focus-visible::before { background: var(--inkt); }
 .c-wijzer__nr { font: 600 0.72rem/1 var(--tekst); font-variant-numeric: tabular-nums; }
 .c-wijzer__lijst li, .c-wijzer__zip-houder { filter: drop-shadow(3px 3px 0 var(--inkt)); }
 .c-wijzer__lijst li:has([aria-current]) { filter: drop-shadow(2px 0 0 var(--creme)) drop-shadow(-2px 0 0 var(--creme)) drop-shadow(0 2px 0 var(--creme)) drop-shadow(0 -2px 0 var(--creme)) drop-shadow(4px 4px 0 var(--mandarijn)); }
-.c-wijzer__pijl:focus-visible, .c-wijzer__zip:focus-visible { outline: 0; background: var(--inkt); color: var(--pijl); translate: calc(-1 * var(--r3)) 0; text-decoration: underline 2px; text-underline-offset: 3px; }
+.c-wijzer__pijl:focus-visible, .c-wijzer__zip:focus-visible { outline: 0; background: var(--inkt); color: var(--creme); translate: calc(-1 * var(--r3)) 0; text-decoration: underline 2px; text-underline-offset: 3px; }
 .c-wijzer__pijl:hover { translate: calc(-1 * var(--r1)) 0; }
-.c-wijzer__pijl[aria-current] { translate: calc(-1 * var(--r3)) 0; rotate: -3deg; background: var(--inkt); color: var(--pijl); transition: translate var(--traag) var(--ease), rotate var(--traag) cubic-bezier(.3, 1.6, .5, 1); }
+.c-wijzer__pijl { transform-origin: 100% 50%; }
+.c-wijzer__pijl[aria-current] { translate: calc(-1 * var(--r3)) 0; rotate: -3deg; transition: translate var(--traag) var(--ease); }
+/* Het bordje van het hoofdstuk waar je bent zwaait aan de paal uit, als een echt wegwijzerbord. */
+.c-wijzer__pijl.is-zwaai { animation: c-zwaai 0.9s var(--ease); }
+@keyframes c-zwaai { 0% { rotate: 0deg; } 30% { rotate: -11deg; } 55% { rotate: 3deg; } 78% { rotate: -5deg; } 100% { rotate: -3deg; } }
 .c-wijzer__zip { --pijl: var(--creme); margin-top: var(--r1); color: var(--inkt); }
 .c-wijzer__zip { flex-direction: column; align-items: flex-start; justify-content: center; gap: 0.25rem; padding-block: 0.5rem; }
 .c-wijzer__zip b { font-weight: 800; white-space: nowrap; }
 .c-wijzer__zip span { font: 600 0.75rem/1 var(--tekst); white-space: nowrap; }
 .c-wijzer__zip:hover { translate: calc(-1 * var(--r1)) 0; --pijl: var(--mandarijn); }
+.c-wijzer__zip { --pijl: var(--mandarijn); }
 .c-wijzer__teller { font: 600 0.78rem/1 var(--tekst); font-variant-numeric: tabular-nums; }
 
 @media (min-width: 72rem) {
@@ -30,6 +36,10 @@
   .c-wijzer__knop { display: none; }
   .c-wijzer__lijst { display: grid; gap: 0.3rem; }
   .c-wijzer__pijl { margin-left: auto; width: 100%; }
+  /* De paal achter de bordjes: inkt, en van boven naar onder Mandarijn naarmate je verder leest. */
+  .c-wijzer__paneel { position: relative; isolation: isolate; }
+  .c-wijzer__paneel::before, .c-wijzer__paneel::after { content: ''; position: absolute; z-index: -1; top: -3rem; bottom: -3rem; right: 1.4rem; width: 0.75rem; background: var(--inkt); }
+  .c-wijzer__paneel::after { background: var(--mandarijn); transform-origin: top; scale: 1 var(--voortgang, 0); transition: scale 0.3s linear; }
   .c-wijzer__merk { background: var(--creme); padding: var(--r0) var(--r1); margin-left: var(--r2); box-shadow: 3px 3px 0 var(--inkt); }
 }
 @media (max-width: 71.99rem) {
@@ -44,6 +54,9 @@
   .c-wijzer__knop::before { content: ''; position: absolute; inset: 3px 3px 3px 5px; z-index: -1; background: var(--inkt); clip-path: polygon(1.2rem 0, 100% 0, 100% 100%, 1.2rem 100%, 0 50%); transition: background var(--snel); }
   .c-wijzer__knop:hover::before { background: var(--indigo); }
   .c-wijzer__knop:active { translate: -4px 0; }
+  .c-wijzer__knop { transform-origin: 100% 50%; }
+  .c-wijzer__knop.is-zwaai { animation: c-zwaai-knop 0.8s var(--ease); }
+  @keyframes c-zwaai-knop { 30% { rotate: -7deg; } 60% { rotate: 2deg; } 80% { rotate: -2deg; } }
   .c-wijzer.is-weg:not(.is-open) .c-wijzer__knop { translate: 0 calc(100% + var(--r3) + env(safe-area-inset-bottom, 0px)); }
   .c-wijzer__knop:focus-visible { outline: 0; background: var(--mandarijn); text-decoration: underline 2px; }
   .c-wijzer.is-open .c-wijzer__knop { background: var(--mandarijn); }
