@@ -18,7 +18,7 @@ export const held = (jaar: number, nummer: number) => `
       </div>
     </div>
     <button type="button" class="c-held__affiche" data-groot="${url('drukwerk/affiche.jpg')}" data-alt="Affiche Bosfeesten ${jaar}" aria-label="Affiche groot bekijken">
-      <img src="${url('voorbeeld/affiche-held.webp')}" alt="Affiche Bosfeesten ${jaar}: Indigo met groen boompjespatroon en het volledige programma" width="600" height="848" fetchpriority="high">
+      <img src="${url('voorbeeld/affiche-held.webp')}" srcset="${url('voorbeeld/affiche-held.webp')} 600w, ${url('voorbeeld/affiche.webp')} 849w" sizes="(min-width: 60rem) 44vw, 78vw" alt="Affiche Bosfeesten ${jaar}: Indigo met groen boompjespatroon en het volledige programma" width="600" height="848" fetchpriority="high">
     </button>
     <div class="c-held__band" aria-hidden="true"><div class="c-held__loop">${loop(jaar, nummer)}</div></div>
   </section>`;

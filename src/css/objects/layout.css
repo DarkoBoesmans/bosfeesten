@@ -4,5 +4,6 @@
   margin-left: max(0px, (100% - var(--rail) - 112rem) / 2);
   padding-left: var(--zijde); padding-right: var(--zijde-r);
 }
+@media (min-width: 72rem) { .o-wrap { padding-right: calc(var(--zijde-r) + var(--r4)); } }
 main > section { padding-top: var(--r6); }
 @media (max-width: 40rem) { main > section { padding-top: var(--r5); } }

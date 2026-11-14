@@ -12,6 +12,6 @@
 .c-proef__rij { display: flex; flex-wrap: wrap; gap: var(--r1); }
 .c-proef__staal { display: inline-flex; align-items: center; gap: var(--r1); min-height: 3rem; padding: 0 var(--r2) 0 var(--r0); border: 2px solid var(--inkt); background: var(--creme); font-weight: 600; font-size: 0.95rem; transition: translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease); }
 .c-proef__staal::before { content: ''; width: 2.1rem; height: 2.1rem; background: var(--staal); outline: 1px solid var(--lijn); }
-.c-proef__staal:hover { translate: -3px -3px; box-shadow: 3px 3px 0 var(--inkt); }
+.c-proef__staal:hover { translate: -5px -5px; box-shadow: 6px 6px 0 var(--inkt); }
 .c-proef__staal[aria-pressed='true'] { background: var(--inkt); color: var(--creme); }
 @media (max-width: 52rem) { .c-proef { grid-template-columns: 1fr; } }
