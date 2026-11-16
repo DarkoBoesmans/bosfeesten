@@ -17,18 +17,18 @@ export const maker = (jaar: number) => `
       <div class="c-maker__werk" data-maker data-jaar="${jaar}">
         <form class="c-maker__form" data-maker-form>
           <fieldset class="c-maker__groep">
-            <legend>Wat maak je?</legend>
+            <legend><span class="c-stap" aria-hidden="true">1</span>Wat maak je?</legend>
             <div class="c-modus">${MODI.map(([w, t, u], i) => `<label><input type="radio" name="modus" value="${w}"${i === 0 ? ' checked' : ''}><span><b>${t}</b>${u}</span></label>`).join('')}</div>
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="artiest">
-            <legend>Wie</legend>
+            <legend><span class="c-stap" aria-hidden="true">2</span>Wie</legend>
             <label class="c-veld"><span>Artiest of titel</span><input name="naam" type="text" maxlength="40" value="Jouw artiest" autocomplete="off"></label>
             <label class="c-veld"><span>Extra regel <i>(optioneel)</i></span><input name="extra" type="text" maxlength="48" placeholder="Bv. live band, dj-set, mosselfestijn" autocomplete="off"></label>
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="lineup" hidden>
-            <legend>Wie speelt er</legend>
+            <legend><span class="c-stap" aria-hidden="true">2</span>Wie speelt er</legend>
             <label class="c-veld"><span>Eén act per regel: uur, naam en eventueel (Meis) of (Plein)</span>
               <textarea name="acts" rows="6" spellcheck="false">20u00 Opener van de avond (Plein)
 21u30 Lady Gwen &amp; The Ladies (Meis)
@@ -37,12 +37,12 @@ export const maker = (jaar: number) => `
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="aftellen" hidden>
-            <legend>Teaser</legend>
+            <legend><span class="c-stap" aria-hidden="true">2</span>Teaser</legend>
             <label class="c-veld"><span>Extra regel <i>(optioneel)</i></span><input name="teaser" type="text" maxlength="48" placeholder="Bv. de line-up komt deze vrijdag" autocomplete="off"></label>
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="artiest lineup">
-            <legend>Wanneer</legend>
+            <legend><span class="c-stap" aria-hidden="true">3</span>Wanneer</legend>
             <div class="c-dagen">${DAGEN.map(([n, k, lang]) => `<label><input type="radio" name="dag" value="${lang} ${n} augustus"${n === '14' ? ' checked' : ''}><span><b>${n}</b>${k}</span></label>`).join('')}</div>
             <div class="c-veld__rij" data-voor="artiest">
               <label class="c-veld"><span>Uur</span><input name="uur" type="text" maxlength="8" value="21u00"></label>
@@ -51,7 +51,7 @@ export const maker = (jaar: number) => `
           </fieldset>
 
           <fieldset class="c-maker__groep">
-            <legend>Beeld</legend>
+            <legend><span class="c-stap" aria-hidden="true">4</span>Beeld</legend>
             <div class="c-veld c-veld--keuze"><span>Formaat</span>${keuze('formaat', [['post', 'Post 4:5'], ['vierkant', 'Vierkant'], ['story', 'Story 9:16']], 'post')}</div>
             <div data-voor="artiest">
               <label class="c-foto"><input name="foto" type="file" accept="image/*" class="c-foto__invoer"><span class="c-foto__knop">Kies een foto</span><span class="c-foto__naam" data-maker-bestand>Nog geen foto gekozen</span></label>

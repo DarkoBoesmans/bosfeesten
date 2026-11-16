@@ -2,7 +2,7 @@
 .c-held {
   --mx: 0; --my: 0;
   position: relative; isolation: isolate; overflow: hidden;
-  min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.272fr); /* √φ: de affiche iets breder dan het vak */ grid-template-rows: 1fr auto;
+  min-height: 100svh; display: grid; grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr); grid-template-rows: 1fr auto;
   column-gap: var(--r6); align-items: center;
   padding: var(--r5) calc(var(--zijde-r) + var(--rail) + var(--r4)) 0 var(--zijde);
   background: var(--indigo); color: var(--creme);
@@ -15,21 +15,15 @@
   transition: translate 1.2s var(--ease);
   animation: c-wind 70s linear infinite;
 }
-/* De open plek: een Indigo vlak met zachte rand, gecentreerd op de inhoud. */
-.c-held__inhoud {
-  position: relative; display: grid; justify-items: center; gap: var(--r3); text-align: center;
-  padding: var(--r5) var(--r4);
-}
-.c-held__inhoud { container-type: inline-size; background: var(--indigo); box-shadow: 1.2rem 1.2rem 0 var(--inkt); }
-.c-held__titel .c-woordmerk { font-size: min(13rem, 18cqi); }
+/* Links het woordmerk groot op een effen vlak, rechts de drie dagen zoals op de affiche (φ : 1). */
+.c-held__inhoud { position: relative; container-type: inline-size; display: grid; justify-items: start; gap: var(--r3); padding: var(--vlak); background: var(--indigo); box-shadow: 1.2rem 1.2rem 0 var(--inkt); }
+.c-held__titel .c-woordmerk { font-size: min(14rem, 21cqi); }
 .c-held__uitleg { max-width: min(34rem, 100%); }
 .c-held__boven { font: 600 0.95rem/1.3 var(--tekst); }
 .c-held__titel { line-height: 1; }
 .c-held__titel .c-woordmerk__rij { animation: c-op 1s var(--ease) both; }
 .c-held__titel .c-woordmerk__rij + .c-woordmerk__rij { animation-delay: 0.12s; }
 @keyframes c-op { from { translate: 0 0.6em; opacity: 0; } }
-.c-held__editie { font: 800 clamp(1.4rem, 2.4vw, 2rem)/1 var(--slab); background: var(--mandarijn); color: var(--inkt); padding: var(--r0) var(--r1); rotate: -2deg; animation: c-stempel 0.6s 0.5s var(--ease) both; }
-@keyframes c-stempel { from { scale: 1.6; opacity: 0; rotate: 6deg; } }
 .c-held__uitleg { max-width: 34rem; font-size: 1.2rem; line-height: 1.55; }
 .c-held__acties { display: grid; grid-template-columns: minmax(0, 24rem); gap: var(--r2); }
 @media (min-width: 24rem) { .c-held__acties .c-knop { white-space: nowrap; } }
@@ -37,26 +31,39 @@
 .c-held__acties .c-knop:nth-child(2) { clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%); background: var(--creme); color: var(--inkt); }
 .c-held__acties .c-knop:hover, .c-held__acties .c-knop:focus-visible { translate: 0.5rem 0; box-shadow: none; }
 .c-held__acties .c-knop:nth-child(2):hover, .c-held__acties .c-knop:nth-child(2):focus-visible { translate: -0.5rem 0; background: var(--groen); }
-.c-held__affiche {
-  width: 100%; max-width: 64rem; justify-self: center;
-  padding: 0; border: 0; background: none; cursor: zoom-in;
-  perspective: 1400px; animation: c-val 1.1s 0.2s var(--ease) both;
-}
-@keyframes c-val { from { translate: 0 -40%; rotate: 8deg; opacity: 0; } }
-.c-held__affiche img {
-  width: 100%; height: auto; rotate: 3deg; box-shadow: 1.2rem 1.2rem 0 var(--inkt);
-  transform: rotateY(calc(var(--mx) * 10deg)) rotateX(calc(var(--my) * -8deg));
-  transition: transform 0.6s var(--ease), rotate var(--traag) var(--ease), box-shadow var(--traag) var(--ease);
-}
-.c-held__affiche:hover img { rotate: 0deg; box-shadow: 1.6rem 1.6rem 0 var(--mandarijn); }
 .c-held__band { grid-column: 1 / -1; margin-top: var(--r4); margin-inline: calc(-1 * var(--zijde)) calc(-1 * (var(--zijde-r) + var(--rail) + var(--r4))); background: var(--mandarijn); color: var(--inkt); overflow: hidden; rotate: -1.2deg; translate: 0 -0.4rem; }
 .c-held__loop { display: flex; width: max-content; gap: var(--r3); padding: var(--r1) var(--r3) var(--r1) 0; font: 800 clamp(1.2rem, 2.2vw, 1.8rem)/1 var(--slab); text-transform: uppercase; white-space: nowrap; animation: c-loop 60s linear infinite; }
 .c-held__loop > span { flex: none; }
 @keyframes c-loop { to { translate: -50% 0; } }
 @media (max-width: 60rem) {
   .c-held { grid-template-columns: minmax(0, 1fr); padding-top: var(--r6); padding-right: calc(var(--zijde-r) + var(--rail)); row-gap: var(--r4); }
-  .c-held__inhoud { padding: var(--r4) var(--r2); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
-  .c-held__affiche { justify-self: center; width: min(100%, 36rem); }
-  .c-held__affiche img { height: auto; width: 100%; }
+  .c-held__inhoud { padding: var(--vlak); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
   .c-held__band { margin-inline: calc(-1 * var(--zijde)) calc(-1 * (var(--zijde-r) + var(--rail))); }
+}
+
+/* De dagen: een blok met het getal, ernaast weekdag en maand. Ze kantelen afwisselend, zoals op de affiche. */
+.c-held__dagen { display: grid; gap: var(--r3); align-content: center; }
+.c-dag {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: var(--r3);
+  padding: var(--r2) var(--r3) var(--r2) var(--r2); background: var(--creme); color: var(--inkt);
+  box-shadow: 0.6rem 0.6rem 0 var(--inkt); rotate: calc((var(--i) - 1) * -1.5deg);
+  animation: c-dag-in 0.9s calc(0.25s + var(--i) * 0.12s) var(--ease) both;
+  transition: rotate var(--traag) var(--ease), translate var(--traag) var(--ease);
+}
+.c-dag:nth-child(2) { margin-left: var(--r4); }
+.c-dag:hover { rotate: 0deg; translate: -0.4rem -0.4rem; }
+@keyframes c-dag-in { from { translate: 3rem 0; opacity: 0; } }
+.c-dag__nr { display: grid; place-items: center; min-width: 1.618em; padding: 0.08em 0.18em 0.02em; font: 800 clamp(3.4rem, 6.4vw, 6.8rem)/1 var(--slab); letter-spacing: -0.04em; color: var(--creme); background: var(--dag); }
+.c-dag--groen { --dag: var(--groen); }
+.c-dag--mandarijn { --dag: var(--mandarijn); }
+.c-dag__tekst { display: grid; gap: 0.3rem; }
+.c-dag__tekst b { font: 800 clamp(1.5rem, 2.4vw, 2.4rem)/1 var(--slab); }
+.c-dag__tekst span { font: 600 clamp(1rem, 1.3vw, 1.25rem)/1 var(--tekst); text-transform: uppercase; letter-spacing: 0.1em; }
+@media (max-width: 60rem) {
+  .c-held__dagen { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r2); }
+  .c-dag { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; padding: var(--r2); gap: var(--r1); }
+  .c-dag:nth-child(2) { margin-left: 0; }
+  .c-dag__nr { width: 100%; font-size: clamp(2.6rem, 11vw, 4rem); }
+  .c-dag__tekst b { font-size: clamp(1rem, 4vw, 1.4rem); }
+  .c-dag__tekst span { font-size: 0.75rem; }
 }

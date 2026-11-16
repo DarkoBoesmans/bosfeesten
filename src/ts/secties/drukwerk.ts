@@ -1,17 +1,21 @@
 import { kop } from './kop';
 
 // Het echte drukwerk wordt nog gemaakt. Tot dan toont deze sectie wat er komt, onder elkaar.
-const VOLGT: [string, string][] = [
-  ['Affiche', 'A2, voor ramen en uithangborden'],
-  ['Flyer', 'A5, om uit te delen en in de bus te steken'],
-  ['Prijslijst plein', 'Voor de toog en de kassa'],
-  ['Prijslijst bonnetjes', 'Wat een lichte en een zware bon waard is'],
+// Wat er in drukwerk.af staat, met het formaat uit de drukbestanden van vorig jaar.
+const VOLGT: [string, string, string][] = [
+  ['Affiche', 'A2 staand', '420 × 594 mm'],
+  ['Flyer algemeen en flyer helpers', 'A5 staand', '148 × 210 mm'],
+  ['Flyer voorverkoop', 'A5 liggend', '210 × 148 mm'],
+  ['Prijslijsten Plein, Meis, Fuif, Resto en Bonnetjes', 'A3 staand', '297 × 420 mm'],
+  ['Bekers en bonnetjes', 'A3 liggend', '420 × 297 mm'],
+  ['Drankbon licht en zwaar', 'Bonnetje', '50 × 30 mm'],
+  ['Polsbandje', 'Strook', '350 × 15 mm'],
 ];
 
 export const drukwerk = () => `
   <section class="c-hoofdstuk" id="drukwerk" aria-labelledby="drukwerk-titel">
     <div class="o-wrap">
-      ${kop('drukwerk', 5, 'Drukwerk', 'Affiche, flyer en prijslijsten in de nieuwe kleuren. Ze worden nu gemaakt.')}
+      ${kop('drukwerk', 5, 'Drukwerk', 'Alles uit drukwerk.af, in de nieuwe kleuren. Het formaat staat er al bij; de drukklare PDF\'s volgen.')}
       <div class="c-binnenkort">
         <div class="c-binnenkort__kaart" data-toon>
           <p class="c-binnenkort__stempel">Binnenkort</p>
@@ -19,10 +23,10 @@ export const drukwerk = () => `
           <p class="c-binnenkort__tekst">Zodra de ontwerpen af zijn, staan de drukklare PDF's hier, met snijmarge en klaar om naar de drukker te sturen.</p>
         </div>
         <ol class="c-volgt" data-toon>
-          ${VOLGT.map(([naam, uitleg], i) => `
+          ${VOLGT.map(([naam, formaat, maat], i) => `
           <li class="c-volgt__item">
             <span class="c-volgt__nr">${String(i + 1).padStart(2, '0')}</span>
-            <span class="c-volgt__tekst"><b>${naam}</b>${uitleg}</span>
+            <span class="c-volgt__tekst"><b>${naam}</b>${formaat} · ${maat}</span>
             <span class="c-volgt__stempel">Volgt</span>
           </li>`).join('')}
         </ol>

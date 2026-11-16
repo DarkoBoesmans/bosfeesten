@@ -18,7 +18,8 @@ export function wijzer() {
   const voet = document.querySelector('footer');
   const zet_weg = (y: number, _omlaag: boolean) => {
     const voetInBeeld = !!voet && voet.getBoundingClientRect().top < innerHeight * 0.85;
-    nav.classList.toggle('is-weg', y < innerHeight * 0.6 || voetInBeeld);
+    // Weg in de held, bij de voet en tijdens het naar beneden lezen; terug zodra je omhoog scrollt.
+    nav.classList.toggle('is-weg', y < innerHeight * 0.6 || voetInBeeld || (_omlaag && y > 200));
     nav.classList.toggle('is-voet', voetInBeeld);
   };
   zet_weg(scrollY, false);

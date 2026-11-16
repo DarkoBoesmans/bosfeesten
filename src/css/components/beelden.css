@@ -62,7 +62,7 @@
 .c-volgt__item { display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; align-items: center; gap: var(--r3); padding: var(--r3) 0; border-bottom: 1px solid var(--lijn); }
 .c-volgt__nr { font: 800 1rem/1 var(--slab); color: var(--indigo); font-variant-numeric: tabular-nums; }
 .c-volgt__tekst { display: grid; gap: 0.3rem; line-height: 1.5; }
-.c-volgt__tekst b { font: 800 clamp(1.3rem, 2vw, 1.8rem)/1.1 var(--slab); }
+.c-volgt__tekst b { font: 800 clamp(1.15rem, 1.6vw, 1.5rem)/1.15 var(--slab); }
 .c-volgt__stempel { padding: 0.3rem 0.7rem; border: 2px solid var(--indigo); color: var(--indigo); font: 800 0.85rem/1 var(--slab); text-transform: uppercase; letter-spacing: 0.08em; rotate: -4deg; }
 @media (max-width: 56rem) { .c-binnenkort { grid-template-columns: minmax(0, 1fr); } .c-binnenkort__kaart { padding: var(--r4) var(--r3); } }
 @media (max-width: 30rem) { .c-volgt__item { grid-template-columns: 2rem minmax(0, 1fr); } .c-volgt__stempel { grid-column: 2; justify-self: start; } }

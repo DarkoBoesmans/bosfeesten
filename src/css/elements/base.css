@@ -1,4 +1,4 @@
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--r3); }
+html { -webkit-text-size-adjust: 100%; }
 body { background: var(--creme); color: var(--inkt); font: 400 1.125rem/1.6 var(--tekst); overflow-x: clip; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; text-decoration-skip-ink: none; }
