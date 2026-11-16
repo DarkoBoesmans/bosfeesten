@@ -19,6 +19,7 @@ export function wijzer() {
   const zet_weg = (y: number, _omlaag: boolean) => {
     const voetInBeeld = !!voet && voet.getBoundingClientRect().top < innerHeight * 0.85;
     nav.classList.toggle('is-weg', y < innerHeight * 0.6 || voetInBeeld);
+    nav.classList.toggle('is-voet', voetInBeeld);
   };
   zet_weg(scrollY, false);
   const voortgang = () => nav.style.setProperty('--voortgang', String(Math.min(1, scrollY / Math.max(1, document.documentElement.scrollHeight - innerHeight))));

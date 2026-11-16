@@ -35,7 +35,7 @@
 .c-paal__bord:focus-visible { outline: 0; text-decoration: underline 3px; text-underline-offset: 4px; }
 .c-paal__bord:active { translate: 0 0; }
 .c-voet__colofon { max-width: 46rem; margin-top: var(--vlak); padding-top: var(--r3); border-top: 1px solid rgb(250 246 222 / 0.25); font-size: 0.92rem; line-height: 1.6; color: var(--creme); }
-.c-voet__colofon a { color: var(--mandarijn); text-underline-offset: 0.2em; }
+.c-voet__colofon a { display: inline-block; padding-block: 0.3rem; color: var(--mandarijn); text-underline-offset: 0.2em; }
 .c-voet__colofon a:hover { color: var(--groen); }
 @media (max-width: 52rem) {
   .c-voet__binnen { grid-template-columns: minmax(0, 1fr); }

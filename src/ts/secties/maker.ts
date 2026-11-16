@@ -54,7 +54,7 @@ export const maker = (jaar: number) => `
             <legend>Beeld</legend>
             <div class="c-veld c-veld--keuze"><span>Formaat</span>${keuze('formaat', [['post', 'Post 4:5'], ['vierkant', 'Vierkant'], ['story', 'Story 9:16']], 'post')}</div>
             <div data-voor="artiest">
-              <label class="c-veld c-veld--foto"><span>Foto</span><input name="foto" type="file" accept="image/*"></label>
+              <label class="c-foto"><input name="foto" type="file" accept="image/*" class="c-foto__invoer"><span class="c-foto__knop">Kies een foto</span><span class="c-foto__naam" data-maker-bestand>Nog geen foto gekozen</span></label>
               <div class="c-maker__foto" data-maker-foto hidden>
                 <label class="c-veld c-veld--schuif"><span>Inzoomen</span><input name="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
                 <label class="c-vink"><input name="vrij" type="checkbox"><span>Uitgeknipte foto, zonder kader op het bos</span></label>

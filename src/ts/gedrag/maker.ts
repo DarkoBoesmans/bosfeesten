@@ -168,6 +168,8 @@ export async function maker() {
   form.addEventListener('change', async (e) => {
     const v = e.target as HTMLInputElement;
     if (v.type === 'file' && v.files?.[0]) {
+      const naamVak = doos.querySelector<HTMLElement>('[data-maker-bestand]');
+      if (naamVak) naamVak.textContent = v.files[0].name;
       try { foto = await laad(URL.createObjectURL(v.files[0])); } catch { foto = null; }
       schuif.x = schuif.y = 0;
       if (fotoPaneel) fotoPaneel.hidden = !foto;
