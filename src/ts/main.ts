@@ -4,7 +4,6 @@ import { toon } from './gedrag/toon';
 import { wijzer } from './gedrag/wijzer';
 import { aanwijzer } from './gedrag/aanwijzer';
 import { proef } from './gedrag/proef';
-import { sleep } from './gedrag/sleep';
 import { maker } from './gedrag/maker';
 
 toon();
@@ -12,7 +11,6 @@ addEventListener('load', () => setTimeout(() => document.querySelectorAll<HTMLIm
 wijzer();
 aanwijzer('[data-held], [data-patroon]');
 proef();
-sleep();
 maker().catch(() => toast('De postmaker kon niet laden. Herlaad de pagina.'));
 
 const lightbox = document.getElementById('lightbox') as HTMLDialogElement | null;

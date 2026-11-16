@@ -97,7 +97,7 @@ def sjabloon(b, h, leeg=False):
       .boven,.adres{{font:600 {k * .027}px/1.3 Poppins;text-transform:uppercase;letter-spacing:.14em}}
       .regel{{font:800 {k * .05}px/1.1 'Roboto Slab'}}
       .titel{{font:400 {merk:.1f}px/.9 Hipstelvetica;text-transform:uppercase;color:{C};-webkit-text-stroke:{merk * .075:.1f}px {G};paint-order:stroke fill;white-space:nowrap}}
-      .jaar{{color:{M};-webkit-text-stroke-color:{C}}}
+      .jaar{{color:{G};-webkit-text-stroke-color:{C}}}
       .editie{{font:800 {k * .034}px/1 'Roboto Slab';background:{M};color:{I};padding:{k * .014}px {k * .026}px;transform:rotate(-2deg)}}
       .dagen{{display:flex;gap:{k * .022}px}}
       .dag{{display:grid;justify-items:center;gap:{k * .008}px;width:{k * .2}px;padding:{k * .022}px 0 {k * .026}px;background:{C};color:{I};border-radius:{k * .012}px}}
@@ -187,12 +187,16 @@ def main():
             im.thumbnail((900, 1200))
             im.save(KIT / 'voorbeeld' / (Path(pad).stem + '.webp'), quality=82)
             if pad == 'drukwerk/affiche.jpg':  # kleiner beeld voor bovenaan de pagina
-                held = Image.open(KIT / pad).convert('RGB'); held.thumbnail((600, 848))
-                held.save(KIT / 'voorbeeld' / 'affiche-held.webp', quality=80)
+                # Alleen het programma: zonder de titel bovenaan en zonder de sponsors onderaan.
+                held = Image.open(KIT / pad).convert('RGB')
+                held = held.crop((0, round(held.height * .325), held.width, round(held.height * .826)))
+                held.thumbnail((1100, 1100))
+                held.save(KIT / 'voorbeeld' / 'affiche-held.webp', quality=82)
 
     with zipfile.ZipFile(KIT / 'bosfeesten-2027-mediakit.zip', 'w', zipfile.ZIP_DEFLATED) as z:
         for pad in lijst:
-            z.write(KIT / pad, f'Bosfeesten {JAAR}/{pad}')
+            if not pad.startswith('drukwerk/'):  # het echte drukwerk volgt later
+                z.write(KIT / pad, f'Bosfeesten {JAAR}/{pad}')
         z.writestr(f'Bosfeesten {JAAR}/lettertypes.txt',
                    'Hipstelvetica (titels): gratis via https://www.graphicpear.com/hipstelvetica-font/\n'
                    'Roboto Slab (datums, prijzen) en Poppins (tekst): gratis via Google Fonts\n')

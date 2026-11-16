@@ -45,7 +45,6 @@ export const GROEPEN: { titel: string; bestanden: Bestand[] }[] = [
     { pad: 'patroon/bosfeesten-patroon-indigo.png', label: 'Patroon op Indigo, 2048 px' },
   ] },
   { titel: 'Sociale media', bestanden: SOCIAAL.map(({ pad, label }) => ({ pad, label })) },
-  { titel: 'Drukwerk (voorbeeld, geen drukbestand)', bestanden: DRUKWERK },
   { titel: 'Drankbonnen', bestanden: [
     { pad: 'bonnen/drankbon-licht.png', label: 'Drankbon lichte drank' },
     { pad: 'bonnen/drankbon-zwaar.png', label: 'Drankbon zware drank' },

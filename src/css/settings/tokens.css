@@ -19,8 +19,11 @@
   --zijde: max(1.25rem, env(safe-area-inset-left, 0px));
   --zijde-r: max(1.25rem, env(safe-area-inset-right, 0px));
   --rail: 0rem;
+  /* Binnenmarge van gekleurde vlakken: overal even groot, boven, links, onder en rechts. */
+  --vlak: var(--r3);
   --ease: cubic-bezier(.2, .8, .2, 1);
   --snel: 0.25s; --traag: 0.7s;
   --patroon: url('../assets/kit/patroon/bosfeesten-patroon-transparant.svg');
 }
-@media (min-width: 72rem) { :root { --rail: 13.5rem; --zijde: max(2.618rem, env(safe-area-inset-left, 0px)); } }
+@media (min-width: 40rem) { :root { --vlak: var(--r4); } }
+@media (min-width: 72rem) { :root { --vlak: var(--r5); --rail: 13.5rem; --zijde: max(2.618rem, env(safe-area-inset-left, 0px)); } }

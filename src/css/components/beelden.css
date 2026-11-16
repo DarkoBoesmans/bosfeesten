@@ -1,21 +1,7 @@
-/* Voorbeelden: drukwerk ligt schuin op een tafel, bonnen kantelen, oude bonnen zijn doorstreept. */
+/* Voorbeelden: bonnen kantelen, oude bonnen zijn doorstreept, sociale posts staan op één lijn. */
 .c-voorbeeld { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .c-voorbeeld img { width: 100%; transition: translate var(--traag) var(--ease), rotate var(--traag) var(--ease), box-shadow var(--traag) var(--ease); }
 
-.c-tafel { display: flex; gap: var(--r5); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--zijde); margin-right: var(--rail); padding: var(--r3) var(--zijde-r) var(--r5) var(--zijde); cursor: grab; scrollbar-width: thin; scrollbar-color: var(--inkt) transparent; }
-.c-tafel.is-slepen { cursor: grabbing; scroll-snap-type: none; }
-.c-tafel.is-slepen img { pointer-events: none; }
-.c-tafel__item { flex: 0 0 min(72vw, max(22rem, 19vw)); scroll-snap-align: start; display: grid; gap: var(--r1); align-content: start; }
-.c-tafel__item img { rotate: var(--draai); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
-.c-tafel__item:hover img { rotate: 0deg; translate: 0 -0.6rem; box-shadow: 1rem 1.2rem 0 var(--mandarijn); }
-.c-tafel__naam { margin-top: var(--r2); font: 800 1.3rem/1 var(--slab); }
-.c-later { position: relative; display: grid; align-content: center; justify-items: center; gap: var(--r2); aspect-ratio: 849 / 1200; padding: var(--r4) var(--r3); text-align: center; background: var(--indigo) var(--patroon) 0 0 / 8rem; color: var(--creme); rotate: var(--draai); box-shadow: 0.6rem 0.6rem 0 var(--inkt); transition: rotate var(--traag) var(--ease), translate var(--traag) var(--ease); }
-.c-later::before { content: ''; position: absolute; inset: var(--r2); z-index: 0; background: var(--indigo); }
-.c-later > * { position: relative; }
-.c-later__stempel { padding: 0.35rem 0.9rem; border: 3px solid var(--mandarijn); color: var(--mandarijn); font: 800 1.3rem/1 var(--slab); text-transform: uppercase; letter-spacing: 0.08em; rotate: -8deg; }
-.c-later__titel { font: 800 clamp(1.5rem, 2.2vw, 2rem)/1.05 var(--slab); }
-.c-later__tekst { max-width: 15rem; font-size: 0.95rem; line-height: 1.5; }
-.c-tafel__item--later:hover .c-later { rotate: 0deg; translate: 0 -0.6rem; }
 
 .c-bonnen { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r5); }
 .c-bon img { rotate: -2deg; box-shadow: 0.8rem 0.8rem 0 var(--inkt); }
@@ -61,3 +47,22 @@
 .c-lightbox::backdrop { background: rgb(30 21 56 / 0.92); }
 .c-lightbox__beeld { max-height: 86vh; max-width: 100%; width: auto; height: auto; }
 .c-lightbox__sluit { position: absolute; top: calc(-1 * var(--r4)); right: 0; min-height: 2.75rem; padding: 0 var(--r2); border: 0; background: var(--creme); color: var(--inkt); font: 800 1rem/1 var(--slab); }
+
+/* Drukwerk binnenkort: een kaart met stempel naast de lijst van wat komt (φ : 1). */
+.c-binnenkort { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--r4); align-items: stretch; }
+.c-binnenkort__kaart {
+  position: relative; isolation: isolate; display: grid; align-content: center; justify-items: start; gap: var(--r3); padding: var(--r5);
+  background: var(--indigo); color: var(--creme); box-shadow: 0.8rem 0.8rem 0 var(--inkt); overflow: hidden;
+}
+.c-binnenkort__kaart::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--patroon) 0 0 / 10rem; opacity: 0.22; }
+.c-binnenkort__stempel { padding: 0.4rem 1rem; border: 3px solid var(--mandarijn); color: var(--mandarijn); font: 800 1.4rem/1 var(--slab); text-transform: uppercase; letter-spacing: 0.08em; rotate: -6deg; }
+.c-binnenkort__titel { font: 800 clamp(1.8rem, 3vw, 2.8rem)/1.05 var(--slab); }
+.c-binnenkort__tekst { max-width: 26rem; line-height: 1.6; }
+.c-volgt { display: grid; align-content: stretch; border-top: 3px solid var(--inkt); }
+.c-volgt__item { display: grid; grid-template-columns: 3rem minmax(0, 1fr) auto; align-items: center; gap: var(--r3); padding: var(--r3) 0; border-bottom: 1px solid var(--lijn); }
+.c-volgt__nr { font: 800 1rem/1 var(--slab); color: var(--indigo); font-variant-numeric: tabular-nums; }
+.c-volgt__tekst { display: grid; gap: 0.3rem; line-height: 1.5; }
+.c-volgt__tekst b { font: 800 clamp(1.3rem, 2vw, 1.8rem)/1.1 var(--slab); }
+.c-volgt__stempel { padding: 0.3rem 0.7rem; border: 2px solid var(--indigo); color: var(--indigo); font: 800 0.85rem/1 var(--slab); text-transform: uppercase; letter-spacing: 0.08em; rotate: -4deg; }
+@media (max-width: 56rem) { .c-binnenkort { grid-template-columns: minmax(0, 1fr); } .c-binnenkort__kaart { padding: var(--r4) var(--r3); } }
+@media (max-width: 30rem) { .c-volgt__item { grid-template-columns: 2rem minmax(0, 1fr); } .c-volgt__stempel { grid-column: 2; justify-self: start; } }

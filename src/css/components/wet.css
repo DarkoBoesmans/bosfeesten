@@ -1,5 +1,5 @@
 /* Regels: uitklapbare groepen, elke regel met een bron die je kan aanklikken. */
-.c-wet { margin-top: var(--r7); padding-bottom: var(--r7); background: var(--inkt); color: var(--creme); }
+.c-wet { margin-top: 0; padding-bottom: var(--r6); background: var(--inkt); color: var(--creme); }
 .c-wet .c-kop__nr { background: var(--mandarijn); color: var(--inkt); }
 .c-wet__groepen { border-top: 3px solid var(--creme); }
 .c-wet__groep { border-bottom: 3px solid var(--creme); }

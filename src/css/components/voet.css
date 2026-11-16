@@ -1,30 +1,44 @@
-/* Voet: links het feest in één zin, rechts een wegwijzerpaal. De bordjes zwaaien een beetje als je ze aanwijst. */
-.c-voet { overflow-x: clip; margin-top: var(--r6); background: var(--inkt); color: var(--creme); padding: var(--r6) calc(var(--zijde-r) + var(--rail)) calc(var(--r4) + env(safe-area-inset-bottom, 0px)) var(--zijde); }
-.c-voet__binnen { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: var(--r5); align-items: center; max-width: 112rem; }
+/* Voet: links het feest, rechts een wegwijzerpaal met kap, vier bordjes met schroeven en een grondje van boompjes.
+   De bordjes wiegen traag in de wind; aanwijzen zet ze stil en recht. */
+.c-voet { overflow-x: clip; margin-top: var(--r6); background: var(--inkt); color: var(--creme); padding: var(--vlak) calc(var(--vlak) + var(--rail)) calc(var(--vlak) + env(safe-area-inset-bottom, 0px)) var(--vlak); }
+.c-voet__binnen { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--vlak); align-items: center; max-width: 112rem; }
 .c-voet__feest { display: grid; gap: var(--r3); justify-items: start; }
 .c-voet__logo { width: clamp(5rem, 9vw, 8rem); aspect-ratio: 1; background: var(--groen); -webkit-mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; mask: url('../assets/logo/logo-zwart.svg') center / contain no-repeat; animation: c-wieg 6s var(--ease) infinite alternate; }
 @keyframes c-wieg { from { rotate: -6deg; } to { rotate: 6deg; } }
-.c-voet__datum { font: 800 clamp(2.4rem, 5.5vw, 5.5rem)/0.95 var(--slab); letter-spacing: -0.03em; text-wrap: balance; }
-.c-voet__plaats { font-size: 1.15rem; line-height: 1.55; }
+.c-voet__datum { font: 800 clamp(2.4rem, 5vw, 5rem)/0.95 var(--slab); letter-spacing: -0.03em; text-wrap: balance; }
+.c-voet__plaats { font-size: 1.15rem; line-height: 1.6; }
 
-/* De paal staat rechts, de bordjes hangen er afwisselend links en rechts aan. */
-.c-paal { position: relative; display: grid; gap: var(--r2); justify-items: center; padding: var(--r2) 0 var(--r5); }
-.c-paal::before { content: ''; position: absolute; top: 0; bottom: 0; left: 50%; width: 1.1rem; translate: -50% 0; background: var(--mandarijn); border-radius: 0.3rem 0.3rem 0 0; }
+.c-paal { position: relative; display: grid; gap: var(--r3); justify-items: center; padding: var(--r5) 0 var(--r5); }
+/* De paal zelf, met een kap bovenaan */
+.c-paal::before { content: ''; position: absolute; top: var(--r2); bottom: var(--r2); left: 50%; width: 1.4rem; translate: -50% 0; background: linear-gradient(90deg, #d86a12 0 22%, var(--mandarijn) 22% 78%, #ffa04d 78%); }
+.c-paal::after { content: ''; position: absolute; top: 0; left: 50%; width: 2.4rem; height: var(--r3); translate: -50% 0; background: var(--mandarijn); clip-path: polygon(50% 0, 100% 70%, 100% 100%, 0 100%, 0 70%); }
+.c-paal__grond { position: absolute; left: 50%; bottom: 0; width: min(100%, 26rem); height: var(--r4); translate: -50% 0; background: var(--groen); -webkit-mask: var(--patroon) 0 0 / 6rem; mask: var(--patroon) 0 0 / 6rem; clip-path: ellipse(50% 100% at 50% 100%); }
 .c-paal__bord {
-  --tip: 1.6rem; position: relative; display: flex; align-items: center; gap: var(--r1); width: min(100%, 22rem); min-height: 4rem;
-  background: var(--bord); color: var(--inkt); text-decoration: none; font: 800 clamp(1.1rem, 1.6vw, 1.4rem)/1.1 var(--slab);
-  filter: drop-shadow(4px 4px 0 rgb(0 0 0 / 0.35)); transition: rotate var(--traag) var(--ease), translate var(--snel) var(--ease);
+  --tip: 2rem; position: relative; z-index: 1; display: grid; gap: 0.35rem; align-content: center; width: min(100%, 25rem); min-height: 5.6rem;
+  background: var(--bord); color: var(--inkt); text-decoration: none;
+  filter: drop-shadow(5px 5px 0 rgb(0 0 0 / 0.4));
+  animation: c-wind-bord 5s var(--ease) calc(var(--i) * -1.3s) infinite alternate;
+  transition: translate var(--snel) var(--ease);
 }
-.c-paal__bord small { margin-left: auto; font: 600 0.8rem/1 var(--tekst); white-space: nowrap; }
-.c-paal__bord--rechts { translate: 22% 0; padding: 0 calc(var(--tip) + var(--r2)) 0 var(--r3); clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%); transform-origin: 10% 50%; rotate: 2deg; }
-.c-paal__bord--links { translate: -22% 0; justify-content: flex-end; padding: 0 var(--r3) 0 calc(var(--tip) + var(--r2)); clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%); transform-origin: 90% 50%; rotate: -2deg; }
-.c-paal__bord:hover, .c-paal__bord:focus-visible { rotate: 0deg; }
-.c-paal__bord--rechts:hover, .c-paal__bord--rechts:focus-visible { translate: calc(22% + 0.6rem) 0; }
-.c-paal__bord--links:hover, .c-paal__bord--links:focus-visible { translate: calc(-22% - 0.6rem) 0; }
+.c-paal__titel { font: 800 clamp(1.25rem, 1.8vw, 1.6rem)/1.05 var(--slab); }
+.c-paal__onder { font: 600 0.85rem/1.2 var(--tekst); }
+/* Twee schroeven aan de kant van de paal */
+.c-paal__bord::before { content: ''; position: absolute; top: 50%; width: 0.55rem; height: 0.55rem; margin-top: -1.2rem; border-radius: 50%; background: var(--inkt); box-shadow: 0 1.85rem 0 var(--inkt); opacity: 0.55; }
+.c-paal__bord--rechts { translate: 26% 0; padding: 0 calc(var(--tip) + var(--r3)) 0 var(--r4); clip-path: polygon(0 0, calc(100% - var(--tip)) 0, 100% 50%, calc(100% - var(--tip)) 100%, 0 100%); transform-origin: 6% 50%; }
+.c-paal__bord--rechts::before { left: var(--r2); }
+.c-paal__bord--links { translate: -26% 0; justify-items: end; text-align: right; padding: 0 var(--r4) 0 calc(var(--tip) + var(--r3)); clip-path: polygon(var(--tip) 0, 100% 0, 100% 100%, var(--tip) 100%, 0 50%); transform-origin: 94% 50%; }
+.c-paal__bord--links::before { right: var(--r2); }
+@keyframes c-wind-bord { from { rotate: -2.5deg; } to { rotate: 2deg; } }
+.c-paal__bord:hover, .c-paal__bord:focus-visible { animation-play-state: paused; rotate: 0deg; }
+.c-paal__bord--rechts:hover, .c-paal__bord--rechts:focus-visible { translate: calc(26% + 0.8rem) 0; }
+.c-paal__bord--links:hover, .c-paal__bord--links:focus-visible { translate: calc(-26% - 0.8rem) 0; }
 .c-paal__bord:focus-visible { outline: 0; text-decoration: underline 3px; text-underline-offset: 4px; }
-.c-voet__colofon { max-width: 46rem; margin-top: var(--r5); padding-top: var(--r3); border-top: 1px solid rgb(250 246 222 / 0.25); font-size: 0.92rem; line-height: 1.6; color: rgb(250 246 222 / 0.82); }
+.c-paal__bord:active { translate: 0 0; }
+.c-voet__colofon { max-width: 46rem; margin-top: var(--vlak); padding-top: var(--r3); border-top: 1px solid rgb(250 246 222 / 0.25); font-size: 0.92rem; line-height: 1.6; color: var(--creme); }
+.c-voet__colofon a { color: var(--mandarijn); text-underline-offset: 0.2em; }
+.c-voet__colofon a:hover { color: var(--groen); }
 @media (max-width: 52rem) {
   .c-voet__binnen { grid-template-columns: minmax(0, 1fr); }
-  .c-paal__bord--rechts { translate: 8% 0; } .c-paal__bord--links { translate: -8% 0; }
-  .c-paal__bord--rechts:hover { translate: calc(8% + 0.4rem) 0; } .c-paal__bord--links:hover { translate: calc(-8% - 0.4rem) 0; }
+  .c-paal__bord--rechts { translate: 7% 0; } .c-paal__bord--links { translate: -7% 0; }
+  .c-paal__bord--rechts:hover { translate: calc(7% + 0.4rem) 0; } .c-paal__bord--links:hover { translate: calc(-7% - 0.4rem) 0; }
 }

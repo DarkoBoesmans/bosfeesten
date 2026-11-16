@@ -3,42 +3,79 @@ import { kop } from './kop';
 const keuze = (naam: string, opties: [string, string][], gekozen: string) =>
   opties.map(([w, t]) => `<label><input type="radio" name="${naam}" value="${w}"${w === gekozen ? ' checked' : ''}><span>${t}</span></label>`).join('');
 
+const MODI: [string, string, string][] = [
+  ['artiest', 'Artiest', 'Eén act met foto, dag, uur en podium'],
+  ['lineup', 'Line-up', 'Alle acts van één dag onder elkaar'],
+  ['aftellen', 'Aftellen', 'Hoeveel dagen nog tot de Bosfeesten'],
+];
+const DAGEN: [string, string, string][] = [['13', 'vr', 'Vrijdag'], ['14', 'za', 'Zaterdag'], ['15', 'zo', 'Zondag']];
+
 export const maker = (jaar: number) => `
   <section class="c-hoofdstuk c-maker" id="maker" aria-labelledby="maker-titel">
     <div class="o-wrap">
-      ${kop('maker', 8, 'Maak je post', 'Typ een naam, kies dag, uur en podium, zet er een foto in en download het beeld. Alles gebeurt op je eigen toestel.')}
+      ${kop('maker', 8, 'Maak je post', 'Kies wat je wil aankondigen, vul het in en download het beeld. Kleuren, letters en logo staan vast, dus elke post is meteen in huisstijl. Alles gebeurt op je eigen toestel.')}
       <div class="c-maker__werk" data-maker data-jaar="${jaar}">
         <form class="c-maker__form" data-maker-form>
           <fieldset class="c-maker__groep">
-            <legend>1 · Wie</legend>
+            <legend>Wat maak je?</legend>
+            <div class="c-modus">${MODI.map(([w, t, u], i) => `<label><input type="radio" name="modus" value="${w}"${i === 0 ? ' checked' : ''}><span><b>${t}</b>${u}</span></label>`).join('')}</div>
+          </fieldset>
+
+          <fieldset class="c-maker__groep" data-voor="artiest">
+            <legend>Wie</legend>
             <label class="c-veld"><span>Artiest of titel</span><input name="naam" type="text" maxlength="40" value="Jouw artiest" autocomplete="off"></label>
             <label class="c-veld"><span>Extra regel <i>(optioneel)</i></span><input name="extra" type="text" maxlength="48" placeholder="Bv. live band, dj-set, mosselfestijn" autocomplete="off"></label>
           </fieldset>
-          <fieldset class="c-maker__groep">
-            <legend>2 · Wanneer en waar</legend>
-            <div class="c-veld__rij">
-              <label class="c-veld"><span>Dag</span><select name="dag">
-                <option value="Vrijdag 13 augustus">Vrijdag 13</option><option value="Zaterdag 14 augustus" selected>Zaterdag 14</option><option value="Zondag 15 augustus">Zondag 15</option>
-              </select></label>
+
+          <fieldset class="c-maker__groep" data-voor="lineup" hidden>
+            <legend>Wie speelt er</legend>
+            <label class="c-veld"><span>Eén act per regel: uur, naam en eventueel (Meis) of (Plein)</span>
+              <textarea name="acts" rows="6" spellcheck="false">20u00 Opener van de avond (Plein)
+21u30 Lady Gwen &amp; The Ladies (Meis)
+23u00 DJ Duivenmelker (Meis)
+01u00 DJ Mellius (Plein)</textarea></label>
+          </fieldset>
+
+          <fieldset class="c-maker__groep" data-voor="aftellen" hidden>
+            <legend>Teaser</legend>
+            <label class="c-veld"><span>Extra regel <i>(optioneel)</i></span><input name="teaser" type="text" maxlength="48" placeholder="Bv. de line-up komt deze vrijdag" autocomplete="off"></label>
+          </fieldset>
+
+          <fieldset class="c-maker__groep" data-voor="artiest lineup">
+            <legend>Wanneer</legend>
+            <div class="c-dagen">${DAGEN.map(([n, k, lang]) => `<label><input type="radio" name="dag" value="${lang} ${n} augustus"${n === '14' ? ' checked' : ''}><span><b>${n}</b>${k}</span></label>`).join('')}</div>
+            <div class="c-veld__rij" data-voor="artiest">
               <label class="c-veld"><span>Uur</span><input name="uur" type="text" maxlength="8" value="21u00"></label>
+              <div class="c-veld c-veld--keuze"><span>Podium</span>${keuze('podium', [['Meis', 'Meis'], ['Plein', 'Plein'], ['', 'Geen']], 'Meis')}</div>
             </div>
-            <div class="c-veld c-veld--keuze"><span>Podium</span>${keuze('podium', [['Meis', 'Meis'], ['Plein', 'Plein'], ['', 'Geen']], 'Meis')}</div>
           </fieldset>
+
           <fieldset class="c-maker__groep">
-            <legend>3 · Beeld</legend>
+            <legend>Beeld</legend>
             <div class="c-veld c-veld--keuze"><span>Formaat</span>${keuze('formaat', [['post', 'Post 4:5'], ['vierkant', 'Vierkant'], ['story', 'Story 9:16']], 'post')}</div>
-            <label class="c-veld c-veld--foto"><span>Foto</span><input name="foto" type="file" accept="image/*"></label>
-            <div class="c-maker__foto" data-maker-foto hidden>
-              <label class="c-veld c-veld--schuif"><span>Inzoomen</span><input name="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
-              <label class="c-vink"><input name="vrij" type="checkbox"><span>Uitgeknipte foto, zonder kader op het bos</span></label>
-              <p class="c-maker__tip">Sleep in het voorbeeld om de foto te verschuiven.</p>
+            <div data-voor="artiest">
+              <label class="c-veld c-veld--foto"><span>Foto</span><input name="foto" type="file" accept="image/*"></label>
+              <div class="c-maker__foto" data-maker-foto hidden>
+                <label class="c-veld c-veld--schuif"><span>Inzoomen</span><input name="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
+                <label class="c-vink"><input name="vrij" type="checkbox"><span>Uitgeknipte foto, zonder kader op het bos</span></label>
+                <p class="c-maker__tip">Sleep in het voorbeeld om de foto te verschuiven.</p>
+              </div>
             </div>
           </fieldset>
-          <button type="button" class="c-knop c-knop--vol" data-maker-download>Download als PNG</button>
         </form>
-        <div class="c-maker__voorbeeld">
-          <canvas class="c-maker__canvas" width="1080" height="1350" data-maker-canvas role="img" aria-label="Voorbeeld van je post"></canvas>
-          <p class="c-maker__maat" data-maker-maat>1080 × 1350 px</p>
+
+        <div class="c-maker__rechts">
+          <div class="c-maker__voorbeeld">
+            <canvas class="c-maker__canvas" width="1080" height="1350" data-maker-canvas role="img" aria-label="Voorbeeld van je post"></canvas>
+          </div>
+          <div class="c-maker__acties">
+            <button type="button" class="c-knop c-knop--vol" data-maker-download>Download als PNG <span class="c-knop__meta" data-maker-maat>1080 × 1350</span></button>
+            <button type="button" class="c-knop c-knop--licht" data-maker-alles>Alle 3 formaten</button>
+          </div>
+          <div class="c-bijschrift">
+            <div class="c-bijschrift__kop"><p>Bijschrift voor Instagram</p><button type="button" class="c-bijschrift__knop" data-maker-bijschrift>Kopieer</button></div>
+            <p class="c-bijschrift__tekst" data-maker-tekst></p>
+          </div>
         </div>
       </div>
     </div>

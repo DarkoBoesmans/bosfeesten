@@ -36,6 +36,7 @@
 .c-staal:hover small, .c-staal:focus-visible small { opacity: 1; translate: 0 0; }
 .c-staal:active { translate: 0 0; box-shadow: none; }
 @media (max-width: 52rem) { .c-staalkaart { grid-template-columns: repeat(2, minmax(0, 1fr)); } .c-staal { aspect-ratio: auto; min-height: 9rem; } .c-staal:last-child { grid-column: 1 / -1; } .c-staal__hex small { opacity: 1; translate: 0 0; } }
+@media (max-width: 24rem) { .c-staal__hex small { display: none; } .c-staal__naam, .c-staal__hex { padding: var(--r1); } }
 
 .c-verhouding { display: flex; height: var(--r6); margin-top: var(--r5); overflow: hidden; }
 .c-verhouding span { flex: var(--deel) 1 0; display: flex; align-items: flex-end; padding: var(--r1); font: 800 1rem/1 var(--slab); white-space: nowrap; overflow: hidden; transition: flex-grow 1.2s var(--ease); }
