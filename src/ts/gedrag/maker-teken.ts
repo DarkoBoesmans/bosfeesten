@@ -36,12 +36,13 @@ function woordmerk(ctx: CanvasRenderingContext2D, jaar: string, x: number, y: nu
 }
 
 /** Grond voor elk beeld; geeft de vrije ruimte tussen kop en voet terug. */
-export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string, adres = true, logo = true, rand = true): Grond {
+export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string, adres = true, logo = true, rand = true, strak = false): Grond {
   const [W, H] = MATEN[soort];
   const k = Math.min(W, H);
   const r = rand ? Math.round(k * 0.075) : 0;
   const paneel = { x: r, y: r, w: W - 2 * r, h: H - 2 * r };
-  const veilig = soort === 'story' ? Math.round(H * 0.12) : Math.round(k * 0.05);
+  // Story: buiten de balken van Instagram blijven. Strak (eigen post) laat het beeld dichter tegen die balken.
+  const veilig = soort === 'story' ? Math.round(H * (strak ? 0.085 : 0.12)) : Math.round(k * 0.05);
   const midden = W / 2;
 
   ctx.fillStyle = K.indigo; ctx.fillRect(0, 0, W, H);

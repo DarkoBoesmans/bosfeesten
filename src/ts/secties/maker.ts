@@ -31,18 +31,18 @@ export const maker = (jaar: number) => `
           <fieldset class="c-maker__groep" data-voor="lineup" hidden>
             <legend><span class="c-stap" aria-hidden="true">2</span>Wie speelt er</legend>
             <label class="c-veld"><span>Eén act per regel: uur, naam en eventueel (Meis) of (Plein)</span>
-              <textarea name="acts" rows="6" spellcheck="false">20u00 Opener van de avond (Plein)
-21u30 Lady Gwen &amp; The Ladies (Meis)
-23u00 DJ Duivenmelker (Meis)
-01u00 DJ Mellius (Plein)</textarea></label>
+              <textarea name="acts" rows="6" spellcheck="false">20u00 Artiest 1 (Plein)
+21u30 Artiest 2 (Meis)
+23u00 Artiest 3 (Meis)
+01u00 Artiest 4 (Plein)</textarea></label>
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="vrij" hidden>
             <legend><span class="c-stap" aria-hidden="true">2</span>Inhoud</legend>
-            <label class="c-veld"><span>Tekst boven de afbeelding</span><textarea name="bovenschrift" rows="2" maxlength="90">POV: je komt die ene vriend(in) tegen die zogezegd naar huis was</textarea></label>
+            <label class="c-veld"><span>Tekst boven de afbeelding</span><textarea name="bovenschrift" rows="2" maxlength="90" placeholder="Typ hier je tekst"></textarea></label>
             <div class="c-schakels">
               <span class="c-schakels__titel">Wat staat erop?</span>
-              ${[['toon_logo', 'Woordmerk', true], ['toon_editie', '64ste editie', true], ['toon_tekst', 'Tekst', true], ['toon_datum', 'Datum', true], ['toon_adres', 'Adres', false], ['toon_rand', 'Rand van boompjes', true]]
+              ${[['toon_logo', 'Logo', true], ['toon_editie', 'Editie', true], ['toon_tekst', 'Tekst', true], ['toon_datum', 'Datum', true], ['toon_adres', 'Adres', false]]
                 .map(([n, t, aan]) => `<label class="c-schakel"><input type="checkbox" name="${n}"${aan ? ' checked' : ''}><span>${t}</span></label>`).join('')}
             </div>
           </fieldset>

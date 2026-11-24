@@ -6,7 +6,7 @@ const PODIUM_IN: Record<string, string> = { Meis: 'in de Meis', Plein: 'op het P
 const HASHTAGS = (jaar: string) => `#bosfeesten #bosfeesten${jaar} #chiropopov #gijzegem`;
 
 type Act = { uur: string; naam: string; podium: string };
-/** "21u30 Lady Gwen (Meis)" wordt { uur, naam, podium }. */
+/** "21u30 Artiest 2 (Meis)" wordt { uur, naam, podium }. */
 const leesActs = (tekst: string): Act[] => tekst.split('\n').map((r) => r.trim()).filter(Boolean).slice(0, 8).map((r) => {
   const m = r.match(/^(\d{1,2}\s*[u:.h]\s*\d{2})?\s*(.*?)\s*(?:\((meis|plein)\))?$/i)!;
   const p = (m[3] ?? '').toLowerCase();
@@ -137,7 +137,7 @@ export async function maker() {
   const aan = (n: string) => veld(n) === 'on';
   function vrij(g: Grond) {
     const { k, midden, binnenW } = g;
-    const tussen = k * 0.045;
+    const tussen = k * (ctx.canvas.height / ctx.canvas.width > 1.5 ? 0.035 : 0.045);
     type Stuk = { h: number; teken: (y: number) => void };
     const boven: Stuk[] = [], onder: Stuk[] = [];
     ctx.textAlign = 'center';
@@ -151,8 +151,8 @@ export async function maker() {
         ctx.restore();
       } });
     }
-    const tekst = veld('bovenschrift').trim();
-    if (aan('toon_tekst') && tekst) {
+    const tekst = veld('bovenschrift').trim() || 'Jouw tekst hier';
+    if (aan('toon_tekst')) {
       const tpx = k * 0.042;
       ctx.font = `800 ${tpx}px "Roboto Slab"`;
       let lijnen = regels(ctx, tekst, binnenW);
@@ -180,9 +180,11 @@ export async function maker() {
     const stukken = boven.length + onder.length;
     const vast = [...boven, ...onder].reduce((t, s) => t + s.h, 0) + tussen * stukken;
     const ruimte = g.onder - g.boven;
-    let bw = binnenW, bh = Math.max(k * 0.2, ruimte - vast);
-    if (foto) { const s = Math.min(binnenW / foto.width, bh / foto.height); bw = foto.width * s; bh = foto.height * s; }
-    else bh = Math.min(bh, binnenW * 0.75);
+    const hoog = ctx.canvas.height / ctx.canvas.width > 1.5;
+    const maxW = hoog ? g.paneel.w - k * 0.04 : binnenW;
+    let bw = maxW, bh = Math.max(k * 0.2, ruimte - vast);
+    if (foto) { const s = Math.min(maxW / foto.width, bh / foto.height); bw = foto.width * s; bh = foto.height * s; }
+    else if (!hoog) bh = Math.min(bh, binnenW * 0.75);
     const beeld: Stuk = { h: bh, teken: (y) => {
       zone = { x: midden - bw / 2, y, w: bw, h: bh };
       ctx.save(); ctx.beginPath(); ctx.roundRect(zone.x, y, bw, bh, k * 0.022); ctx.clip();
@@ -203,7 +205,7 @@ export async function maker() {
       const rijen = leesActs(veld('acts')).map((a) => `${a.uur ? a.uur + ' ' : ''}${a.naam}${a.podium ? ` (${a.podium})` : ''}`).join('\n');
       return `Dit is de line-up van ${veld('dag').toLowerCase()} op de Bosfeesten ${jaar}:\n\n${rijen}\n\n${adres}\n${HASHTAGS(jaar)}`;
     }
-    if (modus === 'vrij') return `${aan('toon_tekst') ? veld('bovenschrift').trim() + '\n\n' : ''}${adres}\n${HASHTAGS(jaar)}`;
+    if (modus === 'vrij') return `${aan('toon_tekst') && veld('bovenschrift').trim() ? veld('bovenschrift').trim() + '\n\n' : ''}${adres}\n${HASHTAGS(jaar)}`;
     if (modus === 'aftellen') {
       const n = dagenTot(Number(jaar)), teaser = veld('teaser').trim();
       return `Nog ${n} ${n === 1 ? 'dag' : 'dagen'} tot de Bosfeesten ${jaar}!${teaser ? ' ' + teaser + '.' : ''}\n\n${adres}\n${HASHTAGS(jaar)}`;
@@ -219,7 +221,7 @@ export async function maker() {
     const modus = veld('modus') || 'artiest';
     const zand = modus === 'vrij';
     // In de zandbak kunnen woordmerk en boompjesrand uit; zonder rand is het hele beeld Indigo.
-    const g = grond(ctx, soort, tegel, jaar, !zand, !zand || aan('toon_logo'), !zand || aan('toon_rand'));
+    const g = grond(ctx, soort, tegel, jaar, !zand, !zand || aan('toon_logo'), true, zand);
     ({ artiest, lineup, aftellen, vrij } as Record<string, (g: Grond) => void>)[modus]!(g);
   }
 
