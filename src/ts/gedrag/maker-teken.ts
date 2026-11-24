@@ -36,7 +36,7 @@ function woordmerk(ctx: CanvasRenderingContext2D, jaar: string, x: number, y: nu
 }
 
 /** Grond voor elk beeld; geeft de vrije ruimte tussen kop en voet terug. */
-export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string): Grond {
+export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string, adres = true): Grond {
   const [W, H] = MATEN[soort];
   const k = Math.min(W, H), rand = Math.round(k * 0.075);
   const paneel = { x: rand, y: rand, w: W - 2 * rand, h: H - 2 * rand };
@@ -52,6 +52,7 @@ export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTML
   const boven = paneel.y + veilig + woordmerk(ctx, jaar, midden, paneel.y + veilig, (paneel.w * 0.5) / 4.4) + k * 0.04;
   const onderAdres = paneel.y + paneel.h - veilig;
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.font = `600 ${k * 0.026}px Poppins`; ctx.fillStyle = K.creme;
+  if (!adres) return { k, midden, binnenW: paneel.w - k * 0.1, boven, onder: onderAdres, paneel };
   ctx.fillText('EERSTE BOCHTWEG 1 · 9308 GIJZEGEM', midden, onderAdres);
   return { k, midden, binnenW: paneel.w - k * 0.1, boven, onder: onderAdres - k * 0.026 - k * 0.035, paneel };
 }
@@ -86,4 +87,16 @@ export function dagblokken(ctx: CanvasRenderingContext2D, g: Grond, yOnder: numb
     ctx.font = `600 ${h * 0.12}px Poppins`; ctx.fillText(d!, x + w / 2, y + h * 0.86);
   });
   return h;
+}
+
+/** Breekt tekst af op woorden zodat elke regel binnen de breedte past. */
+export function regels(ctx: CanvasRenderingContext2D, tekst: string, max: number) {
+  const uit: string[] = [];
+  let regel = '';
+  for (const woord of tekst.split(/\s+/).filter(Boolean)) {
+    const proef = regel ? `${regel} ${woord}` : woord;
+    if (ctx.measureText(proef).width > max && regel) { uit.push(regel); regel = woord; } else regel = proef;
+  }
+  if (regel) uit.push(regel);
+  return uit;
 }

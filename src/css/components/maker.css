@@ -2,9 +2,9 @@
 .c-maker { position: relative; isolation: isolate; margin-top: var(--r6); padding: var(--vlak) calc(var(--vlak) + var(--rail)) var(--vlak) var(--vlak) !important; background: var(--indigo); color: var(--creme); }
 .c-maker > .o-wrap { width: auto; max-width: 112rem; margin: 0 auto; padding: 0; }
 .c-maker::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--patroon) 0 0 / 12rem; opacity: 0.18; }
-/* De werkbank: één paneel. Links de stappen op crème, rechts het podium op diep Indigo met het voorbeeld (1 : φ). */
-.c-maker__werk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); align-items: stretch; border: 3px solid var(--inkt); box-shadow: 1rem 1rem 0 var(--inkt); background: var(--creme); }
-.c-maker__form { container-type: inline-size; display: grid; gap: var(--r3); align-content: start; min-width: 0; color: var(--inkt); padding: var(--vlak); border-right: 3px solid var(--inkt); }
+/* Links de stappen op één crème vlak, rechts het voorbeeld rechtstreeks op de Indigo grond (1 : φ). Geen kaart in een kaart. */
+.c-maker__werk { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr); gap: var(--vlak); align-items: start; }
+.c-maker__form { container-type: inline-size; display: grid; gap: var(--r3); align-content: start; min-width: 0; color: var(--inkt); padding: var(--vlak); background: var(--creme); box-shadow: 0.8rem 0.8rem 0 var(--inkt); }
 .c-maker__groep:last-of-type { border-bottom: 0; padding-bottom: 0; }
 .c-maker__groep { min-width: 0; display: grid; gap: var(--r2); padding-bottom: var(--r3); border-bottom: 1px solid var(--lijn); }
 .c-maker__groep legend { display: flex; align-items: center; gap: var(--r1); margin-bottom: var(--r2); font: 800 1.35rem/1 var(--slab); color: var(--inkt); }
@@ -29,8 +29,7 @@
 .c-vink { display: flex; gap: var(--r1); align-items: center; font-size: 0.95rem; cursor: pointer; }
 .c-vink input { width: 1.3rem; height: 1.3rem; accent-color: var(--indigo); }
 .c-maker__tip, .c-maker__maat { font-size: 0.88rem; }
-.c-maker__rechts { position: relative; isolation: isolate; display: grid; grid-template-rows: auto auto 1fr; gap: var(--r3); min-width: 0; padding: var(--vlak); background: #3F2C7A; color: var(--creme); }
-.c-maker__rechts::before { content: ''; position: absolute; inset: 0; z-index: -1; background: var(--patroon) 0 0 / 10rem; opacity: 0.12; }
+.c-maker__rechts { display: grid; gap: var(--r3); min-width: 0; color: var(--creme); }
 /* Vast vak: het voorbeeld past zich aan, de sectie verspringt nooit van grootte. */
 .c-maker__voorbeeld { display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 0; height: min(76svh, 48rem); }
 .c-maker__canvas { display: block; width: auto; max-width: 100%; max-height: 100%; height: auto; box-shadow: 0.8rem 0.8rem 0 var(--inkt); }
@@ -38,16 +37,17 @@
 .c-maker__canvas.is-slepen { cursor: grabbing; }
 /* Gsm: voorbeeld bovenaan, dan de stappen, dan downloaden en het bijschrift. */
 @media (max-width: 60rem) {
-  .c-maker__werk { grid-template-columns: minmax(0, 1fr); background: #3F2C7A; color: var(--creme); box-shadow: 0.6rem 0.6rem 0 var(--inkt); }
+  .c-maker__werk { grid-template-columns: minmax(0, 1fr); }
   .c-maker__rechts { display: contents; }
-  .c-maker__voorbeeld { order: 1; height: 54svh; padding: var(--vlak); }
-  .c-maker__form { order: 2; border-right: 0; border-block: 3px solid var(--inkt); background: var(--creme); }
-  .c-maker__acties { order: 3; padding: var(--vlak) var(--vlak) 0; }
-  .c-bijschrift { order: 4; margin: var(--r3) var(--vlak) var(--vlak); }
+  .c-maker__voorbeeld { order: 1; height: 52svh; }
+  .c-maker__form { order: 2; box-shadow: 0.5rem 0.5rem 0 var(--inkt); }
+  .c-maker__acties { order: 3; }
+  .c-bijschrift { order: 4; }
 }
 
+
 /* Wat maak je: drie tegels. */
-.c-modus { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r1); }
+.c-modus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--r1); }
 .c-modus label, .c-dagen label { position: relative; }
 .c-modus input, .c-dagen input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
 .c-modus span { display: grid; gap: 0.35rem; height: 100%; padding: var(--r2); border: 2px solid var(--inkt); border-radius: 0; font-size: 0.85rem; line-height: 1.4; transition: background var(--snel), color var(--snel), translate var(--snel) var(--ease), box-shadow var(--snel) var(--ease); }

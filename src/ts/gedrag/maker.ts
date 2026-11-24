@@ -1,5 +1,5 @@
 // Postmaker: artiest, line-up of aftellen, in drie formaten, altijd in huisstijl. Maakt ook het bijschrift voor Instagram.
-import { K, MATEN, type Formaat, type Grond, blok, dagblokken, datumRij, grond, passend } from './maker-teken';
+import { K, MATEN, type Formaat, type Grond, blok, dagblokken, datumRij, grond, passend, regels } from './maker-teken';
 
 const laad = (src: string) => new Promise<HTMLImageElement>((ok, fout) => { const i = new Image(); i.onload = () => ok(i); i.onerror = fout; i.src = src; });
 const PODIUM_IN: Record<string, string> = { Meis: 'in de Meis', Plein: 'op het Plein' };
@@ -132,6 +132,61 @@ export async function maker() {
     ctx.font = `800 ${lab}px "Roboto Slab"`; ctx.fillStyle = K.groen; ctx.fillText(n === 1 ? 'DAG' : 'DAGEN', midden, y + totaal);
   }
 
+  // Eigen beeld: woordmerk, een regel tekst, de afbeelding en de algemene datum, met gelijke ruimte ertussen.
+  function vrij(g: Grond) {
+    const { k, midden, binnenW } = g;
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    // Editie-stempel onder het woordmerk
+    ctx.font = `800 ${k * 0.034}px "Roboto Slab"`;
+    const ed = `${Number(jaar) - 1963}ste editie`, ew = ctx.measureText(ed).width + k * 0.05, eh = k * 0.06;
+    ctx.save(); ctx.translate(midden, g.boven + eh / 2); ctx.rotate(-0.035);
+    ctx.fillStyle = K.mandarijn; ctx.fillRect(-ew / 2, -eh / 2, ew, eh);
+    ctx.fillStyle = K.indigo; ctx.textBaseline = 'middle'; ctx.fillText(ed, 0, eh * 0.04);
+    ctx.restore();
+    const top = g.boven + eh + k * 0.05;
+    // Datum onderaan
+    ctx.textBaseline = 'alphabetic'; ctx.fillStyle = K.creme;
+    const datum = `13, 14 & 15 augustus ${jaar}`;
+    const dpx = passend(ctx, datum, (px) => `800 ${px}px "Roboto Slab"`, binnenW, k * 0.058);
+    // Tekst boven de afbeelding: kleiner dan de naam bij een artiest, maximaal drie regels
+    const tekst = veld('bovenschrift').trim();
+    const tpx = k * 0.042;
+    ctx.font = `800 ${tpx}px "Roboto Slab"`;
+    // Evenwichtige regels: geen los woord op de laatste regel
+    let lijnen = tekst ? regels(ctx, tekst, binnenW) : [];
+    if (lijnen.length > 1) {
+      const doel = (ctx.measureText(tekst).width / lijnen.length) * 1.1;
+      const even = regels(ctx, tekst, Math.min(binnenW, doel));
+      if (even.length === lijnen.length) lijnen = even;
+    }
+    lijnen = lijnen.slice(0, 3);
+    const lh = tpx * 1.18, tekstH = lijnen.length * lh;
+    // Afbeelding past volledig (niet bijgesneden) in de vrije ruimte; de tussenruimtes zijn even groot
+    const tussen = k * 0.045;
+    const vrijH = g.onder - top - tekstH - dpx * 0.75 - tussen * (lijnen.length ? 3 : 2);
+    let bw = binnenW, bh = Math.max(k * 0.2, vrijH);
+    if (foto) { const s = Math.min(binnenW / foto.width, bh / foto.height); bw = foto.width * s; bh = foto.height * s; }
+    else { bh = Math.min(bh, binnenW * 0.75); }
+    const totaal = (lijnen.length ? tekstH + tussen : 0) + bh + tussen + dpx * 0.75;
+    let y = top + Math.max(0, (g.onder - top - totaal) / 2);
+    ctx.fillStyle = K.creme; ctx.textBaseline = 'alphabetic'; ctx.font = `800 ${tpx}px "Roboto Slab"`;
+    lijnen.forEach((l, i) => ctx.fillText(l, midden, y + tpx * 0.9 + i * lh));
+    if (lijnen.length) y += tekstH + tussen;
+    const r = k * 0.022;
+    zone = { x: midden - bw / 2, y, w: bw, h: bh };
+    ctx.save(); ctx.beginPath(); ctx.roundRect(zone.x, zone.y, bw, bh, r); ctx.clip();
+    if (foto) ctx.drawImage(foto, zone.x, zone.y, bw, bh);
+    else {
+      ctx.fillStyle = K.diep; ctx.fillRect(zone.x, zone.y, bw, bh);
+      ctx.fillStyle = K.creme; ctx.font = `600 ${k * 0.03}px Poppins`; ctx.textBaseline = 'middle';
+      ctx.fillText('Kies een afbeelding', midden, zone.y + bh / 2);
+    }
+    ctx.restore();
+    y += bh + tussen;
+    ctx.font = `800 ${dpx}px "Roboto Slab"`; ctx.fillStyle = K.creme; ctx.textBaseline = 'alphabetic';
+    ctx.fillText(datum, midden, y + dpx * 0.75);
+  }
+
   function bijschrift() {
     const modus = veld('modus');
     const adres = `13, 14 & 15 augustus ${jaar} · Eerste Bochtweg 1, Gijzegem`;
@@ -139,6 +194,7 @@ export async function maker() {
       const rijen = leesActs(veld('acts')).map((a) => `${a.uur ? a.uur + ' ' : ''}${a.naam}${a.podium ? ` (${a.podium})` : ''}`).join('\n');
       return `Dit is de line-up van ${veld('dag').toLowerCase()} op de Bosfeesten ${jaar}:\n\n${rijen}\n\n${adres}\n${HASHTAGS(jaar)}`;
     }
+    if (modus === 'vrij') return `${veld('bovenschrift').trim()}\n\n${adres}\n${HASHTAGS(jaar)}`;
     if (modus === 'aftellen') {
       const n = dagenTot(Number(jaar)), teaser = veld('teaser').trim();
       return `Nog ${n} ${n === 1 ? 'dag' : 'dagen'} tot de Bosfeesten ${jaar}!${teaser ? ' ' + teaser + '.' : ''}\n\n${adres}\n${HASHTAGS(jaar)}`;
@@ -151,13 +207,16 @@ export async function maker() {
   function teken(soort = (veld('formaat') as Formaat) || 'post') {
     const [W, H] = MATEN[soort];
     canvas!.width = W; canvas!.height = H;
-    const g = grond(ctx, soort, tegel, jaar);
-    ({ artiest, lineup, aftellen } as Record<string, (g: Grond) => void>)[veld('modus') || 'artiest']!(g);
+    const modus = veld('modus') || 'artiest';
+    const g = grond(ctx, soort, tegel, jaar, modus !== 'vrij');
+    ({ artiest, lineup, aftellen, vrij } as Record<string, (g: Grond) => void>)[modus]!(g);
   }
 
   function ververs() {
     const modus = veld('modus');
     form!.querySelectorAll<HTMLElement>('[data-voor]').forEach((el) => { el.hidden = !el.dataset.voor!.split(' ').includes(modus); });
+    // Inzoomen en uitknippen horen bij de artiestfoto; een eigen beeld staat altijd volledig in beeld.
+    if (fotoPaneel) fotoPaneel.hidden = !foto || modus !== 'artiest';
     const [W, H] = MATEN[(veld('formaat') as Formaat) || 'post'];
     if (maat) maat.textContent = `${W} × ${H}`;
     if (tekstVak) tekstVak.textContent = bijschrift();

@@ -7,6 +7,7 @@ const MODI: [string, string, string][] = [
   ['artiest', 'Artiest', 'Eén act met foto, dag, uur en podium'],
   ['lineup', 'Line-up', 'Alle acts van één dag onder elkaar'],
   ['aftellen', 'Aftellen', 'Hoeveel dagen nog tot de Bosfeesten'],
+  ['vrij', 'Eigen beeld', 'Jouw afbeelding met een regel tekst erboven'],
 ];
 const DAGEN: [string, string, string][] = [['13', 'vr', 'Vrijdag'], ['14', 'za', 'Zaterdag'], ['15', 'zo', 'Zondag']];
 
@@ -36,6 +37,11 @@ export const maker = (jaar: number) => `
 01u00 DJ Mellius (Plein)</textarea></label>
           </fieldset>
 
+          <fieldset class="c-maker__groep" data-voor="vrij" hidden>
+            <legend><span class="c-stap" aria-hidden="true">2</span>Tekst</legend>
+            <label class="c-veld"><span>Tekst boven de afbeelding</span><textarea name="bovenschrift" rows="2" maxlength="90">POV: je komt die ene vriend(in) tegen die zogezegd naar huis was</textarea></label>
+          </fieldset>
+
           <fieldset class="c-maker__groep" data-voor="aftellen" hidden>
             <legend><span class="c-stap" aria-hidden="true">2</span>Teaser</legend>
             <label class="c-veld"><span>Extra regel <i>(optioneel)</i></span><input name="teaser" type="text" maxlength="48" placeholder="Bv. de line-up komt deze vrijdag" autocomplete="off"></label>
@@ -53,7 +59,7 @@ export const maker = (jaar: number) => `
           <fieldset class="c-maker__groep">
             <legend><span class="c-stap" aria-hidden="true">4</span>Beeld</legend>
             <div class="c-veld c-veld--keuze"><span>Formaat</span>${keuze('formaat', [['post', 'Post 4:5'], ['vierkant', 'Vierkant'], ['story', 'Story 9:16']], 'post')}</div>
-            <div data-voor="artiest">
+            <div data-voor="artiest vrij">
               <label class="c-foto"><input name="foto" type="file" accept="image/*" class="c-foto__invoer"><span class="c-foto__knop">Kies een foto</span><span class="c-foto__naam" data-maker-bestand>Nog geen foto gekozen</span></label>
               <div class="c-maker__foto" data-maker-foto hidden>
                 <label class="c-veld c-veld--schuif"><span>Inzoomen</span><input name="zoom" type="range" min="1" max="3" step="0.01" value="1"></label>
