@@ -7,7 +7,7 @@ const MODI: [string, string, string][] = [
   ['artiest', 'Artiest', 'Eén act met foto, dag, uur en podium'],
   ['lineup', 'Line-up', 'Alle acts van één dag onder elkaar'],
   ['aftellen', 'Aftellen', 'Hoeveel dagen nog tot de Bosfeesten'],
-  ['vrij', 'Eigen beeld', 'Jouw afbeelding met een regel tekst erboven'],
+  ['vrij', 'Eigen post', 'Vrij spel: kies zelf wat erop komt'],
 ];
 const DAGEN: [string, string, string][] = [['13', 'vr', 'Vrijdag'], ['14', 'za', 'Zaterdag'], ['15', 'zo', 'Zondag']];
 
@@ -38,8 +38,13 @@ export const maker = (jaar: number) => `
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="vrij" hidden>
-            <legend><span class="c-stap" aria-hidden="true">2</span>Tekst</legend>
+            <legend><span class="c-stap" aria-hidden="true">2</span>Inhoud</legend>
             <label class="c-veld"><span>Tekst boven de afbeelding</span><textarea name="bovenschrift" rows="2" maxlength="90">POV: je komt die ene vriend(in) tegen die zogezegd naar huis was</textarea></label>
+            <div class="c-schakels">
+              <span class="c-schakels__titel">Wat staat erop?</span>
+              ${[['toon_logo', 'Woordmerk', true], ['toon_editie', '64ste editie', true], ['toon_tekst', 'Tekst', true], ['toon_datum', 'Datum', true], ['toon_adres', 'Adres', false], ['toon_rand', 'Rand van boompjes', true]]
+                .map(([n, t, aan]) => `<label class="c-schakel"><input type="checkbox" name="${n}"${aan ? ' checked' : ''}><span>${t}</span></label>`).join('')}
+            </div>
           </fieldset>
 
           <fieldset class="c-maker__groep" data-voor="aftellen" hidden>

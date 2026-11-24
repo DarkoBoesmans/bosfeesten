@@ -36,20 +36,21 @@ function woordmerk(ctx: CanvasRenderingContext2D, jaar: string, x: number, y: nu
 }
 
 /** Grond voor elk beeld; geeft de vrije ruimte tussen kop en voet terug. */
-export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string, adres = true): Grond {
+export function grond(ctx: CanvasRenderingContext2D, soort: Formaat, tegel: HTMLImageElement, jaar: string, adres = true, logo = true, rand = true): Grond {
   const [W, H] = MATEN[soort];
-  const k = Math.min(W, H), rand = Math.round(k * 0.075);
-  const paneel = { x: rand, y: rand, w: W - 2 * rand, h: H - 2 * rand };
+  const k = Math.min(W, H);
+  const r = rand ? Math.round(k * 0.075) : 0;
+  const paneel = { x: r, y: r, w: W - 2 * r, h: H - 2 * r };
   const veilig = soort === 'story' ? Math.round(H * 0.12) : Math.round(k * 0.05);
   const midden = W / 2;
 
   ctx.fillStyle = K.indigo; ctx.fillRect(0, 0, W, H);
   const t = document.createElement('canvas'); t.width = t.height = Math.round(k / 3);
   t.getContext('2d')!.drawImage(tegel, 0, 0, t.width, t.height);
-  ctx.fillStyle = ctx.createPattern(t, 'repeat')!; ctx.fillRect(0, 0, W, H);
+  if (rand) { ctx.fillStyle = ctx.createPattern(t, 'repeat')!; ctx.fillRect(0, 0, W, H); }
   ctx.fillStyle = K.indigo; ctx.beginPath(); ctx.roundRect(paneel.x, paneel.y, paneel.w, paneel.h, k * 0.035); ctx.fill();
 
-  const boven = paneel.y + veilig + woordmerk(ctx, jaar, midden, paneel.y + veilig, (paneel.w * 0.5) / 4.4) + k * 0.04;
+  const boven = logo ? paneel.y + veilig + woordmerk(ctx, jaar, midden, paneel.y + veilig, (paneel.w * 0.5) / 4.4) + k * 0.04 : paneel.y + veilig;
   const onderAdres = paneel.y + paneel.h - veilig;
   ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.font = `600 ${k * 0.026}px Poppins`; ctx.fillStyle = K.creme;
   if (!adres) return { k, midden, binnenW: paneel.w - k * 0.1, boven, onder: onderAdres, paneel };
